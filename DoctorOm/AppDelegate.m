@@ -26,16 +26,16 @@ void comb_tilde_setup();
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     if (IS_IPAD()) {
-        THUMBW = 1024;
-        THUMBH = 768;
+        THUMBW = 768;
+        THUMBH = 512;
         PADW = 40;
         SCREEN_CENTER_X = 512;
         SCREEN_CENTER_Y = 384;
         BUTTON_Y = 60;
         ABOUT_IMAGE_WIDTH = 1000;
     } else {
-        THUMBW = 480;
-        THUMBH = 320;
+        THUMBW = 360;
+        THUMBH = 240;
         PADW = 20;
         SCREEN_CENTER_X = 240;
         SCREEN_CENTER_Y = 160;

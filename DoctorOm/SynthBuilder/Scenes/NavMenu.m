@@ -74,7 +74,7 @@
 }
 
 -(void)showInfo: (id) sender{
-    [(InstrumentLayer *)self.parent toggleHelp:0];
+    [(InstrumentLayer *)self.parent toggleInfo:0];
     [self moveToClosedState];
 }
 

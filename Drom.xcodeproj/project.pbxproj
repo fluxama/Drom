@@ -8,15 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		451B6E811583BD530024B92A /* InstrumentScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 451B6E801583BD530024B92A /* InstrumentScene.m */; };
-		453FEC6D155082F500850E88 /* DoctorOm2MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6B155082F500850E88 /* DoctorOm2MenuSelected.png */; };
-		453FEC6E155082F500850E88 /* DoctorOm3MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6C155082F500850E88 /* DoctorOm3MenuSelected.png */; };
-		453FEC71155083CF00850E88 /* DoctorOm2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6F155083CF00850E88 /* DoctorOm2.plist */; };
-		453FEC72155083CF00850E88 /* DoctorOm3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC70155083CF00850E88 /* DoctorOm3.plist */; };
-		4558E16A15507F3700F568A4 /* DoctorOm2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E16215507F3700F568A4 /* DoctorOm2.png */; };
-		4558E16C15507F3700F568A4 /* DoctorOm3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E16415507F3700F568A4 /* DoctorOm3.png */; };
-		4558E1761550807200F568A4 /* DoctorOm2Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E1721550807200F568A4 /* DoctorOm2Menu.png */; };
-		4558E1771550807200F568A4 /* DoctorOm3Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E1731550807200F568A4 /* DoctorOm3Menu.png */; };
-		45A9A13B157EBCF00050AEB8 /* pd-drom.pd in Resources */ = {isa = PBXBuildFile; fileRef = 45A9A13A157EBCF00050AEB8 /* pd-drom.pd */; };
+		453FEC6D155082F500850E88 /* Drom2MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6B155082F500850E88 /* Drom2MenuSelected.png */; };
+		453FEC6E155082F500850E88 /* Drom3MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6C155082F500850E88 /* Drom3MenuSelected.png */; };
+		453FEC71155083CF00850E88 /* Drom2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6F155083CF00850E88 /* Drom2.plist */; };
+		453FEC72155083CF00850E88 /* Drom3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC70155083CF00850E88 /* Drom3.plist */; };
+		4558E16A15507F3700F568A4 /* Drom2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E16215507F3700F568A4 /* Drom2.png */; };
+		4558E16C15507F3700F568A4 /* Drom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E16415507F3700F568A4 /* Drom3.png */; };
+		4558E1761550807200F568A4 /* Drom2Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E1721550807200F568A4 /* Drom2Menu.png */; };
+		4558E1771550807200F568A4 /* Drom3Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 4558E1731550807200F568A4 /* Drom3Menu.png */; };
+		455CA05715A8DBD000D2B890 /* pd-drom.pd in Resources */ = {isa = PBXBuildFile; fileRef = 455CA05615A8DBD000D2B890 /* pd-drom.pd */; };
+		455CA06015A8EBF400D2B890 /* Drom-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA05B15A8EBF400D2B890 /* Drom-ipad.png */; };
+		455CA06115A8EBF400D2B890 /* Drom2-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA05C15A8EBF400D2B890 /* Drom2-ipad.png */; };
+		455CA06215A8EBF400D2B890 /* Drom3-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA05D15A8EBF400D2B890 /* Drom3-ipad.png */; };
+		455CA06315A8EBF400D2B890 /* InfoLayer-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA05E15A8EBF400D2B890 /* InfoLayer-hd.png */; };
+		455CA06415A8EBF400D2B890 /* InfoLayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA05F15A8EBF400D2B890 /* InfoLayer.png */; };
+		455CA07015A8EC4700D2B890 /* Default-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06515A8EC4700D2B890 /* Default-ipad.png */; };
+		455CA07115A8EC4700D2B890 /* InfoDrom.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06615A8EC4700D2B890 /* InfoDrom.png */; };
+		455CA07215A8EC4700D2B890 /* InfoDromSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06715A8EC4700D2B890 /* InfoDromSelected.png */; };
+		455CA07315A8EC4700D2B890 /* InfoFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06815A8EC4700D2B890 /* InfoFacebook.png */; };
+		455CA07415A8EC4700D2B890 /* InfoFacebookSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06915A8EC4700D2B890 /* InfoFacebookSelected.png */; };
+		455CA07515A8EC4700D2B890 /* InfoFluxama.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06A15A8EC4700D2B890 /* InfoFluxama.png */; };
+		455CA07615A8EC4700D2B890 /* InfoFluxamaSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06B15A8EC4700D2B890 /* InfoFluxamaSelected.png */; };
+		455CA07715A8EC4700D2B890 /* InfoNM.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06C15A8EC4700D2B890 /* InfoNM.png */; };
+		455CA07815A8EC4700D2B890 /* InfoNMSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06D15A8EC4700D2B890 /* InfoNMSelected.png */; };
+		455CA07915A8EC4700D2B890 /* InfoTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06E15A8EC4700D2B890 /* InfoTwitter.png */; };
+		455CA07A15A8EC4700D2B890 /* InfoTwitterSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06F15A8EC4700D2B890 /* InfoTwitterSelected.png */; };
 		45AD91581513AF1400B462D1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AD91571513AF1400B462D1 /* QuartzCore.framework */; };
 		45AD915A1513AF1400B462D1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AD91591513AF1400B462D1 /* OpenGLES.framework */; };
 		45AD915C1513AF1400B462D1 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AD915B1513AF1400B462D1 /* OpenAL.framework */; };
@@ -42,8 +58,7 @@
 		45CE59DB1513B1570043658F /* AboutLayer-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CE59621513B1570043658F /* AboutLayer-ipad.png */; };
 		45CE59DC1513B1570043658F /* AboutLayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CE59631513B1570043658F /* AboutLayer.png */; };
 		45CE59DD1513B1570043658F /* MenuBackground-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CE59641513B1570043658F /* MenuBackground-ipad.png */; };
-		45CE59DE1513B1570043658F /* MenuIcons-.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CE59651513B1570043658F /* MenuIcons-.png */; };
-		45CE59FE1513B1570043658F /* DoctorOm.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45CE59861513B1570043658F /* DoctorOm.plist */; };
+		45CE59FE1513B1570043658F /* Drom.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45CE59861513B1570043658F /* Drom.plist */; };
 		45CE5A021513B1570043658F /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45CE598A1513B1570043658F /* settings.plist */; };
 		45CE5A051513B1570043658F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE598E1513B1570043658F /* main.m */; };
 		45CE5A061513B1570043658F /* Drom-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 45CE598F1513B1570043658F /* Drom-LICENSE.txt */; };
@@ -82,7 +97,6 @@
 		45CE5A361513B1570043658F /* Sequence.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59C61513B1570043658F /* Sequence.m */; };
 		45CE5A371513B1570043658F /* ToggleTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59C81513B1570043658F /* ToggleTouch.m */; };
 		45CE5A381513B1570043658F /* TwoPosSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59CA1513B1570043658F /* TwoPosSwitch.m */; };
-		45CE5A391513B1570043658F /* AboutScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59CD1513B1570043658F /* AboutScene.m */; };
 		45CE5A3A1513B1570043658F /* Instrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59CF1513B1570043658F /* Instrument.m */; };
 		45CE5A3C1513B1570043658F /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59D31513B1570043658F /* MenuScene.m */; };
 		45CE5A3D1513B1570043658F /* NavMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CE59D51513B1570043658F /* NavMenu.m */; };
@@ -214,9 +228,9 @@
 		45CEC6981513C15E00E439FF /* PositionTextureColor.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5BE01513B9E40043658F /* PositionTextureColor.vsh */; };
 		45CEC6991513C15E00E439FF /* PositionTextureColorAlphaTest.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 45CE5BE11513B9E40043658F /* PositionTextureColorAlphaTest.fsh */; };
 		45CEC6AD1518E24A00E439FF /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6AC1518E24A00E439FF /* iTunesArtwork.png */; };
-		45CEC6B11518E25F00E439FF /* DoctorOm.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6AE1518E25F00E439FF /* DoctorOm.png */; };
-		45CEC6B21518E25F00E439FF /* DoctorOmMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6AF1518E25F00E439FF /* DoctorOmMenu.png */; };
-		45CEC6B31518E25F00E439FF /* DoctorOmMenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6B01518E25F00E439FF /* DoctorOmMenuSelected.png */; };
+		45CEC6B11518E25F00E439FF /* Drom.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6AE1518E25F00E439FF /* Drom.png */; };
+		45CEC6B21518E25F00E439FF /* DromMenu.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6AF1518E25F00E439FF /* DromMenu.png */; };
+		45CEC6B31518E25F00E439FF /* DromMenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6B01518E25F00E439FF /* DromMenuSelected.png */; };
 		45CEC6B91519188700E439FF /* KnobLine-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6B61519188700E439FF /* KnobLine-hd.png */; };
 		45CEC6BA1519188700E439FF /* KnobLine-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6B71519188700E439FF /* KnobLine-ipad.png */; };
 		45CEC6BB1519188700E439FF /* KnobLine.png in Resources */ = {isa = PBXBuildFile; fileRef = 45CEC6B81519188700E439FF /* KnobLine.png */; };
@@ -250,16 +264,32 @@
 /* Begin PBXFileReference section */
 		451B6E7F1583BD530024B92A /* InstrumentScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentScene.h; sourceTree = "<group>"; };
 		451B6E801583BD530024B92A /* InstrumentScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScene.m; sourceTree = "<group>"; };
-		453FEC6B155082F500850E88 /* DoctorOm2MenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm2MenuSelected.png; sourceTree = "<group>"; };
-		453FEC6C155082F500850E88 /* DoctorOm3MenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm3MenuSelected.png; sourceTree = "<group>"; };
-		453FEC6F155083CF00850E88 /* DoctorOm2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DoctorOm2.plist; sourceTree = "<group>"; };
-		453FEC70155083CF00850E88 /* DoctorOm3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DoctorOm3.plist; sourceTree = "<group>"; };
-		4558E16215507F3700F568A4 /* DoctorOm2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm2.png; sourceTree = "<group>"; };
-		4558E16415507F3700F568A4 /* DoctorOm3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm3.png; sourceTree = "<group>"; };
-		4558E1721550807200F568A4 /* DoctorOm2Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm2Menu.png; sourceTree = "<group>"; };
-		4558E1731550807200F568A4 /* DoctorOm3Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm3Menu.png; sourceTree = "<group>"; };
-		45A9A13A157EBCF00050AEB8 /* pd-drom.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pd-drom.pd"; sourceTree = "<group>"; };
-		45AD91531513AF1400B462D1 /* DoctorOm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoctorOm.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		453FEC6B155082F500850E88 /* Drom2MenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom2MenuSelected.png; sourceTree = "<group>"; };
+		453FEC6C155082F500850E88 /* Drom3MenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom3MenuSelected.png; sourceTree = "<group>"; };
+		453FEC6F155083CF00850E88 /* Drom2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Drom2.plist; sourceTree = "<group>"; };
+		453FEC70155083CF00850E88 /* Drom3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Drom3.plist; sourceTree = "<group>"; };
+		4558E16215507F3700F568A4 /* Drom2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom2.png; sourceTree = "<group>"; };
+		4558E16415507F3700F568A4 /* Drom3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom3.png; sourceTree = "<group>"; };
+		4558E1721550807200F568A4 /* Drom2Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom2Menu.png; sourceTree = "<group>"; };
+		4558E1731550807200F568A4 /* Drom3Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom3Menu.png; sourceTree = "<group>"; };
+		455CA05615A8DBD000D2B890 /* pd-drom.pd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pd-drom.pd"; sourceTree = SOURCE_ROOT; };
+		455CA05B15A8EBF400D2B890 /* Drom-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Drom-ipad.png"; sourceTree = "<group>"; };
+		455CA05C15A8EBF400D2B890 /* Drom2-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Drom2-ipad.png"; sourceTree = "<group>"; };
+		455CA05D15A8EBF400D2B890 /* Drom3-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Drom3-ipad.png"; sourceTree = "<group>"; };
+		455CA05E15A8EBF400D2B890 /* InfoLayer-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InfoLayer-hd.png"; sourceTree = "<group>"; };
+		455CA05F15A8EBF400D2B890 /* InfoLayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InfoLayer.png; sourceTree = "<group>"; };
+		455CA06515A8EC4700D2B890 /* Default-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-ipad.png"; path = "Resources/Default-ipad.png"; sourceTree = "<group>"; };
+		455CA06615A8EC4700D2B890 /* InfoDrom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoDrom.png; path = Resources/InfoDrom.png; sourceTree = "<group>"; };
+		455CA06715A8EC4700D2B890 /* InfoDromSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoDromSelected.png; path = Resources/InfoDromSelected.png; sourceTree = "<group>"; };
+		455CA06815A8EC4700D2B890 /* InfoFacebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoFacebook.png; path = Resources/InfoFacebook.png; sourceTree = "<group>"; };
+		455CA06915A8EC4700D2B890 /* InfoFacebookSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoFacebookSelected.png; path = Resources/InfoFacebookSelected.png; sourceTree = "<group>"; };
+		455CA06A15A8EC4700D2B890 /* InfoFluxama.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoFluxama.png; path = Resources/InfoFluxama.png; sourceTree = "<group>"; };
+		455CA06B15A8EC4700D2B890 /* InfoFluxamaSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoFluxamaSelected.png; path = Resources/InfoFluxamaSelected.png; sourceTree = "<group>"; };
+		455CA06C15A8EC4700D2B890 /* InfoNM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoNM.png; path = Resources/InfoNM.png; sourceTree = "<group>"; };
+		455CA06D15A8EC4700D2B890 /* InfoNMSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoNMSelected.png; path = Resources/InfoNMSelected.png; sourceTree = "<group>"; };
+		455CA06E15A8EC4700D2B890 /* InfoTwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoTwitter.png; path = Resources/InfoTwitter.png; sourceTree = "<group>"; };
+		455CA06F15A8EC4700D2B890 /* InfoTwitterSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoTwitterSelected.png; path = Resources/InfoTwitterSelected.png; sourceTree = "<group>"; };
+		45AD91531513AF1400B462D1 /* Drom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45AD91571513AF1400B462D1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		45AD91591513AF1400B462D1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		45AD915B1513AF1400B462D1 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -287,8 +317,7 @@
 		45CE59621513B1570043658F /* AboutLayer-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AboutLayer-ipad.png"; sourceTree = "<group>"; };
 		45CE59631513B1570043658F /* AboutLayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AboutLayer.png; sourceTree = "<group>"; };
 		45CE59641513B1570043658F /* MenuBackground-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuBackground-ipad.png"; sourceTree = "<group>"; };
-		45CE59651513B1570043658F /* MenuIcons-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuIcons-.png"; sourceTree = "<group>"; };
-		45CE59861513B1570043658F /* DoctorOm.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DoctorOm.plist; sourceTree = "<group>"; };
+		45CE59861513B1570043658F /* Drom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Drom.plist; sourceTree = "<group>"; };
 		45CE598A1513B1570043658F /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 		45CE598E1513B1570043658F /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		45CE598F1513B1570043658F /* Drom-LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Drom-LICENSE.txt"; sourceTree = "<group>"; };
@@ -333,8 +362,6 @@
 		45CE59C81513B1570043658F /* ToggleTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToggleTouch.m; sourceTree = "<group>"; };
 		45CE59C91513B1570043658F /* TwoPosSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoPosSwitch.h; sourceTree = "<group>"; };
 		45CE59CA1513B1570043658F /* TwoPosSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoPosSwitch.m; sourceTree = "<group>"; };
-		45CE59CC1513B1570043658F /* AboutScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutScene.h; sourceTree = "<group>"; };
-		45CE59CD1513B1570043658F /* AboutScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutScene.m; sourceTree = "<group>"; };
 		45CE59CE1513B1570043658F /* Instrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Instrument.h; sourceTree = "<group>"; };
 		45CE59CF1513B1570043658F /* Instrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Instrument.m; sourceTree = "<group>"; };
 		45CE59D21513B1570043658F /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
@@ -586,9 +613,9 @@
 		45CE5CDD1513BA600043658F /* LICENSE_CocosDenshion.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE_CocosDenshion.txt; path = libs/LICENSE_CocosDenshion.txt; sourceTree = "<group>"; };
 		45CE5CDE1513BA600043658F /* LICENSE_Kazmath.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE_Kazmath.txt; path = libs/LICENSE_Kazmath.txt; sourceTree = "<group>"; };
 		45CEC6AC1518E24A00E439FF /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iTunesArtwork.png; path = Resources/iTunesArtwork.png; sourceTree = "<group>"; };
-		45CEC6AE1518E25F00E439FF /* DoctorOm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm.png; sourceTree = "<group>"; };
-		45CEC6AF1518E25F00E439FF /* DoctorOmMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOmMenu.png; sourceTree = "<group>"; };
-		45CEC6B01518E25F00E439FF /* DoctorOmMenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOmMenuSelected.png; sourceTree = "<group>"; };
+		45CEC6AE1518E25F00E439FF /* Drom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom.png; sourceTree = "<group>"; };
+		45CEC6AF1518E25F00E439FF /* DromMenu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DromMenu.png; sourceTree = "<group>"; };
+		45CEC6B01518E25F00E439FF /* DromMenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DromMenuSelected.png; sourceTree = "<group>"; };
 		45CEC6B61519188700E439FF /* KnobLine-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KnobLine-hd.png"; sourceTree = "<group>"; };
 		45CEC6B71519188700E439FF /* KnobLine-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "KnobLine-ipad.png"; sourceTree = "<group>"; };
 		45CEC6B81519188700E439FF /* KnobLine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KnobLine.png; sourceTree = "<group>"; };
@@ -628,10 +655,8 @@
 		45AD91481513AF1400B462D1 = {
 			isa = PBXGroup;
 			children = (
-				45CE5A6E1513B83D0043658F /* GameKit.framework */,
-				45CE5A6C1513B3AE0043658F /* MediaPlayer.framework */,
 				45CE5A3E1513B17B0043658F /* libpd.xcodeproj */,
-				45AD91671513AF1400B462D1 /* DoctorOm */,
+				45AD91671513AF1400B462D1 /* Drom */,
 				45AD91561513AF1400B462D1 /* Frameworks */,
 				45AD91541513AF1400B462D1 /* Products */,
 			);
@@ -640,7 +665,7 @@
 		45AD91541513AF1400B462D1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				45AD91531513AF1400B462D1 /* DoctorOm.app */,
+				45AD91531513AF1400B462D1 /* Drom.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -648,6 +673,8 @@
 		45AD91561513AF1400B462D1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				45CE5A6E1513B83D0043658F /* GameKit.framework */,
+				45CE5A6C1513B3AE0043658F /* MediaPlayer.framework */,
 				45AD91571513AF1400B462D1 /* QuartzCore.framework */,
 				45AD91591513AF1400B462D1 /* OpenGLES.framework */,
 				45AD915B1513AF1400B462D1 /* OpenAL.framework */,
@@ -660,29 +687,41 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		45AD91671513AF1400B462D1 /* DoctorOm */ = {
+		45AD91671513AF1400B462D1 /* Drom */ = {
 			isa = PBXGroup;
 			children = (
 				45CE5BD41513B9E40043658F /* Shaders */,
 				45CE595D1513B1570043658F /* InstrumentImages */,
 				45CE59851513B1570043658F /* InstrumentPlists */,
-				45CE598B1513B1570043658F /* InstumentPatches */,
+				45CE598B1513B1570043658F /* InstrumentPatches */,
+				45CE59911513B1570043658F /* SynthBuilder */,
 				45CE598E1513B1570043658F /* main.m */,
 				45CE598F1513B1570043658F /* Drom-LICENSE.txt */,
 				45CE59901513B1570043658F /* Prefix.pch */,
-				45CE59911513B1570043658F /* SynthBuilder */,
 				45CE595A1513B1410043658F /* AppDelegate.h */,
 				45CE595B1513B1410043658F /* AppDelegate.m */,
 				45AD91681513AF1400B462D1 /* Resources */,
 				45AD917C1513AF1400B462D1 /* libs */,
 				45AD92B51513AF1600B462D1 /* Supporting Files */,
 			);
+			name = Drom;
 			path = DoctorOm;
 			sourceTree = "<group>";
 		};
 		45AD91681513AF1400B462D1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				455CA06515A8EC4700D2B890 /* Default-ipad.png */,
+				455CA06615A8EC4700D2B890 /* InfoDrom.png */,
+				455CA06715A8EC4700D2B890 /* InfoDromSelected.png */,
+				455CA06815A8EC4700D2B890 /* InfoFacebook.png */,
+				455CA06915A8EC4700D2B890 /* InfoFacebookSelected.png */,
+				455CA06A15A8EC4700D2B890 /* InfoFluxama.png */,
+				455CA06B15A8EC4700D2B890 /* InfoFluxamaSelected.png */,
+				455CA06C15A8EC4700D2B890 /* InfoNM.png */,
+				455CA06D15A8EC4700D2B890 /* InfoNMSelected.png */,
+				455CA06E15A8EC4700D2B890 /* InfoTwitter.png */,
+				455CA06F15A8EC4700D2B890 /* InfoTwitterSelected.png */,
 				45CEC6AC1518E24A00E439FF /* iTunesArtwork.png */,
 				45AD91691513AF1400B462D1 /* Default.png */,
 				45AD916B1513AF1400B462D1 /* fps_images.png */,
@@ -722,15 +761,20 @@
 		45CE595D1513B1570043658F /* InstrumentImages */ = {
 			isa = PBXGroup;
 			children = (
-				453FEC6B155082F500850E88 /* DoctorOm2MenuSelected.png */,
-				453FEC6C155082F500850E88 /* DoctorOm3MenuSelected.png */,
-				4558E1721550807200F568A4 /* DoctorOm2Menu.png */,
-				4558E1731550807200F568A4 /* DoctorOm3Menu.png */,
-				4558E16215507F3700F568A4 /* DoctorOm2.png */,
-				4558E16415507F3700F568A4 /* DoctorOm3.png */,
-				45CEC6AE1518E25F00E439FF /* DoctorOm.png */,
-				45CEC6AF1518E25F00E439FF /* DoctorOmMenu.png */,
-				45CEC6B01518E25F00E439FF /* DoctorOmMenuSelected.png */,
+				455CA05B15A8EBF400D2B890 /* Drom-ipad.png */,
+				455CA05C15A8EBF400D2B890 /* Drom2-ipad.png */,
+				455CA05D15A8EBF400D2B890 /* Drom3-ipad.png */,
+				455CA05E15A8EBF400D2B890 /* InfoLayer-hd.png */,
+				455CA05F15A8EBF400D2B890 /* InfoLayer.png */,
+				453FEC6B155082F500850E88 /* Drom2MenuSelected.png */,
+				453FEC6C155082F500850E88 /* Drom3MenuSelected.png */,
+				4558E1721550807200F568A4 /* Drom2Menu.png */,
+				4558E1731550807200F568A4 /* Drom3Menu.png */,
+				4558E16215507F3700F568A4 /* Drom2.png */,
+				4558E16415507F3700F568A4 /* Drom3.png */,
+				45CEC6AE1518E25F00E439FF /* Drom.png */,
+				45CEC6AF1518E25F00E439FF /* DromMenu.png */,
+				45CEC6B01518E25F00E439FF /* DromMenuSelected.png */,
 				45CE595E1513B1570043658F /* AboutButton-hd.png */,
 				45CE595F1513B1570043658F /* AboutButton-ipad.png */,
 				45CE59601513B1570043658F /* AboutButton.png */,
@@ -738,7 +782,6 @@
 				45CE59621513B1570043658F /* AboutLayer-ipad.png */,
 				45CE59631513B1570043658F /* AboutLayer.png */,
 				45CE59641513B1570043658F /* MenuBackground-ipad.png */,
-				45CE59651513B1570043658F /* MenuIcons-.png */,
 			);
 			path = InstrumentImages;
 			sourceTree = "<group>";
@@ -746,19 +789,20 @@
 		45CE59851513B1570043658F /* InstrumentPlists */ = {
 			isa = PBXGroup;
 			children = (
-				453FEC6F155083CF00850E88 /* DoctorOm2.plist */,
-				453FEC70155083CF00850E88 /* DoctorOm3.plist */,
-				45CE59861513B1570043658F /* DoctorOm.plist */,
+				453FEC6F155083CF00850E88 /* Drom2.plist */,
+				453FEC70155083CF00850E88 /* Drom3.plist */,
+				45CE59861513B1570043658F /* Drom.plist */,
 				45CE598A1513B1570043658F /* settings.plist */,
 			);
 			path = InstrumentPlists;
 			sourceTree = "<group>";
 		};
-		45CE598B1513B1570043658F /* InstumentPatches */ = {
+		45CE598B1513B1570043658F /* InstrumentPatches */ = {
 			isa = PBXGroup;
 			children = (
-				45A9A13A157EBCF00050AEB8 /* pd-drom.pd */,
+				455CA05615A8DBD000D2B890 /* pd-drom.pd */,
 			);
+			name = InstrumentPatches;
 			path = InstumentPatches;
 			sourceTree = "<group>";
 		};
@@ -844,8 +888,6 @@
 			children = (
 				451B6E7F1583BD530024B92A /* InstrumentScene.h */,
 				451B6E801583BD530024B92A /* InstrumentScene.m */,
-				45CE59CC1513B1570043658F /* AboutScene.h */,
-				45CE59CD1513B1570043658F /* AboutScene.m */,
 				45CE59CE1513B1570043658F /* Instrument.h */,
 				45CE59CF1513B1570043658F /* Instrument.m */,
 				45CE59D21513B1570043658F /* MenuScene.h */,
@@ -1215,9 +1257,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		45AD91521513AF1400B462D1 /* DoctorOm */ = {
+		45AD91521513AF1400B462D1 /* Drom */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45AD92C51513AF1600B462D1 /* Build configuration list for PBXNativeTarget "DoctorOm" */;
+			buildConfigurationList = 45AD92C51513AF1600B462D1 /* Build configuration list for PBXNativeTarget "Drom" */;
 			buildPhases = (
 				45AD914F1513AF1400B462D1 /* Sources */,
 				45AD91501513AF1400B462D1 /* Frameworks */,
@@ -1228,9 +1270,9 @@
 			dependencies = (
 				45CE5A6A1513B35C0043658F /* PBXTargetDependency */,
 			);
-			name = DoctorOm;
+			name = Drom;
 			productName = DoctorOm;
-			productReference = 45AD91531513AF1400B462D1 /* DoctorOm.app */;
+			productReference = 45AD91531513AF1400B462D1 /* Drom.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1241,7 +1283,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 45AD914D1513AF1400B462D1 /* Build configuration list for PBXProject "DoctorOm" */;
+			buildConfigurationList = 45AD914D1513AF1400B462D1 /* Build configuration list for PBXProject "Drom" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1259,7 +1301,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				45AD91521513AF1400B462D1 /* DoctorOm */,
+				45AD91521513AF1400B462D1 /* Drom */,
 			);
 		};
 /* End PBXProject section */
@@ -1308,8 +1350,7 @@
 				45CE59DB1513B1570043658F /* AboutLayer-ipad.png in Resources */,
 				45CE59DC1513B1570043658F /* AboutLayer.png in Resources */,
 				45CE59DD1513B1570043658F /* MenuBackground-ipad.png in Resources */,
-				45CE59DE1513B1570043658F /* MenuIcons-.png in Resources */,
-				45CE59FE1513B1570043658F /* DoctorOm.plist in Resources */,
+				45CE59FE1513B1570043658F /* Drom.plist in Resources */,
 				45CE5A021513B1570043658F /* settings.plist in Resources */,
 				45CE5A061513B1570043658F /* Drom-LICENSE.txt in Resources */,
 				45CE5A071513B1570043658F /* IconInfo-hd.png in Resources */,
@@ -1349,20 +1390,20 @@
 				45CE5D4C1513BA600043658F /* LICENSE_CocosDenshion.txt in Resources */,
 				45CE5D4D1513BA600043658F /* LICENSE_Kazmath.txt in Resources */,
 				45CEC6AD1518E24A00E439FF /* iTunesArtwork.png in Resources */,
-				45CEC6B11518E25F00E439FF /* DoctorOm.png in Resources */,
-				45CEC6B21518E25F00E439FF /* DoctorOmMenu.png in Resources */,
-				45CEC6B31518E25F00E439FF /* DoctorOmMenuSelected.png in Resources */,
+				45CEC6B11518E25F00E439FF /* Drom.png in Resources */,
+				45CEC6B21518E25F00E439FF /* DromMenu.png in Resources */,
+				45CEC6B31518E25F00E439FF /* DromMenuSelected.png in Resources */,
 				45CEC6B91519188700E439FF /* KnobLine-hd.png in Resources */,
 				45CEC6BA1519188700E439FF /* KnobLine-ipad.png in Resources */,
 				45CEC6BB1519188700E439FF /* KnobLine.png in Resources */,
-				4558E16A15507F3700F568A4 /* DoctorOm2.png in Resources */,
-				4558E16C15507F3700F568A4 /* DoctorOm3.png in Resources */,
-				4558E1761550807200F568A4 /* DoctorOm2Menu.png in Resources */,
-				4558E1771550807200F568A4 /* DoctorOm3Menu.png in Resources */,
-				453FEC6D155082F500850E88 /* DoctorOm2MenuSelected.png in Resources */,
-				453FEC6E155082F500850E88 /* DoctorOm3MenuSelected.png in Resources */,
-				453FEC71155083CF00850E88 /* DoctorOm2.plist in Resources */,
-				453FEC72155083CF00850E88 /* DoctorOm3.plist in Resources */,
+				4558E16A15507F3700F568A4 /* Drom2.png in Resources */,
+				4558E16C15507F3700F568A4 /* Drom3.png in Resources */,
+				4558E1761550807200F568A4 /* Drom2Menu.png in Resources */,
+				4558E1771550807200F568A4 /* Drom3Menu.png in Resources */,
+				453FEC6D155082F500850E88 /* Drom2MenuSelected.png in Resources */,
+				453FEC6E155082F500850E88 /* Drom3MenuSelected.png in Resources */,
+				453FEC71155083CF00850E88 /* Drom2.plist in Resources */,
+				453FEC72155083CF00850E88 /* Drom3.plist in Resources */,
 				45DE96911572AD4C00DD4940 /* LedGlow.png in Resources */,
 				45DE96951572B6C400DD4940 /* navMenuHelp-ipad.png in Resources */,
 				45DE96961572B6C400DD4940 /* navMenuHelp.png in Resources */,
@@ -1370,7 +1411,23 @@
 				45DE969D1572CFD100DD4940 /* KnobTop.png in Resources */,
 				45DE969F1572D20400DD4940 /* RingWhite.png in Resources */,
 				45DE96A11574203600DD4940 /* Slider.png in Resources */,
-				45A9A13B157EBCF00050AEB8 /* pd-drom.pd in Resources */,
+				455CA05715A8DBD000D2B890 /* pd-drom.pd in Resources */,
+				455CA06015A8EBF400D2B890 /* Drom-ipad.png in Resources */,
+				455CA06115A8EBF400D2B890 /* Drom2-ipad.png in Resources */,
+				455CA06215A8EBF400D2B890 /* Drom3-ipad.png in Resources */,
+				455CA06315A8EBF400D2B890 /* InfoLayer-hd.png in Resources */,
+				455CA06415A8EBF400D2B890 /* InfoLayer.png in Resources */,
+				455CA07015A8EC4700D2B890 /* Default-ipad.png in Resources */,
+				455CA07115A8EC4700D2B890 /* InfoDrom.png in Resources */,
+				455CA07215A8EC4700D2B890 /* InfoDromSelected.png in Resources */,
+				455CA07315A8EC4700D2B890 /* InfoFacebook.png in Resources */,
+				455CA07415A8EC4700D2B890 /* InfoFacebookSelected.png in Resources */,
+				455CA07515A8EC4700D2B890 /* InfoFluxama.png in Resources */,
+				455CA07615A8EC4700D2B890 /* InfoFluxamaSelected.png in Resources */,
+				455CA07715A8EC4700D2B890 /* InfoNM.png in Resources */,
+				455CA07815A8EC4700D2B890 /* InfoNMSelected.png in Resources */,
+				455CA07915A8EC4700D2B890 /* InfoTwitter.png in Resources */,
+				455CA07A15A8EC4700D2B890 /* InfoTwitterSelected.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,7 +1445,6 @@
 				45CE5A361513B1570043658F /* Sequence.m in Sources */,
 				45CE5A371513B1570043658F /* ToggleTouch.m in Sources */,
 				45CE5A381513B1570043658F /* TwoPosSwitch.m in Sources */,
-				45CE5A391513B1570043658F /* AboutScene.m in Sources */,
 				45CE5A3A1513B1570043658F /* Instrument.m in Sources */,
 				45CE5A3C1513B1570043658F /* MenuScene.m in Sources */,
 				45CE5A3D1513B1570043658F /* NavMenu.m in Sources */,
@@ -1566,7 +1622,7 @@
 				INFOPLIST_FILE = DoctorOm/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Drom;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1584,7 +1640,7 @@
 				INFOPLIST_FILE = DoctorOm/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Drom;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1594,7 +1650,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		45AD914D1513AF1400B462D1 /* Build configuration list for PBXProject "DoctorOm" */ = {
+		45AD914D1513AF1400B462D1 /* Build configuration list for PBXProject "Drom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45AD92C31513AF1600B462D1 /* Debug */,
@@ -1603,7 +1659,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45AD92C51513AF1600B462D1 /* Build configuration list for PBXNativeTarget "DoctorOm" */ = {
+		45AD92C51513AF1600B462D1 /* Build configuration list for PBXNativeTarget "Drom" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45AD92C61513AF1600B462D1 /* Debug */,

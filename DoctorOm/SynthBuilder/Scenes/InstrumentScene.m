@@ -36,19 +36,88 @@
         [self addChild:nav_menu z:50];
         [nav_menu moveToClosedState];
         
+        // Create the Info Menu
+        infoLayer = [CCSprite spriteWithFile:@"InfoLayer.png"];
+        [infoLayer setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
+        [infoLayer setVisible:false];
+        [self addChild:infoLayer z:100];
+        
+        infoMenu = [CCMenu menuWithItems:nil ];
+        
+        CCMenuItemImage *infoNM = [CCMenuItemImage 
+                                   itemWithNormalImage:@"InfoNM.png"
+                                   selectedImage:@"InfoNMSelected.png"
+                                   target:self
+                                   selector:@selector(gotoNM:)];
+        CCMenuItemImage *infoDrom = [CCMenuItemImage 
+                                     itemWithNormalImage:@"InfoDrom.png"
+                                     selectedImage:@"InfoDromSelected.png"
+                                     target:self
+                                     selector:@selector(gotoDrom:)];
+        
+        CCMenuItemImage *infoFB = [CCMenuItemImage 
+                                   itemWithNormalImage:@"InfoFacebook.png"
+                                   selectedImage:@"InfoFacebookSelected.png"
+                                   target:self
+                                   selector:@selector(gotoFB:)];
+        
+        CCMenuItemImage *infoTwitter = [CCMenuItemImage 
+                                        itemWithNormalImage:@"InfoTwitter.png"
+                                        selectedImage:@"InfoTwitterSelected.png"
+                                        target:self
+                                        selector:@selector(gotoTwitter:)];
+        
+        CCMenuItemImage *infoWeb = [CCMenuItemImage 
+                                    itemWithNormalImage:@"InfoFluxama.png"
+                                    selectedImage:@"InfoFluxamaSelected.png"
+                                    target:self
+                                    selector:@selector(gotoWeb:)];
+        
+        [infoMenu addChild:infoNM];
+        [infoMenu addChild:infoDrom];
+        [infoMenu addChild:infoFB];
+        [infoMenu addChild:infoTwitter];
+        [infoMenu addChild:infoWeb];
+
+        [infoMenu alignItemsHorizontallyWithPadding:5];
+		if (IS_IPAD()) {
+            [helpMenu setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)]; 
+        } else {
+		    [helpMenu setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
+        }
+        [infoMenu setVisible:false];
+        [self addChild:infoMenu z:150];
+        
+        CCMenu *exitButtonMenu = [CCMenu menuWithItems:nil ];
+        
+        CCMenuItemImage *exitInfoButton = [CCMenuItemImage 
+                                           itemWithNormalImage:@"navMenuExit.png"
+                                           selectedImage:@"navMenuExit.png"
+                                           target:self
+                                           selector:@selector(toggleInfo:)];
+        [exitButtonMenu addChild:exitInfoButton];
+        if (IS_IPAD()) {
+            [exitButtonMenu setPosition:ccp(1000, 25)]; 
+        } else {
+		    [exitButtonMenu setPosition:ccp(465, 15)];
+        }
+        [infoLayer addChild:exitButtonMenu z:150];
+        
+        // Create the Help Menu
+        
         helpMenu = [CCMenu menuWithItems:nil ];
         
         CCMenuItemImage *exitHelpButton = [CCMenuItemImage 
-                                       itemWithNormalImage:@"navMenuExit.png"
-                                       selectedImage:@"navMenuExit.png"
-                                       target:self
-                                       selector:@selector(toggleHelp:)];
+                                           itemWithNormalImage:@"navMenuExit.png"
+                                           selectedImage:@"navMenuExit.png"
+                                           target:self
+                                           selector:@selector(toggleHelp:)];
         
         [helpMenu addChild:exitHelpButton];
 		if (IS_IPAD()) {
             [helpMenu setPosition:ccp(1000, 25)]; 
         } else {
-		    [helpMenu setPosition:ccp(465, 20)];
+		    [helpMenu setPosition:ccp(465, 15)];
         }
         [helpMenu setVisible:false];
         [self addChild:helpMenu z:150];
@@ -57,6 +126,9 @@
         [helpLayer setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
         [helpLayer setVisible:false];
         [self addChild:helpLayer z:100];
+        
+
+        
         
     }
     return self;
@@ -75,6 +147,35 @@
     layer.visible = !layer.visible;
     nav_menu.visible = !nav_menu.visible;
 }
+
+-(void) toggleInfo: (id)sender {
+    infoMenu.visible = !infoLayer.visible;
+    infoLayer.visible = !infoLayer.visible;
+    layer.visible = !layer.visible;
+    nav_menu.visible = !nav_menu.visible;
+}
+
+- (void) gotoNM: (id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Noisemusick"]];
+}
+- (void) gotoDrom: (id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Drom"]];
+
+}
+- (void) gotoFB: (id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/fluxamacorp"]];
+
+}
+- (void) gotoTwitter: (id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.twitter.com/fluxama"]];
+
+}
+- (void) gotoWeb: (id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.fluxama.com"]];
+
+}
+
+
 
 - (void) dealloc
 {	

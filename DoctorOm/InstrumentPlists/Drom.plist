@@ -50,7 +50,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<integer>0</integer>
+			<real>0.5</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -96,7 +96,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<integer>0</integer>
+			<real>0.5</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>

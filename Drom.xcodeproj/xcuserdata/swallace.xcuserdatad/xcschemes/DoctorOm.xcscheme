@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "45AD91521513AF1400B462D1"
-               BuildableName = "DoctorOm.app"
-               BlueprintName = "DoctorOm"
-               ReferencedContainer = "container:DoctorOm.xcodeproj">
+               BuildableName = "Drom.app"
+               BlueprintName = "Drom"
+               ReferencedContainer = "container:Drom.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45AD91521513AF1400B462D1"
-            BuildableName = "DoctorOm.app"
-            BlueprintName = "DoctorOm"
-            ReferencedContainer = "container:DoctorOm.xcodeproj">
+            BuildableName = "Drom.app"
+            BlueprintName = "Drom"
+            ReferencedContainer = "container:Drom.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -47,15 +47,14 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enablesOpenGLESFrameCapture = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45AD91521513AF1400B462D1"
-            BuildableName = "DoctorOm.app"
-            BlueprintName = "DoctorOm"
-            ReferencedContainer = "container:DoctorOm.xcodeproj">
+            BuildableName = "Drom.app"
+            BlueprintName = "Drom"
+            ReferencedContainer = "container:Drom.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -71,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45AD91521513AF1400B462D1"
-            BuildableName = "DoctorOm.app"
-            BlueprintName = "DoctorOm"
-            ReferencedContainer = "container:DoctorOm.xcodeproj">
+            BuildableName = "Drom.app"
+            BlueprintName = "Drom"
+            ReferencedContainer = "container:Drom.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

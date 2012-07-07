@@ -22,11 +22,20 @@
 	NSString *instrument_name;
 	InstrumentLayer *layer;
     CCLayer *helpLayer;
+    CCLayer *infoLayer;
     CCMenu *helpMenu;
+    CCMenu *infoMenu;
     NavMenu *nav_menu;
 }
+
 -(void) loadInstrument;
 - (void) toggleHelp: (id)sender;
+- (void) toggleInfo: (id)sender;
+- (void) gotoNM: (id)sender;
+- (void) gotoDrom: (id)sender;
+- (void) gotoFB: (id)sender;
+- (void) gotoTwitter: (id)sender;
+- (void) gotoWeb: (id)sender;
 
 @property (copy, nonatomic) NSString *instrument_name;
 

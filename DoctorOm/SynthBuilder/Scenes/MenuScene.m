@@ -10,7 +10,6 @@
 
 #import "MenuScene.h"
 #import "InstrumentScene.h"
-#import "AboutScene.h"
 
 @implementation MenuScene
 
@@ -27,32 +26,12 @@
 		ml = [MenuLayer node];
         [self addChild:ml z:1];
         menu = [CCMenu menuWithItems:nil ];
-        
-        /*CCMenuItemImage *aboutButton = [CCMenuItemImage 
-         itemWithNormalImage:@"IconInfo.png"
-         selectedImage:@"IconInfo.png"
-         target:self
-         selector:@selector(toggleAbout:)];
-         
-         [aboutButton setPosition:ccp(SCREEN_CENTER_X, BUTTON_Y)];
-         
-         [menu addChild:aboutButton z:30];        
-         [menu setAnchorPoint:ccp(0,0)];
-         [menu setPosition:ccp(0, 0)];
-         
-         [self addChild:menu z:50];
-         */
-        
+    
     }
 	
     return self;
 }
 
--(void) toggleAbout: (id) sender {
-    //CCLOG(@"about pressed");
-    AboutScene *as = [AboutScene node];
-	[[CCDirector sharedDirector] replaceScene:[CCTransitionFlipY transitionWithDuration:0.5f scene:as]];
-}
 
 -(void) dealloc
 {
