@@ -160,22 +160,16 @@
 }
 - (void) gotoDrom: (id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Drom"]];
-
 }
 - (void) gotoFB: (id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/fluxamacorp"]];
-
 }
 - (void) gotoTwitter: (id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.twitter.com/fluxama"]];
-
 }
 - (void) gotoWeb: (id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.fluxama.com"]];
-
 }
-
-
 
 - (void) dealloc
 {	
@@ -192,7 +186,6 @@
 
 //@synthesize audioController = _audioController;
 //@synthesize fileReference = fileReference_;
-
 
 void lookup_tilde_setup(); 
 void kink_tilde_setup();
@@ -213,6 +206,46 @@ int selectedControl;
         touchList = CFDictionaryCreateMutable(NULL, 0, 
                                               &kCFTypeDictionaryKeyCallBacks, 
                                               &kCFTypeDictionaryValueCallBacks);
+        // Read the saved state
+        
+        NSString *errorDesc = nil;
+        NSError *error = nil;
+        BOOL success;
+        NSPropertyListFormat format;
+        NSString *plistPath;
+        NSFileManager* fileManager = [NSFileManager defaultManager]; 
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *savedStatePath = [documentsDirectory stringByAppendingPathComponent:@"savedState.plist"];
+        success = [fileManager fileExistsAtPath:savedStatePath];
+        if (!success) {
+            plistPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"savedState.plist"];
+            success = [fileManager copyItemAtPath:plistPath toPath:savedStatePath error:&error]; 
+        }
+
+        /*NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+																  NSUserDomainMask, YES) objectAtIndex:0];
+        plistPath = [rootPath stringByAppendingPathComponent:[NSString stringWithFormat:@"savedState.plist"]];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
+            plistPath = [[NSBundle mainBundle] pathForResource:@"savedState" ofType:@"plist"];
+        }
+         */
+		CCLOG(@"Path: %@",savedStatePath);
+		
+        NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:savedStatePath];
+        savedState = (NSMutableDictionary *)[NSPropertyListSerialization
+											  propertyListFromData:plistXML
+											  mutabilityOption:NSPropertyListMutableContainersAndLeaves
+											  format:&format
+											  errorDescription:&errorDesc];
+        if (!savedState) {
+            NSLog(@"Error reading plist: %@, format: %d", errorDesc, format);
+        }
+        
+        [savedState retain];
+        
+        CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:@"pot_a1"] floatValue]);
+        
         beats = BASEBEATS;
 		[self schedule: @selector(tick:) ];
         
@@ -227,13 +260,16 @@ int selectedControl;
 		Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
 		c.position = ccp(c.control_x, c.control_y);
         c.tag = CONTROL_TAG;
-		[self addChild:c z:4];
-        //[c autorelease];
+        if (savedState) {
+            CCLOG(@"Key: %@",c.control_id);
+            CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+            c.control_value = [[savedState valueForKey:c.control_id] floatValue];
+            [c updateViewWithValue];
+		}
+        [c sendControlValues];
+        [self addChild:c z:4];
 	}
-	//[self openPatch:instrument_def.patch_name];
-
     [(AppController*)[[UIApplication sharedApplication] delegate] turnOnSound];
-    //LEDLayer = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@LedLit.png",instrument_def.name]];
     LEDLayer = [CCSprite spriteWithFile:@"LedGlow.png"];
     //[LEDLayer setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
     [LEDLayer setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_COLOR }];
@@ -245,7 +281,6 @@ int selectedControl;
     }
     LEDState = FALSE;
     [self addChild:LEDLayer z:-3];
-    //[LEDLayer autorelease];
 }
 
 - (void) draw {
@@ -273,6 +308,7 @@ int selectedControl;
                 Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
                 if ([c withinBounds:location] && !touchedAlready) {
                     CFDictionarySetValue(touchList, touch, c);
+
                     [c showHighlight];
                     [c sendOnValues];
                     [c touchAdded:touch];
@@ -325,7 +361,6 @@ int selectedControl;
             if (c.control_type == TOGGLE_TOUCH) {   
                 c.control_value = 0;
                 [c sendOffValues];
-                //[PdBase sendFloat:0 toReceiver:[NSString stringWithFormat:@"%@OFF", c.control_id]];
             }
             [c hideHighlight];
             CFDictionaryRemoveValue(touchList, touch);
@@ -338,35 +373,9 @@ int selectedControl;
 }
 
 - (void) openPatch:(NSString *) patch {  
-    // Note: no longer used
-   /* //dispatcher = [[PdDispatcher alloc] init]; 
-    //[PdBase setDelegate:dispatcher]; 
-    //[dispatcher autorelease];
-    _audioController = [[PdAudioController alloc] init];
-    if ([self.audioController configureAmbientWithSampleRate:44100 
-                                              numberChannels:2 
-                                               mixingEnabled:YES] != PdAudioOK) {
-        NSLog(@"failed to initialize audio components");
-    }
-    lookup_tilde_setup();
-    kink_tilde_setup();
-    self.audioController.active = YES;
-   
-    void *ptr = [PdBase openFile:patch
-                              path:[[NSBundle mainBundle] resourcePath]];
-    if (ptr) { 
-        self.fileReference = [NSValue valueWithPointer:ptr];
-    } else {
-        NSLog(@"Failed to open patch!");
-    }
-  */
 }
 
 - (void) closePatch {
-   /* CCLOG(@"Closing patch");
-    void *ptr = [self.fileReference pointerValue];
-    [PdBase closeFile:ptr];
-    */
 }
 
 -(void) toggleHelp: (id)sender {
@@ -379,25 +388,26 @@ int selectedControl;
 - (void) dealloc
 {	
     for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
-        [[instrument_def.interactive_inputs objectAtIndex:i] sendOffValues];
-		[[instrument_def.interactive_inputs objectAtIndex:i] sendZeroValues];
+        Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
+        [c sendOffValues];
+		[c sendZeroValues];
+        CCLOG(@"Retrieved value: %@",c.control_id);
+        [savedState setValue:[NSNumber numberWithFloat:c.control_value] forKey:c.control_id];
+        CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
 	}
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+                      stringByAppendingPathComponent:[NSString stringWithFormat:@"savedState.plist"]];
+    if ([savedState writeToFile:path atomically:YES]) {
+        CCLOG(@"Wrote saved state file! %@",path);
+    } else {
+        CCLOG(@"Failed! %@",path);
+    }
     [(AppController*)[[UIApplication sharedApplication] delegate] turnOffSound];
     [PdBase sendFloat:0.0f toReceiver:@"kit_number"];
-    //CCLOG(@"Dealloc InstrumentLayer");
-    //[self closePatch];
-    //self.fileReference = nil;
-    //CCLOG(@"remove all children");
     [self removeAllChildrenWithCleanup:YES];
-    //dispatcher =nil;
-    //self.audioController = nil;
-    //[self.audioController release];
-    //CCLOG(@"release touchlist");
     [(id)touchList release];
-    //CCLOG(@"release instrument def");
+    [savedState release];
     [instrument_def dealloc];
-	// don't forget to call "super dealloc"
-    //CCLOG(@"call super");
 	[super dealloc];
 
 }

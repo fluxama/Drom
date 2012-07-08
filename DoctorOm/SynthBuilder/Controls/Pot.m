@@ -128,6 +128,11 @@
 	}
 }
 
+-(void) updateViewWithValue {	
+    [sprite setRotation:CC_RADIANS_TO_DEGREES((5.283f*self.control_value)-1.203f)];
+    [sprite_highlight setRotation:CC_RADIANS_TO_DEGREES((5.283f*self.control_value)-1.203f)];
+}
+
 - (void) showHighlight {
     sprite_highlight.visible = YES;
 }

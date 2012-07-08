@@ -104,6 +104,9 @@
 -(void) updateView:(CGPoint) location {	
 }
 
+-(void) updateViewWithValue {	
+}
+
 - (void) showHighlight {
 }
 
@@ -118,6 +121,7 @@
 
 - (void) dealloc {
     // CCLOG(@"Dealloc Control");
+
     [control_id release];
 	[control_patch_input release];
     [super dealloc];

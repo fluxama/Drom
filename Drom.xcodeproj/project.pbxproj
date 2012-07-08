@@ -33,6 +33,7 @@
 		455CA07815A8EC4700D2B890 /* InfoNMSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06D15A8EC4700D2B890 /* InfoNMSelected.png */; };
 		455CA07915A8EC4700D2B890 /* InfoTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06E15A8EC4700D2B890 /* InfoTwitter.png */; };
 		455CA07A15A8EC4700D2B890 /* InfoTwitterSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 455CA06F15A8EC4700D2B890 /* InfoTwitterSelected.png */; };
+		455CA07C15A90DC000D2B890 /* savedState.plist in Resources */ = {isa = PBXBuildFile; fileRef = 455CA07B15A90DC000D2B890 /* savedState.plist */; };
 		45AD91581513AF1400B462D1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AD91571513AF1400B462D1 /* QuartzCore.framework */; };
 		45AD915A1513AF1400B462D1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AD91591513AF1400B462D1 /* OpenGLES.framework */; };
 		45AD915C1513AF1400B462D1 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AD915B1513AF1400B462D1 /* OpenAL.framework */; };
@@ -289,6 +290,7 @@
 		455CA06D15A8EC4700D2B890 /* InfoNMSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoNMSelected.png; path = Resources/InfoNMSelected.png; sourceTree = "<group>"; };
 		455CA06E15A8EC4700D2B890 /* InfoTwitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoTwitter.png; path = Resources/InfoTwitter.png; sourceTree = "<group>"; };
 		455CA06F15A8EC4700D2B890 /* InfoTwitterSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = InfoTwitterSelected.png; path = Resources/InfoTwitterSelected.png; sourceTree = "<group>"; };
+		455CA07B15A90DC000D2B890 /* savedState.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = savedState.plist; sourceTree = "<group>"; };
 		45AD91531513AF1400B462D1 /* Drom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45AD91571513AF1400B462D1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		45AD91591513AF1400B462D1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -789,10 +791,11 @@
 		45CE59851513B1570043658F /* InstrumentPlists */ = {
 			isa = PBXGroup;
 			children = (
+				45CE598A1513B1570043658F /* settings.plist */,
+				45CE59861513B1570043658F /* Drom.plist */,
 				453FEC6F155083CF00850E88 /* Drom2.plist */,
 				453FEC70155083CF00850E88 /* Drom3.plist */,
-				45CE59861513B1570043658F /* Drom.plist */,
-				45CE598A1513B1570043658F /* settings.plist */,
+				455CA07B15A90DC000D2B890 /* savedState.plist */,
 			);
 			path = InstrumentPlists;
 			sourceTree = "<group>";
@@ -1428,6 +1431,7 @@
 				455CA07815A8EC4700D2B890 /* InfoNMSelected.png in Resources */,
 				455CA07915A8EC4700D2B890 /* InfoTwitter.png in Resources */,
 				455CA07A15A8EC4700D2B890 /* InfoTwitterSelected.png in Resources */,
+				455CA07C15A90DC000D2B890 /* savedState.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

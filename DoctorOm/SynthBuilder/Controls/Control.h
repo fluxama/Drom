@@ -61,6 +61,7 @@
 -(void) sendOffValues;
 -(void) sendControlValuesForTouch:(UITouch *) touch;
 - (void) updateView:(CGPoint) location;
+-(void) updateViewWithValue;
 - (void) showHighlight;
 - (void) hideHighlight;
 - (void) showSeqHighlight;

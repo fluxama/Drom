@@ -84,7 +84,7 @@
 					[interactive_inputs addObject:c];
                     c.scale = c.control_scale;
                     [c autorelease];
-                    [c sendControlValues];
+                   // [c sendControlValues];
 					break;
 				}
                 case SLIDER : 
@@ -93,7 +93,7 @@
 					[interactive_inputs addObject:c];
                     c.scale = c.control_scale;
                     [c autorelease];
-                    [c sendControlValues];
+                    //[c sendControlValues];
 					break;
 				}
                 case TOGGLE_TOUCH : 
@@ -102,8 +102,7 @@
 					[interactive_inputs addObject:ta];
                     ta.scale = ta.control_scale;
                     [ta autorelease];
-                    
-                    [ta sendControlValues];
+                    //[ta sendControlValues];
                     [ta sendOffValues];
 					break;
 				}
@@ -113,7 +112,7 @@
 					[interactive_inputs addObject:s];
                     s.scale = s.control_scale;
                     [s autorelease];
-                    [s sendControlValues];
+                    //[s sendControlValues];
 					break;
 				}
             }

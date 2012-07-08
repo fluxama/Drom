@@ -50,12 +50,14 @@
     //CCLOG(@"%3.3f",control_value);
 }
 
-- (void) showHighlight {
+-(void) updateViewWithValue {	
+    self.position = ccp(control_value*(control_max-control_min)+control_min, self.position.y);
+}
 
+- (void) showHighlight {
 }
 
 - (void) hideHighlight {
-
 }
 
 - (void) showSeqHighlight {

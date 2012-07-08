@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>pot_a1</key>
+	<real>0.5</real>
+	<key>pot_a2</key>
+	<real>0.5</real>
+	<key>pot_a3</key>
+	<real>0.5</real>
+	<key>pot_a4</key>
+	<real>0.5</real>
+	<key>pot_a5</key>
+	<real>0.5</real>
+	<key>pot_a6</key>
+	<real>0.5</real>
+	<key>pot_a7</key>
+	<real>0.5</real>
+	<key>pot_a8</key>
+	<real>0.5</real>
+	<key>pot_a9</key>
+	<real>0.5</real>
+	<key>slider_a1</key>
+	<real>0.5</real>
+	<key>pot_b1</key>
+	<real>0.5</real>
+	<key>pot_b2</key>
+	<real>0.5</real>
+	<key>pot_b3</key>
+	<real>0.5</real>
+	<key>pot_b4</key>
+	<real>0.5</real>
+	<key>pot_b5</key>
+	<real>0.5</real>
+	<key>pot_b6</key>
+	<real>0.5</real>
+	<key>pot_b7</key>
+	<real>0.5</real>
+	<key>pot_b8</key>
+	<real>0.5</real>
+	<key>pot_b9</key>
+	<real>0.5</real>
+	<key>slider_b1</key>
+	<real>0.5</real>
+	<key>pot_c1</key>
+	<real>0.5</real>
+	<key>pot_c2</key>
+	<real>0.5</real>
+	<key>pot_c3</key>
+	<real>0.5</real>
+	<key>pot_c4</key>
+	<real>0.5</real>
+	<key>pot_c5</key>
+	<real>0.5</real>
+	<key>pot_c6</key>
+	<real>0.5</real>
+	<key>pot_c7</key>
+	<real>0.5</real>
+	<key>pot_c8</key>
+	<real>0.5</real>
+	<key>pot_c9</key>
+	<real>0.5</real>
+	<key>slider_c1</key>
+	<real>0.5</real>
+</dict>
+</plist>

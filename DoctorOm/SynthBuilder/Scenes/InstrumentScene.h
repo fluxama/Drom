@@ -47,6 +47,7 @@
    //PdDispatcher *dispatcher;
     NSUInteger touchCount;
     CFMutableDictionaryRef touchList;
+    NSMutableDictionary *savedState;
     CCSprite *LEDLayer;
     bool LEDState;
     float beat_count;
@@ -61,6 +62,5 @@
 -(void) toggleHelp: (id)sender;
 
 //@property (nonatomic, retain) PdAudioController *audioController;
-//@property (nonatomic, retain) NSValue *fileReference;
 
 @end
