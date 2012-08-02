@@ -47,7 +47,7 @@
         [sprite setRotation:CC_RADIANS_TO_DEGREES((5.283f*self.control_value)-1.203f)];
         [sprite_highlight setRotation:CC_RADIANS_TO_DEGREES((5.283f*self.control_value)-1.203f)];
     
-  		[self addChild:sprite_highlight z:50];
+  		[self addChild:sprite_highlight z:100];
         prevAngle = 5;
 	}
 	return self;

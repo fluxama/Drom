@@ -48,5 +48,6 @@ int SCREEN_CENTER_Y;
 int BUTTON_Y;
 int ABOUT_IMAGE_WIDTH;
 int HALF_DROP_SHADOW_W;
+int HELP_SCREEN_H;
 
 int current_item;

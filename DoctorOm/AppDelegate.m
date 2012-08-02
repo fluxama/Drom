@@ -28,6 +28,7 @@ void moog_tilde_setup();
         SCREEN_CENTER_Y = 384;
         BUTTON_Y = 60;
         ABOUT_IMAGE_WIDTH = 1000;
+        HELP_SCREEN_H = 1512;
     } else {
         THUMBW = 360;
         THUMBH = 240;
@@ -36,6 +37,7 @@ void moog_tilde_setup();
         SCREEN_CENTER_Y = 160;
         BUTTON_Y = 30;
         ABOUT_IMAGE_WIDTH = 1000;
+        HELP_SCREEN_H = 709;
     }
     
     // Turn off idle timer

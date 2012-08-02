@@ -20,7 +20,7 @@
     MenuLayer *ml;
 }
 
--(void)toggleAbout: (id) sender;
+//-(void)toggleAbout: (id) sender;
 
 @end
 
@@ -39,6 +39,6 @@
     bool screenIsTouched;
 }
 
--(void)startInstrument: (id)sender;
+//-(void)startInstrument: (id)sender;
 
 @end

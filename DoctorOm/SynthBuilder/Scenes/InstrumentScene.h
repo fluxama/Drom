@@ -13,6 +13,7 @@
 #import "PdDispatcher.h"
 #import "PdAudioController.h"
 #import "NavMenu.h"
+#import "HelpLayer.h"
 
 @class InstrumentLayer;
 
@@ -21,9 +22,7 @@
 {
 	NSString *instrument_name;
 	InstrumentLayer *layer;
-    CCLayer *helpLayer;
     CCLayer *infoLayer;
-    CCMenu *helpMenu;
     CCMenu *infoMenu;
     NavMenu *nav_menu;
 }
@@ -31,6 +30,9 @@
 -(void) loadInstrument;
 - (void) toggleHelp: (id)sender;
 - (void) toggleInfo: (id)sender;
+- (void) toggleHelp: (id)sender;
+- (void) toggleNav;
+
 - (void) gotoNM: (id)sender;
 - (void) gotoDrom: (id)sender;
 - (void) gotoFB: (id)sender;
@@ -38,6 +40,7 @@
 - (void) gotoWeb: (id)sender;
 
 @property (copy, nonatomic) NSString *instrument_name;
+@property (copy, nonatomic) HelpLayer *helpLayer;
 
 @end
 
@@ -49,6 +52,8 @@
     CFMutableDictionaryRef touchList;
     NSMutableDictionary *savedState;
     CCSprite *LEDLayer;
+    CCMenu *helpMenu;
+    HelpLayer *helpLayer;
     bool LEDState;
     float beat_count;
     float beats;
@@ -59,7 +64,7 @@
 - (void) loadInstrument: (NSString *) name;
 - (void) openPatch:(NSString *) patch;
 - (void) closePatch;
--(void) toggleHelp: (id)sender;
+- (void) toggleHelp: (id)sender;
 
 //@property (nonatomic, retain) PdAudioController *audioController;
 

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451592C815CA30A60096B6FD /* DoctorOm1Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592C315CA30A60096B6FD /* DoctorOm1Menu.png */; };
+		451592C915CA30A60096B6FD /* DoctorOm1MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592C415CA30A60096B6FD /* DoctorOm1MenuSelected.png */; };
+		451592CA15CA30A60096B6FD /* KnobTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592C515CA30A60096B6FD /* KnobTop.png */; };
+		451592CB15CA30A60096B6FD /* LedGlow.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592C615CA30A60096B6FD /* LedGlow.png */; };
+		451592CC15CA30A60096B6FD /* MenuIcons-.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592C715CA30A60096B6FD /* MenuIcons-.png */; };
+		451592CF15CA30D80096B6FD /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592CD15CA30D80096B6FD /* Icon-72@2x.png */; };
+		451592D015CA30D80096B6FD /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 451592CE15CA30D80096B6FD /* Icon-Small-50@2x.png */; };
+		451592D315CAD6A10096B6FD /* HelpLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 451592D215CAD6A10096B6FD /* HelpLayer.m */; };
 		451B6E811583BD530024B92A /* InstrumentScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 451B6E801583BD530024B92A /* InstrumentScene.m */; };
 		453FEC6D155082F500850E88 /* Drom2MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6B155082F500850E88 /* Drom2MenuSelected.png */; };
 		453FEC6E155082F500850E88 /* Drom3MenuSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = 453FEC6C155082F500850E88 /* Drom3MenuSelected.png */; };
@@ -254,6 +262,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		451592C315CA30A60096B6FD /* DoctorOm1Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm1Menu.png; sourceTree = "<group>"; };
+		451592C415CA30A60096B6FD /* DoctorOm1MenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoctorOm1MenuSelected.png; sourceTree = "<group>"; };
+		451592C515CA30A60096B6FD /* KnobTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = KnobTop.png; sourceTree = "<group>"; };
+		451592C615CA30A60096B6FD /* LedGlow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LedGlow.png; sourceTree = "<group>"; };
+		451592C715CA30A60096B6FD /* MenuIcons-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuIcons-.png"; sourceTree = "<group>"; };
+		451592CD15CA30D80096B6FD /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "Resources/Icon-72@2x.png"; sourceTree = "<group>"; };
+		451592CE15CA30D80096B6FD /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50@2x.png"; path = "Resources/Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		451592D115CAD6A10096B6FD /* HelpLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpLayer.h; sourceTree = "<group>"; };
+		451592D215CAD6A10096B6FD /* HelpLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpLayer.m; sourceTree = "<group>"; };
 		451B6E7F1583BD530024B92A /* InstrumentScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentScene.h; sourceTree = "<group>"; };
 		451B6E801583BD530024B92A /* InstrumentScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScene.m; sourceTree = "<group>"; };
 		453FEC6B155082F500850E88 /* Drom2MenuSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Drom2MenuSelected.png; sourceTree = "<group>"; };
@@ -736,6 +753,8 @@
 		45AD91681513AF1400B462D1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				451592CD15CA30D80096B6FD /* Icon-72@2x.png */,
+				451592CE15CA30D80096B6FD /* Icon-Small-50@2x.png */,
 				455CA06515A8EC4700D2B890 /* Default-ipad.png */,
 				455CA06615A8EC4700D2B890 /* InfoDrom.png */,
 				455CA06715A8EC4700D2B890 /* InfoDromSelected.png */,
@@ -785,6 +804,11 @@
 		45CE595D1513B1570043658F /* InstrumentImages */ = {
 			isa = PBXGroup;
 			children = (
+				451592C315CA30A60096B6FD /* DoctorOm1Menu.png */,
+				451592C415CA30A60096B6FD /* DoctorOm1MenuSelected.png */,
+				451592C515CA30A60096B6FD /* KnobTop.png */,
+				451592C615CA30A60096B6FD /* LedGlow.png */,
+				451592C715CA30A60096B6FD /* MenuIcons-.png */,
 				455CA05B15A8EBF400D2B890 /* Drom-ipad.png */,
 				455CA05C15A8EBF400D2B890 /* Drom2-ipad.png */,
 				455CA05D15A8EBF400D2B890 /* Drom3-ipad.png */,
@@ -873,6 +897,8 @@
 				45CE59D31513B1570043658F /* MenuScene.m */,
 				45CE59D41513B1570043658F /* NavMenu.h */,
 				45CE59D51513B1570043658F /* NavMenu.m */,
+				451592D115CAD6A10096B6FD /* HelpLayer.h */,
+				451592D215CAD6A10096B6FD /* HelpLayer.m */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -1381,6 +1407,13 @@
 				45730D5B15BF507900B6C4EC /* twoPosSwitch1-ipad.png in Resources */,
 				45730D5C15BF507900B6C4EC /* twoPosSwitch1.png in Resources */,
 				45FBB42415C24530002FD86A /* pd-drom.pd in Resources */,
+				451592C815CA30A60096B6FD /* DoctorOm1Menu.png in Resources */,
+				451592C915CA30A60096B6FD /* DoctorOm1MenuSelected.png in Resources */,
+				451592CA15CA30A60096B6FD /* KnobTop.png in Resources */,
+				451592CB15CA30A60096B6FD /* LedGlow.png in Resources */,
+				451592CC15CA30A60096B6FD /* MenuIcons-.png in Resources */,
+				451592CF15CA30D80096B6FD /* Icon-72@2x.png in Resources */,
+				451592D015CA30D80096B6FD /* Icon-Small-50@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1498,6 +1531,7 @@
 				45DE96A4157420E700DD4940 /* Slider.m in Sources */,
 				451B6E811583BD530024B92A /* InstrumentScene.m in Sources */,
 				45BE3E8D15B6747B00AF9C8E /* moog~.c in Sources */,
+				451592D315CAD6A10096B6FD /* HelpLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

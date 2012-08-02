@@ -20,6 +20,7 @@
 
 @implementation InstrumentScene
 @synthesize instrument_name;
+@synthesize helpLayer;
 
 -(id) init {
     self = [super init];
@@ -80,11 +81,6 @@
         [infoMenu addChild:infoWeb];
 
         [infoMenu alignItemsHorizontallyWithPadding:5];
-		if (IS_IPAD()) {
-            [helpMenu setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)]; 
-        } else {
-		    [helpMenu setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
-        }
         [infoMenu setVisible:false];
         [self addChild:infoMenu z:150];
         
@@ -103,33 +99,6 @@
         }
         [infoLayer addChild:exitButtonMenu z:150];
         
-        // Create the Help Menu
-        
-        helpMenu = [CCMenu menuWithItems:nil ];
-        
-        CCMenuItemImage *exitHelpButton = [CCMenuItemImage 
-                                           itemWithNormalImage:@"navMenuExit.png"
-                                           selectedImage:@"navMenuExit.png"
-                                           target:self
-                                           selector:@selector(toggleHelp:)];
-        
-        [helpMenu addChild:exitHelpButton];
-		if (IS_IPAD()) {
-            [helpMenu setPosition:ccp(873, 25)]; 
-        } else {
-		    [helpMenu setPosition:ccp(465, 15)];
-        }
-        [helpMenu setVisible:false];
-        [self addChild:helpMenu z:150];
-        
-        helpLayer = [CCSprite spriteWithFile:@"AboutLayer.png"];
-        [helpLayer setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
-        [helpLayer setVisible:false];
-        [self addChild:helpLayer z:100];
-        
-
-        
-        
     }
     return self;
 }
@@ -141,18 +110,19 @@
     [layer addChild:background z:-10];
 }
 
--(void) toggleHelp: (id)sender {
-    helpMenu.visible = !helpLayer.visible;
-    helpLayer.visible = !helpLayer.visible;
-    layer.visible = !layer.visible;
-    nav_menu.visible = !nav_menu.visible;
-}
-
 -(void) toggleInfo: (id)sender {
     infoMenu.visible = !infoLayer.visible;
     infoLayer.visible = !infoLayer.visible;
     layer.visible = !layer.visible;
     nav_menu.visible = !nav_menu.visible;
+}
+
+-(void) toggleHelp: (id)sender {
+    [layer toggleHelp:sender];
+}
+
+-(void) toggleNav {
+  nav_menu.visible = !nav_menu.visible;
 }
 
 - (void) gotoNM: (id)sender {
@@ -278,6 +248,31 @@ int selectedControl;
     }
     LEDState = FALSE;
     [self addChild:LEDLayer z:-3];
+    
+    // Create the Help Menu
+    
+    helpMenu = [CCMenu menuWithItems:nil ];
+    
+    CCMenuItemImage *exitHelpButton = [CCMenuItemImage 
+                                       itemWithNormalImage:@"navMenuExit.png"
+                                       selectedImage:@"navMenuExit.png"
+                                       target:self
+                                       selector:@selector(toggleHelp:)];
+    
+    [helpMenu addChild:exitHelpButton];
+    if (IS_IPAD()) {
+        [helpMenu setPosition:ccp(873, 25)]; 
+    } else {
+        [helpMenu setPosition:ccp(465, 15)];
+    }
+    [helpMenu setVisible:false];
+    [self addChild:helpMenu z:150];
+    
+    helpLayer = [HelpLayer node];
+    [helpLayer setPosition:ccp(SCREEN_CENTER_X,SCREEN_CENTER_Y-(HELP_SCREEN_H/2-SCREEN_CENTER_Y))];
+    [helpLayer setVisible:false];
+
+    [self addChild:helpLayer z:100];
 }
 
 - (void) draw {
@@ -296,16 +291,17 @@ int selectedControl;
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGPoint location;
-    if (self.visible) {
-        for (UITouch *touch in touches) {
-            location = [touch locationInView: [touch view]];
-            location  = [[CCDirector sharedDirector] convertToGL:location ];
+    
+    for (UITouch *touch in touches) {
+        location = [touch locationInView: [touch view]];
+        location  = [[CCDirector sharedDirector] convertToGL:location ];
+        if ((self.visible) && !(helpLayer.visible)) {
             bool touchedAlready = FALSE;
             for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
                 Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
                 if ([c withinBounds:location] && !touchedAlready) {
                     CFDictionarySetValue(touchList, touch, c);
-
+                    
                     [c showHighlight];
                     [c sendOnValues];
                     [c touchAdded:touch];
@@ -313,38 +309,47 @@ int selectedControl;
                     [c sendControlValues]; 
                     touchedAlready = TRUE;
                 }
-            }   
+            }
+        }
+        if (helpLayer.visible) {
+            helpLayer.firstTouch = location.y;
+            helpLayer.origY = helpLayer.position.y;
         }
     }
+    
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGPoint location;
-    
     for (UITouch *touch in touches) {
         location = [touch locationInView: [touch view]];
         location  = [[CCDirector sharedDirector] convertToGL:location ];
-        Control *c = (Control*)CFDictionaryGetValue(touchList, touch);
-        if (c != NULL) {
-            if ([c.control_id isEqualToString:@"pot1"]) {
-                beats = (1.05-c.control_value)*BASEBEATS;
-                //CCLOG(@"beats %@, %4f",c.control_id, beats);
-            }
-            if ((c.control_type == TOUCH_AREA) || (c.control_type == ROUND_TOUCH_AREA) || 
-                (c.control_type == TOGGLE_TOUCH) || (c.control_type == PLASMA_MULTI_TOUCH))  {
-                if ([c withinBounds:location]) {
-                    [c updateView:location];
-                    [c sendControlValues]; 
+        if (!(helpLayer.visible)) {
+            Control *c = (Control*)CFDictionaryGetValue(touchList, touch);
+            if (c != NULL) {
+                if ([c.control_id isEqualToString:@"pot1"]) {
+                    beats = (1.05-c.control_value)*BASEBEATS;
+                    //CCLOG(@"beats %@, %4f",c.control_id, beats);
                 }
-            } else {
-                [c updateView:location];
-                if (c.control_sequenced_by == 0) {
-                    [c sendControlValues];
-                }   
+                if ((c.control_type == TOUCH_AREA) || (c.control_type == ROUND_TOUCH_AREA) || 
+                    (c.control_type == TOGGLE_TOUCH) || (c.control_type == PLASMA_MULTI_TOUCH))  {
+                    if ([c withinBounds:location]) {
+                        [c updateView:location];
+                        [c sendControlValues]; 
+                    }
+                } else {
+                    [c updateView:location];
+                    if (c.control_sequenced_by == 0) {
+                        [c sendControlValues];
+                    }   
+                }
             }
+        } else {
+            [helpLayer updateView:location];
         }
     }
+    
     
 }
 
@@ -376,6 +381,9 @@ int selectedControl;
 }
 
 -(void) toggleHelp: (id)sender {
+    helpMenu.visible = !helpLayer.visible;
+    helpLayer.visible = !helpLayer.visible;
+    [(InstrumentScene *)self.parent toggleNav];
 }
 
 -(void)showInfo: (id) sender{
