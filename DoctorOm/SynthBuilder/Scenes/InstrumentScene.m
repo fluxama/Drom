@@ -29,7 +29,7 @@
 		instrument_name = [NSString alloc];
         nav_menu = [NavMenu node];
         if (IS_IPAD()) {
-            [nav_menu setPosition:ccp(1000, 65)];
+            [nav_menu setPosition:ccp(410*IPAD_MULT, 15*IPAD_MULT)];
         } else {
             [nav_menu setPosition:ccp(410, 15)];
         }
@@ -115,7 +115,7 @@
         
         [helpMenu addChild:exitHelpButton];
 		if (IS_IPAD()) {
-            [helpMenu setPosition:ccp(1000, 25)]; 
+            [helpMenu setPosition:ccp(873, 25)]; 
         } else {
 		    [helpMenu setPosition:ccp(465, 15)];
         }
@@ -186,9 +186,6 @@
 
 //@synthesize audioController = _audioController;
 //@synthesize fileReference = fileReference_;
-
-void lookup_tilde_setup(); 
-void kink_tilde_setup();
 
 Instrument *instrument_def;
 int selectedControl;
@@ -379,6 +376,9 @@ int selectedControl;
 }
 
 -(void) toggleHelp: (id)sender {
+}
+
+-(void)showInfo: (id) sender{
 }
 
 -(void) nothing:(id)sender {

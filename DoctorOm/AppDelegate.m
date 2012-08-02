@@ -7,8 +7,6 @@
  *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
  *  WARRANTIES, see the file, "Noisemusick-LICENSE.txt," in this distribution.  */
 
-
-
 #import "AppDelegate.h"
 #import "MenuScene.h"
 #import "cocos2d.h"
@@ -18,10 +16,7 @@
 @synthesize window=window_, navController=navController_, director=director_;
 @synthesize audioController = _audioController;
 
-void lookup_tilde_setup(); 
-void kink_tilde_setup();
-void gate_setup();
-void comb_tilde_setup();
+void moog_tilde_setup();    
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -117,6 +112,8 @@ void comb_tilde_setup();
         NSLog(@"failed to initialize audio components");
     }
 
+    moog_tilde_setup();
+    
     void *ptr = [PdBase openFile:@"pd-drom.pd"
                             path:[[NSBundle mainBundle] resourcePath]];
     if (!ptr) { 
@@ -165,6 +162,7 @@ void comb_tilde_setup();
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
     self.audioController.active = YES;
+    
 	if( [navController_ visibleViewController] == director_ )
 		[director_ resume];
 }

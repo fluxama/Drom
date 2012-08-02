@@ -154,13 +154,13 @@ typedef u_int8_t uchar;
 typedef union _shared_wrappy
 {
     double  w_d;
-    int   w_i[2];  // was int32
+    int   w_i[2];
 } t_shared_wrappy;
 
 typedef union _shared_floatint
 {
     t_float  fi_f;
-    int    fi_i;    // was int32
+    int    fi_i;
 } t_shared_floatint;
 
 #define SHARED_TRUEBITS  0x3f800000  /* t_float f = 1; *(int32 *)&f */
