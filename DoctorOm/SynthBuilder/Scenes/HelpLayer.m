@@ -26,12 +26,10 @@
     
     if ((origY-diff) > (SCREEN_CENTER_Y-(HELP_SCREEN_H/2-SCREEN_CENTER_Y)) &&
         (origY-diff) < (HELP_SCREEN_H/2)) {
-        CCLOG(@"d1: %3.3f diff: %3.3f",d1, diff);
-        CCLOG(@"y: %3f min: %3d",(origY-diff), (SCREEN_CENTER_Y-(HELP_SCREEN_H/2-SCREEN_CENTER_Y)));
+        //CCLOG(@"d1: %3.3f diff: %3.3f",d1, diff);
+        //CCLOG(@"y: %3f min: %3d",(origY-diff), (SCREEN_CENTER_Y-(HELP_SCREEN_H/2-SCREEN_CENTER_Y)));
         self.position = ccp(self.position.x, origY-diff);
     }
-    
-    
 }
 
 

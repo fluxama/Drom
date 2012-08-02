@@ -30,7 +30,7 @@
 		instrument_name = [NSString alloc];
         nav_menu = [NavMenu node];
         if (IS_IPAD()) {
-            [nav_menu setPosition:ccp(410*IPAD_MULT, 15*IPAD_MULT)];
+            [nav_menu setPosition:ccp(932, 25)];
         } else {
             [nav_menu setPosition:ccp(410, 15)];
         }
@@ -97,7 +97,7 @@
         } else {
 		    [exitButtonMenu setPosition:ccp(465, 15)];
         }
-        [infoLayer addChild:exitButtonMenu z:150];
+        [infoLayer addChild:exitButtonMenu z:151];
         
     }
     return self;
@@ -261,7 +261,7 @@ int selectedControl;
     
     [helpMenu addChild:exitHelpButton];
     if (IS_IPAD()) {
-        [helpMenu setPosition:ccp(873, 25)]; 
+        [helpMenu setPosition:ccp(1000, 25)]; 
     } else {
         [helpMenu setPosition:ccp(465, 15)];
     }
