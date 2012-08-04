@@ -55,7 +55,7 @@
         [nav_menu addChild:showHelp];
         [nav_menu addChild:showInfo];
 
-        [nav_menu alignItemsHorizontallyWithPadding:5];
+        [nav_menu alignItemsHorizontallyWithPadding:3];
         [nav_menu setAnchorPoint:ccp(0.5, 0)];
         
         CCSprite * nav_bg = [CCSprite spriteWithFile:@"navMenuBg.png"];
@@ -74,12 +74,12 @@
 }
 
 -(void)showInfo: (id) sender{
-    [(InstrumentLayer *)self.parent toggleInfo:0];
+    [(InstrumentScene *)self.parent toggleInfo:0];
     [self moveToClosedState];
 }
 
 -(void)openMenu: (id) sender{
-    CCLOG(@"Open menu");
+    //CCLOG(@"Open menu");
     if (stateOpen) {
         [self moveToClosedState];
     } else {

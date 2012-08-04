@@ -23,7 +23,9 @@
 	NSString *instrument_name;
 	InstrumentLayer *layer;
     CCLayer *infoLayer;
-    CCMenu *infoMenu;
+    CCMenu *infoMenu1;
+    CCMenu *infoMenu2;
+    CCMenu *exitButtonMenu;
     NavMenu *nav_menu;
 }
 

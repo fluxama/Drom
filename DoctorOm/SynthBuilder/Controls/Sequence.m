@@ -28,7 +28,7 @@
 }
 
 - (void) dealloc {
-    CCLOG(@"Dealloc Sequence");
+    //CCLOG(@"Dealloc Sequence");
     [input_list dealloc];
     [super dealloc];
 }

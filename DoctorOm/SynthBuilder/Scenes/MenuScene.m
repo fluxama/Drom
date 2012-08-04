@@ -178,6 +178,7 @@ bool waitForMoveTo;
             sLocation.x = sLocation.x+menu.position.x;
             if (((sLocation.x-THUMBW/2)<location.x) && ((sLocation.x+THUMBW/2)>location.x) &&
                 ((sLocation.y-THUMBH/2)<location.y) && ((sLocation.y+THUMBH/2)>location.y)) {
+                [[menuItems objectAtIndex:i ] setVisible:NO];
                 [[selectedMenuItems objectAtIndex:i ] setVisible:YES];
                 selected = i;
             }
@@ -195,6 +196,7 @@ bool waitForMoveTo;
 	if ((screenIsTouched)&&(!waitForMoveTo)) {
         if (selected >=0) {
             [[selectedMenuItems objectAtIndex:selected ] setVisible:NO];
+            [[menuItems objectAtIndex:selected ] setVisible:YES];
             selected = -1;
         }
 		CGPoint location;

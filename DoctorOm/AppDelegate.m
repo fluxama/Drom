@@ -29,6 +29,7 @@ void moog_tilde_setup();
         BUTTON_Y = 60;
         ABOUT_IMAGE_WIDTH = 1000;
         HELP_SCREEN_H = 1512;
+        INFO_ICON_H = 181;
     } else {
         THUMBW = 360;
         THUMBH = 240;
@@ -38,6 +39,7 @@ void moog_tilde_setup();
         BUTTON_Y = 30;
         ABOUT_IMAGE_WIDTH = 1000;
         HELP_SCREEN_H = 709;
+        INFO_ICON_H = 86;
     }
     
     // Turn off idle timer
@@ -78,8 +80,8 @@ void moog_tilde_setup();
 //	[director setProjection:kCCDirectorProjection3D];
 
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
-		CCLOG(@"Retina Display Not supported");
+	//if( ! [director_ enableRetinaDisplay:YES] )
+	//	CCLOG(@"Retina Display Not supported");
 
 	// Create a Navigation Controller with the Director
 	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];

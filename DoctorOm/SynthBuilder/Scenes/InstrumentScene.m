@@ -30,7 +30,7 @@
 		instrument_name = [NSString alloc];
         nav_menu = [NavMenu node];
         if (IS_IPAD()) {
-            [nav_menu setPosition:ccp(932, 25)];
+            [nav_menu setPosition:ccp(933, 25)];
         } else {
             [nav_menu setPosition:ccp(410, 15)];
         }
@@ -38,12 +38,13 @@
         [nav_menu moveToClosedState];
         
         // Create the Info Menu
-        infoLayer = [CCSprite spriteWithFile:@"InfoLayer.png"];
+        infoLayer = [CCSprite spriteWithFile:@"menuBackground.png"];
         [infoLayer setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
         [infoLayer setVisible:false];
         [self addChild:infoLayer z:100];
         
-        infoMenu = [CCMenu menuWithItems:nil ];
+        infoMenu1 = [CCMenu menuWithItems:nil ];
+        infoMenu2 = [CCMenu menuWithItems:nil ];
         
         CCMenuItemImage *infoNM = [CCMenuItemImage 
                                    itemWithNormalImage:@"InfoNM.png"
@@ -74,30 +75,40 @@
                                     target:self
                                     selector:@selector(gotoWeb:)];
         
-        [infoMenu addChild:infoNM];
-        [infoMenu addChild:infoDrom];
-        [infoMenu addChild:infoFB];
-        [infoMenu addChild:infoTwitter];
-        [infoMenu addChild:infoWeb];
+        [infoMenu1 addChild:infoNM];
+        [infoMenu1 addChild:infoDrom];
+        
+        [infoMenu2 addChild:infoFB];
+        [infoMenu2 addChild:infoTwitter];
+        [infoMenu2 addChild:infoWeb];
 
-        [infoMenu alignItemsHorizontallyWithPadding:5];
-        [infoMenu setVisible:false];
-        [self addChild:infoMenu z:150];
+        [infoMenu1 alignItemsHorizontallyWithPadding:5];
+        [infoMenu1 setVisible:false];
+        [infoMenu1 setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y+INFO_ICON_H/2-3)];
+        [self addChild:infoMenu1 z:150];
         
-        CCMenu *exitButtonMenu = [CCMenu menuWithItems:nil ];
+        [infoMenu2 alignItemsHorizontallyWithPadding:5];
+        [infoMenu2 setVisible:false];
+        [infoMenu2 setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y-INFO_ICON_H/2-3)];
+        [self addChild:infoMenu2 z:150];
         
+        exitButtonMenu = [CCMenu menuWithItems:nil ];
+        [exitButtonMenu setVisible:false];
         CCMenuItemImage *exitInfoButton = [CCMenuItemImage 
                                            itemWithNormalImage:@"navMenuExit.png"
                                            selectedImage:@"navMenuExit.png"
                                            target:self
                                            selector:@selector(toggleInfo:)];
         [exitButtonMenu addChild:exitInfoButton];
+        [exitButtonMenu alignItemsHorizontallyWithPadding:0];
         if (IS_IPAD()) {
             [exitButtonMenu setPosition:ccp(1000, 25)]; 
         } else {
-		    [exitButtonMenu setPosition:ccp(465, 15)];
+		    [exitButtonMenu setPosition:ccp(463, 15)];
         }
-        [infoLayer addChild:exitButtonMenu z:151];
+        [self addChild:exitButtonMenu z:150];
+        //[infoLayer addChild:exitButtonMenu z:151];
+        
         
     }
     return self;
@@ -111,7 +122,9 @@
 }
 
 -(void) toggleInfo: (id)sender {
-    infoMenu.visible = !infoLayer.visible;
+    infoMenu1.visible = !infoLayer.visible;
+    infoMenu2.visible = !infoLayer.visible;
+    exitButtonMenu.visible = !exitButtonMenu.visible;
     infoLayer.visible = !infoLayer.visible;
     layer.visible = !layer.visible;
     nav_menu.visible = !nav_menu.visible;
@@ -197,7 +210,7 @@ int selectedControl;
             plistPath = [[NSBundle mainBundle] pathForResource:@"savedState" ofType:@"plist"];
         }
          */
-		CCLOG(@"Path: %@",savedStatePath);
+		//CCLOG(@"Path: %@",savedStatePath);
 		
         NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:savedStatePath];
         savedState = (NSMutableDictionary *)[NSPropertyListSerialization
@@ -211,10 +224,10 @@ int selectedControl;
         
         [savedState retain];
         
-        CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:@"pot_a1"] floatValue]);
+        //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:@"pot_a1"] floatValue]);
         
         beats = BASEBEATS;
-		[self schedule: @selector(tick:) ];
+		[self schedule: @selector(tick:) interval:0.25f ];
         
 	}
 	return self;
@@ -228,8 +241,8 @@ int selectedControl;
 		c.position = ccp(c.control_x, c.control_y);
         c.tag = CONTROL_TAG;
         if (savedState) {
-            CCLOG(@"Key: %@",c.control_id);
-            CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+            //CCLOG(@"Key: %@",c.control_id);
+            //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
             c.control_value = [[savedState valueForKey:c.control_id] floatValue];
             [c updateViewWithValue];
 		}
@@ -242,7 +255,7 @@ int selectedControl;
     [LEDLayer setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_COLOR }];
     
     if (IS_IPAD()) {
-        LEDLayer.position = ccp(241*IPAD_MULT-1,106*IPAD_MULT+IPAD_BOT_TRIM-1); 
+        LEDLayer.position = ccp(512, 548); 
     } else {
         LEDLayer.position = ccp(240,239);
     }
@@ -280,12 +293,7 @@ int selectedControl;
 }
 
 -(void) tick: (ccTime) dt {
-    if (beat_count < 0) {
-        beat_count = beats;
-        LEDState = !LEDState;
-        LEDLayer.visible = LEDState;
-    }
-    beat_count--;
+        LEDLayer.visible = !LEDLayer.visible;
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -399,16 +407,16 @@ int selectedControl;
         Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
         [c sendOffValues];
 		[c sendZeroValues];
-        CCLOG(@"Retrieved value: %@",c.control_id);
+        //CCLOG(@"Retrieved value: %@",c.control_id);
         [savedState setValue:[NSNumber numberWithFloat:c.control_value] forKey:c.control_id];
-        CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+        //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
 	}
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
                       stringByAppendingPathComponent:[NSString stringWithFormat:@"savedState.plist"]];
     if ([savedState writeToFile:path atomically:YES]) {
-        CCLOG(@"Wrote saved state file! %@",path);
+        //CCLOG(@"Wrote saved state file! %@",path);
     } else {
-        CCLOG(@"Failed! %@",path);
+        //CCLOG(@"Failed! %@",path);
     }
     [(AppController*)[[UIApplication sharedApplication] delegate] turnOffSound];
     [PdBase sendFloat:0.0f toReceiver:@"kit_number"];

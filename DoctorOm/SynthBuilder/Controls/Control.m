@@ -84,7 +84,7 @@
 }
 
 -(void) sendOnValues {
-    CCLOG(@"%@ ON",[NSString stringWithFormat:@"%@OFF",self.control_id]);
+    //CCLOG(@"%@ ON",[NSString stringWithFormat:@"%@OFF",self.control_id]);
     [PdBase sendFloat:1 toReceiver:[NSString stringWithFormat:@"%@OFF",self.control_id]];
 }
 

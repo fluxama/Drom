@@ -45,7 +45,7 @@
         if (![[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
             plistPath = [[NSBundle mainBundle] pathForResource:instrumentName ofType:@"plist"];
         }
-		CCLOG(@"Path: %@",plistPath);
+		//CCLOG(@"Path: %@",plistPath);
 		
         NSData *plistXML = [[NSFileManager defaultManager] contentsAtPath:plistPath];
         NSDictionary *temp = (NSDictionary *)[NSPropertyListSerialization
@@ -85,6 +85,15 @@
                     c.scale = c.control_scale;
                     [c autorelease];
                    // [c sendControlValues];
+					break;
+				}
+                case POT_NO_KNOB : 
+				{ 
+					Pot *c = [[Pot alloc] initWithDictionary:dict];
+					[interactive_inputs addObject:c];
+                    c.scale = c.control_scale;
+                    [c autorelease];
+                    // [c sendControlValues];
 					break;
 				}
                 case SLIDER : 

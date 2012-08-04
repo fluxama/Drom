@@ -30,7 +30,11 @@
         pinnedLow = NO;
         pinnedHigh = NO;
         
-		sprite = [CCSprite spriteWithFile:@"KnobDot.png"];
+		if (control_type == POT1) {
+            sprite = [CCSprite spriteWithFile:@"KnobDot.png"];
+        } else {
+            sprite = [CCSprite spriteWithFile:@"BrokenKnobPot.png"];
+        }
 		sprite.position = ccp(0, 0);
 		sprite.visible = YES;
 		[self addChild:sprite z:3];
@@ -39,7 +43,11 @@
 		//top.position = ccp(0, 0);
 		//top.visible = YES;
 		//[self addChild:top z:4];
-		sprite_highlight = [CCSprite spriteWithFile:@"RingWhite.png"];
+        if (control_type == POT1) {
+            sprite_highlight = [CCSprite spriteWithFile:@"RingWhite.png"];
+        } else {
+            sprite_highlight = [CCSprite spriteWithFile:@"RingWhiteNoDot.png"];
+        }
 		sprite_highlight.position = ccp(0, 0);
 		sprite_highlight.visible = NO;
         //[sprite setRotation:CC_RADIANS_TO_DEGREES(5.01f)];
