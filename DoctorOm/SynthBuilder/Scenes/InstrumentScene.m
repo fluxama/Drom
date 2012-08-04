@@ -1,11 +1,13 @@
 /*
  *  InstrumentScene.m
- *  Noisemusick
+ *  Drom
+ *  http://www.fluxama.com
+ *  http://github.com/fluxama
  *
- *  Created by Shawn Wallace on 10/1/11.
- *  Copyright (c) 2011-2012 by Shawn Wallace of the Fluxama Group. 
+ *  Created by Elliot Clapp, Shawn Greenlee, and Shawn Wallace
+ *  Copyright (c) 2012 by Shawn Wallace of the Fluxama Group. 
  *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
- *  WARRANTIES, see the file, "Noisemusick-LICENSE.txt," in this distribution.  */
+ *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  */
 
 #import "AppDelegate.h"
 #import "InstrumentScene.h"
@@ -401,8 +403,7 @@ int selectedControl;
     //CCLOG(@"Do nothing");
 }
 
-- (void) dealloc
-{	
+- (void) dealloc {	
     for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
         Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
         [c sendOffValues];

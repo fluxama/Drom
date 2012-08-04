@@ -1,10 +1,13 @@
-//
-//  Slider.m
-//  DoctorOm
-//
-//  Created by Shawn Wallace on 5/28/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ *  Slider.m
+ *  Drom
+ *  http://www.fluxama.com
+ *  http://github.com/fluxama
+ *
+ *  Created by Elliot Clapp, Shawn Greenlee, and Shawn Wallace
+ *  Copyright (c) 2012 by Shawn Wallace of the Fluxama Group. 
+ *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  */
 
 #import "Slider.h"
 

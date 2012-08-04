@@ -1,11 +1,13 @@
 /*
  *  NavMenu.m
- *  Noisemusick
+ *  Drom 
+ *  http://www.fluxama.com
+ *  http://github.com/fluxama
  *
- *  Created by Shawn Wallace on 10/1/11.
- *  Copyright (c) 2011-2012 by Shawn Wallace of the Fluxama Group. 
+ *  Created by Elliot Clapp, Shawn Greenlee, and Shawn Wallace
+ *  Copyright (c) 2012 by Shawn Wallace of the Fluxama Group. 
  *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
- *  WARRANTIES, see the file, "Noisemusick-LICENSE.txt," in this distribution.  */
+ *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  */
 
 
 #import "NavMenu.h"
@@ -62,7 +64,8 @@
         [nav_menu setPosition:ccp(nav_bg.contentSize.width/2, nav_bg.contentSize.height/2)];
         [nav_bg addChild:nav_menu];
         
-        [self addChild:nav_bg z:49];
+        [self addChild:nav_bg z:49];;
+        
         
     }
     return self;

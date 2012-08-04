@@ -1,11 +1,11 @@
 /*
  *  AppDelegate.m
- *  Noisemusick
+ *  Drom
  *
- *  Created by Shawn Wallace on 10/1/11.
- *  Copyright (c) 2011-2012 by Shawn Wallace of the Fluxama Group. 
+ *  Created by Elliot Clapp, Shawn Greenlee, and Shawn Wallace
+ *  Copyright (c) 2012 by Shawn Wallace of the Fluxama Group. 
  *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
- *  WARRANTIES, see the file, "Noisemusick-LICENSE.txt," in this distribution.  */
+ *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  */
 
 #import "AppDelegate.h"
 #import "MenuScene.h"
@@ -111,7 +111,7 @@ void moog_tilde_setup();
     
     _audioController = [[PdAudioController alloc] init];
     if ([self.audioController configureAmbientWithSampleRate:44100 
-                                              numberChannels:2 
+                                              numberChannels:2
                                                mixingEnabled:YES] != PdAudioOK) {
         NSLog(@"failed to initialize audio components");
     }

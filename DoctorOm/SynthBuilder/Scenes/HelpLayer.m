@@ -1,10 +1,13 @@
-//
-//  HelpLayer.m
-//  Drom
-//
-//  Created by Shawn Wallace on 8/2/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
-//
+/*
+ *  HelpLayer.m
+ *  Drom
+ *  http://www.fluxama.com
+ *  http://github.com/fluxama
+ *
+ *  Created by Elliot Clapp, Shawn Greenlee, and Shawn Wallace
+ *  Copyright (c) 2012 by Shawn Wallace of the Fluxama Group. 
+ *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
+ *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  *///
 
 #import "HelpLayer.h"
 

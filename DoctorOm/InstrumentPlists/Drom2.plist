@@ -13,7 +13,7 @@
 	<key>help</key>
 	<string></string>
 	<key>instrument_id</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>interactive_inputs</key>
 	<array>
 		<dict>
@@ -524,7 +524,7 @@
 		</dict>
 	</array>
 	<key>name</key>
-	<string>Drom</string>
+	<string>Drom2</string>
 	<key>orientation</key>
 	<string>1</string>
 	<key>patch_name</key>

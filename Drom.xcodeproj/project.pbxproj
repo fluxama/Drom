@@ -763,7 +763,6 @@
 		45AD91671513AF1400B462D1 /* Drom */ = {
 			isa = PBXGroup;
 			children = (
-				45CE5BD41513B9E40043658F /* Shaders */,
 				45CE595D1513B1570043658F /* InstrumentImages */,
 				45CE59851513B1570043658F /* InstrumentPlists */,
 				45CE598B1513B1570043658F /* InstrumentPatches */,
@@ -775,6 +774,7 @@
 				45CE595B1513B1410043658F /* AppDelegate.m */,
 				45AD91681513AF1400B462D1 /* Resources */,
 				45AD917C1513AF1400B462D1 /* libs */,
+				45CE5BD41513B9E40043658F /* Shaders */,
 				45AD92B51513AF1600B462D1 /* Supporting Files */,
 			);
 			name = Drom;

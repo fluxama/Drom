@@ -1,4 +1,4 @@
-#N canvas -23 22 1395 816 10;
+#N canvas 0 22 1395 816 10;
 #X obj 636 500 dac~;
 #X obj 257 336 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
@@ -24,8 +24,8 @@
 #X obj 257 315 r dsp1;
 #X msg 359 -266 0;
 #X obj 199 -181 select 1 2 3 0;
-#N canvas 151 363 1335 800 voice1_________________________________
-0;
+#N canvas 220 30 1335 800 voice1_________________________________ 0
+;
 #X floatatom 206 -40 5 0 0 0 - - -;
 #X obj 206 -68 line;
 #X obj 206 -96 pack f 200;
@@ -906,55 +906,55 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 -1 -1;
 #X obj 606 -225 loadbang;
 #X obj 304 -64 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 3800 1;
+-1 -1 0 1;
 #X obj 301 -91 r dc1a;
 #X obj 304 32 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7500 1;
+-1 -1 0 1;
 #X obj 304 -15 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 4700 1;
+-1 -1 0 1;
 #X obj 301 -43 r dc2a;
 #X obj 301 4 r dc3a;
 #X obj 304 80 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7600 1;
+-1 -1 0 1;
 #X obj 304 127 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 9400 1;
+-1 -1 0 1;
 #X obj 301 52 r dc4a;
 #X obj 301 99 r dc5a;
 #X obj 305 174 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7100 1;
+-1 -1 0 1;
 #X obj 305 268 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 9300 1;
+-1 -1 0 1;
 #X obj 305 221 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7000 1;
+-1 -1 0 1;
 #X obj 305 315 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 5800 1;
+-1 -1 0 1;
 #X obj 305 362 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 8200 1;
+-1 -1 0 1;
 #X obj 302 146 r dc6a;
 #X obj 302 193 r dc7a;
 #X obj 302 240 r dc8a;
 #X obj 302 287 r dc9a;
 #X obj 302 334 r dc10a;
 #X obj 736 -64 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7900 1;
+-1 -1 0 1;
 #X obj 736 31 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 0 1;
 #X obj 736 -16 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 9000 1;
+-1 -1 0 1;
 #X obj 736 79 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 736 126 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 1500 1;
+-1 -1 0 1;
 #X obj 737 173 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7700 1;
+-1 -1 0 1;
 #X obj 737 267 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 9600 1;
+-1 -1 0 1;
 #X obj 737 220 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7400 1;
+-1 -1 0 1;
 #X obj 737 314 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7800 1;
+-1 -1 0 1;
 #X obj 737 361 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 9000 1;
+-1 -1 0 1;
 #X obj 733 -92 r dc1b;
 #X obj 733 -44 r dc2b;
 #X obj 733 3 r dc3b;
@@ -966,25 +966,25 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 734 286 r dc9b;
 #X obj 734 333 r dc10b;
 #X obj 1168 -65 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 0 1;
 #X obj 1168 30 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 1168 -17 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 11500 1;
+-1 -1 0 1;
 #X obj 1168 78 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7800 1;
+-1 -1 0 1;
 #X obj 1168 125 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 8800 1;
+-1 -1 0 1;
 #X obj 1169 172 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 0 1;
 #X obj 1169 266 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 10300 1;
+-1 -1 0 1;
 #X obj 1169 219 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 11100 1;
+-1 -1 0 1;
 #X obj 1169 313 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 11800 1;
+-1 -1 0 1;
 #X obj 1169 360 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 0 1;
 #X obj 1165 -93 r dc1c;
 #X obj 1165 -45 r dc2c;
 #X obj 1165 2 r dc3c;
@@ -998,7 +998,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 689 336 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 1121 335 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X obj 689 314 r dsp2;
 #X obj 1121 314 r dsp3;
 #X obj 709 446 clip~ -1 1;
@@ -1783,7 +1783,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 104 101 *~ 0.5;
 #X obj 1165 -181 inlet;
 #X obj 1165 -101 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X obj 1194 38 vline~;
 #X obj 1165 -71 select 1;
 #X msg 1165 7 1;
