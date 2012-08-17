@@ -18,6 +18,7 @@
 #import "Slider.h"
 #import "ToggleTouch.h"
 #import "TwoPosSwitch.h"
+#import "LEDButton.h"
 
 @implementation Instrument
 
@@ -89,6 +90,15 @@
                    // [c sendControlValues];
 					break;
 				}
+                case VOL_POT : 
+				{ 
+					Pot *c = [[Pot alloc] initWithDictionary:dict];
+					[interactive_inputs addObject:c];
+                    c.scale = c.control_scale;
+                    [c autorelease];
+                    // [c sendControlValues];
+					break;
+				}
                 case POT_NO_KNOB : 
 				{ 
 					Pot *c = [[Pot alloc] initWithDictionary:dict];
@@ -126,6 +136,16 @@
                     //[s sendControlValues];
 					break;
 				}
+                case LED_BUTTON :
+                {
+					LEDButton *s = [[LEDButton alloc] initWithDictionary:dict];
+					[interactive_inputs addObject:s];
+                    s.scale = s.control_scale;
+                    [s autorelease];
+                    //[s sendControlValues];
+					break;
+				}
+                    
             }
 		}
 

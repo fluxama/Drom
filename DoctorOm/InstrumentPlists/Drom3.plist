@@ -80,7 +80,7 @@
 			<key>min</key>
 			<integer>0</integer>
 			<key>patch_input</key>
-			<string>onOffc</string>
+			<string>dc10c</string>
 			<key>scale</key>
 			<integer>1</integer>
 			<key>sequenced_by</key>
@@ -96,7 +96,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<integer>1</integer>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -326,7 +326,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<integer>0</integer>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -482,7 +482,7 @@
 			<key>input_id</key>
 			<string>pot_c9</string>
 			<key>input_type</key>
-			<integer>1</integer>
+			<integer>7</integer>
 			<key>linked_to_output</key>
 			<integer>0</integer>
 			<key>linked_to_seq_cpm</key>
@@ -532,6 +532,6 @@
 	<key>sequences</key>
 	<array/>
 	<key>type</key>
-	<integer>1</integer>
+	<integer>3</integer>
 </dict>
 </plist>

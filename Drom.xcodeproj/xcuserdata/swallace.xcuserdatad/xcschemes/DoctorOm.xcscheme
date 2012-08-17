@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "45AD91521513AF1400B462D1"
-               BuildableName = "Drom.app"
+               BuildableName = "DR-OM.app"
                BlueprintName = "Drom"
                ReferencedContainer = "container:Drom.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45AD91521513AF1400B462D1"
-            BuildableName = "Drom.app"
+            BuildableName = "DR-OM.app"
             BlueprintName = "Drom"
             ReferencedContainer = "container:Drom.xcodeproj">
          </BuildableReference>
@@ -47,13 +47,12 @@
       buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      enablesOpenGLESFrameCapture = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45AD91521513AF1400B462D1"
-            BuildableName = "Drom.app"
+            BuildableName = "DR-OM.app"
             BlueprintName = "Drom"
             ReferencedContainer = "container:Drom.xcodeproj">
          </BuildableReference>
@@ -71,7 +70,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "45AD91521513AF1400B462D1"
-            BuildableName = "Drom.app"
+            BuildableName = "DR-OM.app"
             BlueprintName = "Drom"
             ReferencedContainer = "container:Drom.xcodeproj">
          </BuildableReference>

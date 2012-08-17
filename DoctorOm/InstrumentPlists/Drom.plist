@@ -80,7 +80,7 @@
 			<key>min</key>
 			<integer>0</integer>
 			<key>patch_input</key>
-			<string>onOffa</string>
+			<string>dc10a</string>
 			<key>scale</key>
 			<integer>1</integer>
 			<key>sequenced_by</key>
@@ -96,7 +96,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<integer>1</integer>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -142,7 +142,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<integer>0</integer>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -188,7 +188,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.25</real>
+			<real>0.125</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -234,7 +234,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.75</real>
+			<integer>0</integer>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -280,7 +280,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<integer>0</integer>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -326,7 +326,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<real>0.3</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -372,7 +372,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<real>0.094</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -418,7 +418,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<real>0.9399999999999999</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -464,7 +464,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<real>0.6</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>
@@ -482,7 +482,7 @@
 			<key>input_id</key>
 			<string>pot_a9</string>
 			<key>input_type</key>
-			<integer>1</integer>
+			<integer>7</integer>
 			<key>linked_to_output</key>
 			<integer>0</integer>
 			<key>linked_to_seq_bpm</key>
@@ -510,7 +510,7 @@
 			<key>sweep_angle</key>
 			<integer>0</integer>
 			<key>value</key>
-			<real>0.5</real>
+			<real>0.75</real>
 			<key>value2</key>
 			<integer>0</integer>
 			<key>value3</key>

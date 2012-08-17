@@ -23,6 +23,7 @@
 	float control_scale;
 	float control_angle;
 	float control_value;
+    	float control_value2;
     int control_state;
 	NSString *control_patch_input;
     int control_linked_to_output;
@@ -44,6 +45,7 @@
 @property float control_scale;
 @property float control_angle;
 @property float control_value;
+@property float control_value2;
 @property int control_state;
 @property (copy, nonatomic) NSString *control_patch_input;
 @property int control_linked_to_output;

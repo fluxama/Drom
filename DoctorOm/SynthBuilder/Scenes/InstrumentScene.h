@@ -56,16 +56,24 @@
     CFMutableDictionaryRef touchList;
     NSMutableDictionary *savedState;
     CCSprite *LEDLayer;
+    CCSprite *LED2Layer;
     CCMenu *helpMenu;
     HelpLayer *helpLayer;
     bool LEDState;
+    bool LED2State;
     float beat_count;
     float beats;
     int padsTouched;
     bool screenIsTouched;
+    float masterVolume;
+    bool instrumentOn;
+    NSString *masterVolumeInput;
 }   
 
 - (void) loadInstrument: (NSString *) name;
+- (void) setMasterVolumeOn;
+- (void) setMasterVolumeOff;
+- (void) setMasterVolumeValue:(float) val;
 - (void) openPatch:(NSString *) patch;
 - (void) closePatch;
 - (void) toggleHelp: (id)sender;

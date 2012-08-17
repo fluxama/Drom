@@ -28,7 +28,7 @@ void moog_tilde_setup();
         SCREEN_CENTER_Y = 384;
         BUTTON_Y = 60;
         ABOUT_IMAGE_WIDTH = 1000;
-        HELP_SCREEN_H = 1512;
+        HELP_SCREEN_H = 1394;
         INFO_ICON_H = 181;
     } else {
         THUMBW = 360;
@@ -38,7 +38,7 @@ void moog_tilde_setup();
         SCREEN_CENTER_Y = 160;
         BUTTON_Y = 30;
         ABOUT_IMAGE_WIDTH = 1000;
-        HELP_SCREEN_H = 709;
+        HELP_SCREEN_H = 654;
         INFO_ICON_H = 86;
     }
     

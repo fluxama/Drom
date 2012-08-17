@@ -7,7 +7,8 @@
  *  Created by Elliot Clapp, Shawn Greenlee, and Shawn Wallace
  *  Copyright (c) 2012 by Shawn Wallace of the Fluxama Group. 
  *  For information on usage and redistribution, and for a DISCLAIMER OF ALL
- *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  */
+ *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  
+ */
 
 #import "AppDelegate.h"
 #import "InstrumentScene.h"
@@ -144,8 +145,10 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Noisemusick"]];
 }
 - (void) gotoDrom: (id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.com/apps/Drom"]];
+    [[UIApplication sharedApplication] 
+     openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=513770094"]];
 }
+
 - (void) gotoFB: (id)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.facebook.com/fluxamacorp"]];
 }
@@ -230,7 +233,6 @@ int selectedControl;
         
         beats = BASEBEATS;
 		[self schedule: @selector(tick:) interval:0.25f ];
-        
 	}
 	return self;
 }
@@ -242,16 +244,31 @@ int selectedControl;
 		Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
 		c.position = ccp(c.control_x, c.control_y);
         c.tag = CONTROL_TAG;
+        [self addChild:c z:4];
         if (savedState) {
-            //CCLOG(@"Key: %@",c.control_id);
-            //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+            CCLOG(@"Key: %@",c.control_id);
+            CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
             c.control_value = [[savedState valueForKey:c.control_id] floatValue];
             [c updateViewWithValue];
 		}
-        [c sendControlValues];
-        [self addChild:c z:4];
+        // Note that the following means than an on/off switch has to occur before a volume control in the plist
+        if ((c.control_type == VOL_POT)) {
+            masterVolumeInput = c.control_patch_input;
+            masterVolume = c.control_value;
+            if (instrumentOn) {
+                [c sendControlValues];
+            }
+        } else {  
+            [c sendControlValues];
+        }
 	}
-    [(AppController*)[[UIApplication sharedApplication] delegate] turnOnSound];
+    
+    if (instrumentOn) {
+        CCLOG(@"Set instrument master volume");
+      [self setMasterVolumeOn];
+    }
+    
+   // [(AppController*)[[UIApplication sharedApplication] delegate] turnOnSound];
     LEDLayer = [CCSprite spriteWithFile:@"LedGlow.png"];
     //[LEDLayer setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
     [LEDLayer setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_COLOR }];
@@ -259,12 +276,14 @@ int selectedControl;
     if (IS_IPAD()) {
         LEDLayer.position = ccp(512, 548); 
     } else {
-        LEDLayer.position = ccp(240,239);
+        LEDLayer.position = ccp(240,236);
     }
     LEDState = FALSE;
+    LEDLayer.visible = NO;
+
     [self addChild:LEDLayer z:-3];
     
-    // Create the Help Menu
+        // Create the Help Menu
     
     helpMenu = [CCMenu menuWithItems:nil ];
     
@@ -295,7 +314,30 @@ int selectedControl;
 }
 
 -(void) tick: (ccTime) dt {
+    if (instrumentOn) {
         LEDLayer.visible = !LEDLayer.visible;
+    } else {
+         LEDLayer.visible = NO;
+    }
+}
+
+-(void) setMasterVolumeOn {
+    //Kind of a hack 
+          CCLOG(@"ON2");
+    instrumentOn = YES;
+    [PdBase sendFloat:masterVolume toReceiver:@"masterVolume"];
+}
+
+-(void) setMasterVolumeOff {
+    //Kind of a hack
+          CCLOG(@"OFF2");
+    instrumentOn = NO;
+    [PdBase sendFloat:0 toReceiver:@"masterVolume"];
+}
+
+-(void) setMasterVolumeValue:(float) val {
+    //Kind of a hack
+    masterVolume = val;
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -316,8 +358,20 @@ int selectedControl;
                     [c sendOnValues];
                     [c touchAdded:touch];
                     [c updateView:location];
-                    [c sendControlValues]; 
+                    if ((c.control_type != VOL_POT)) {
+                        [c sendControlValues]; 
+                    } else {
+                        if (instrumentOn) {
+                            
+                            [c sendControlValues]; 
+                        }
+                    }
                     touchedAlready = TRUE;
+                    // Kind of a hack
+                    if ((c.control_type == VOL_POT)) {
+                        masterVolume = c.control_value;
+                    }
+
                 }
             }
         }
@@ -342,6 +396,10 @@ int selectedControl;
                     beats = (1.05-c.control_value)*BASEBEATS;
                     //CCLOG(@"beats %@, %4f",c.control_id, beats);
                 }
+                // Kind of a hack
+                if ((c.control_type == VOL_POT)) {
+                    masterVolume = c.control_value;
+                }
                 if ((c.control_type == TOUCH_AREA) || (c.control_type == ROUND_TOUCH_AREA) || 
                     (c.control_type == TOGGLE_TOUCH) || (c.control_type == PLASMA_MULTI_TOUCH))  {
                     if ([c withinBounds:location]) {
@@ -350,25 +408,37 @@ int selectedControl;
                     }
                 } else {
                     [c updateView:location];
-                    if (c.control_sequenced_by == 0) {
-                        [c sendControlValues];
-                    }   
+                    if ((c.control_type != VOL_POT)) {
+                        if (c.control_sequenced_by == 0) {
+                            [c sendControlValues];
+                        }  
+                    } else {
+                        if (instrumentOn) {
+                            [c sendControlValues]; 
+                        }
+                    }
                 }
             }
         } else {
             [helpLayer updateView:location];
         }
     }
-    
-    
 }
-
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for (UITouch *touch in touches) {
         Control *c = (Control*)CFDictionaryGetValue(touchList, touch);
         if (c != NULL) {
+            if (c.control_type == LED_BUTTON) {
+                for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
+                    Control *c2 = [instrument_def.interactive_inputs objectAtIndex:i];
+                    if (c2.control_type == LED_BUTTON) {
+                        c2.control_state = 0;
+                     //   [c2 turnOff ];
+                    }
+                }
+            }
             [c touchRemoved:touch];
             if (c.control_type == TOGGLE_TOUCH) {   
                 c.control_value = 0;
@@ -404,13 +474,14 @@ int selectedControl;
 }
 
 - (void) dealloc {	
+    [PdBase sendFloat:0.0f toReceiver:@"kit_number"];
     for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
         Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
-        [c sendOffValues];
-		[c sendZeroValues];
-        //CCLOG(@"Retrieved value: %@",c.control_id);
+        //[c sendOffValues];
+		//[c sendZeroValues];
+        CCLOG(@"Retrieved value: %@",c.control_id);
         [savedState setValue:[NSNumber numberWithFloat:c.control_value] forKey:c.control_id];
-        //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+        CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
 	}
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
                       stringByAppendingPathComponent:[NSString stringWithFormat:@"savedState.plist"]];
@@ -419,8 +490,8 @@ int selectedControl;
     } else {
         //CCLOG(@"Failed! %@",path);
     }
-    [(AppController*)[[UIApplication sharedApplication] delegate] turnOffSound];
-    [PdBase sendFloat:0.0f toReceiver:@"kit_number"];
+    //[(AppController*)[[UIApplication sharedApplication] delegate] turnOffSound];
+
     [self removeAllChildrenWithCleanup:YES];
     [(id)touchList release];
     [savedState release];

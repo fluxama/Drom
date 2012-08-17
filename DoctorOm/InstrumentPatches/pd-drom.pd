@@ -1021,53 +1021,53 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X connect 102 0 46 0;
 #X restore 8 362 pd voice1_________________________________;
 #X obj 304 -64 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 889 1;
+-1 -1 0 1;
 #X obj 301 -91 r dc1a;
 #X obj 304 32 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 6350 1;
+-1 -1 0 1;
 #X obj 304 -15 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 4889 1;
+-1 -1 0 1;
 #X obj 301 -43 r dc2a;
 #X obj 301 4 r dc3a;
 #X obj 304 80 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 1397 1;
+-1 -1 0 1;
 #X obj 304 127 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 2794 1;
+-1 -1 0 1;
 #X obj 301 52 r dc4a;
 #X obj 301 99 r dc5a;
 #X obj 305 174 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 305 268 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 1587 1;
+-1 -1 0 1;
 #X obj 305 221 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 2197 1;
+-1 -1 0 1;
 #X obj 305 315 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 8191 1;
+-1 -1 0 1;
 #X obj 305 362 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 5700 1;
+-1 -1 0 1;
 #X obj 302 146 r dc6a;
 #X obj 302 193 r dc7a;
 #X obj 302 240 r dc8a;
 #X obj 302 287 r dc9a;
 #X obj 302 334 r dc10a;
 #X obj 736 -64 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 762 1;
+-1 -1 0 1;
 #X obj 736 31 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 2375 1;
+-1 -1 0 1;
 #X obj 736 -16 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 2375 1;
+-1 -1 0 1;
 #X obj 736 79 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 9500 1;
+-1 -1 0 1;
 #X obj 736 126 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12370 1;
+-1 -1 0 1;
 #X obj 737 173 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 5080 1;
+-1 -1 0 1;
 #X obj 737 267 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12357 1;
+-1 -1 0 1;
 #X obj 737 220 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 584 1;
+-1 -1 0 1;
 #X obj 737 314 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 5486 1;
+-1 -1 0 1;
 #X obj 737 361 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 733 -92 r dc1b;
@@ -1081,23 +1081,23 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 734 286 r dc9b;
 #X obj 734 333 r dc10b;
 #X obj 1168 -65 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 394 1;
+-1 -1 0 1;
 #X obj 1168 30 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 7300 1;
+-1 -1 0 1;
 #X obj 1168 -17 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 889 1;
+-1 -1 0 1;
 #X obj 1168 78 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 1168 125 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 991 1;
+-1 -1 0 1;
 #X obj 1169 172 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 1905 1;
+-1 -1 0 1;
 #X obj 1169 266 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 495 1;
+-1 -1 0 1;
 #X obj 1169 219 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 1169 313 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 12700 1;
+-1 -1 0 1;
 #X obj 1169 360 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
 -1 -1 0 1;
 #X obj 1165 -93 r dc1c;
@@ -1113,7 +1113,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 689 336 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 1121 335 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X obj 689 314 r dsp2;
 #X obj 1121 314 r dsp3;
 #X obj 709 446 clip~ -1 1;
@@ -1715,7 +1715,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 983 137 * 10;
 #X obj 983 159 + 1;
 #X obj 295 459 > 1;
-#X obj 295 478 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 295 478 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X floatatom 983 181 5 0 0 0 - - -;
 #X obj 982 200 int;
@@ -2093,7 +2093,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 104 101 *~ 0.5;
 #X obj 1165 -181 inlet;
 #X obj 1165 -101 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
-1 1;
+0 1;
 #X obj 1194 38 vline~;
 #X obj 1165 -71 select 1;
 #X msg 1165 7 1;
@@ -2684,7 +2684,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 913 97 * 10;
 #X obj 913 119 + 1;
 #X obj 912 209 > 1;
-#X obj 912 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 912 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X floatatom 913 141 5 0 0 0 - - -;
 #X obj 912 160 int;
@@ -2804,7 +2804,7 @@ of Composing Interactive Music \, 2001 paperback 1st ed.;
 #X obj 913 97 * 10;
 #X obj 913 119 + 1;
 #X obj 912 209 > 1;
-#X obj 912 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 912 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X floatatom 913 141 5 0 0 0 - - -;
 #X obj 912 160 int;
@@ -3198,6 +3198,7 @@ dc5c 0.6 \; dc6c 0.2 \; dc7c 0.6 \; dc8c 0.05 \; dc9c 0.6 \; dc10c
 #X floatatom 1300 328 5 0 0 0 - - -;
 #X text 211 480 patch: Shawn Greenlee for Fluxama's Dr-Om (August 10
 \, 2012);
+#X obj 35 119 r masterVolume;
 #X connect 1 0 24 10;
 #X connect 2 0 0 0;
 #X connect 3 0 2 0;
@@ -3327,3 +3328,6 @@ dc5c 0.6 \; dc6c 0.2 \; dc7c 0.6 \; dc8c 0.05 \; dc9c 0.6 \; dc10c
 #X connect 91 1 90 0;
 #X connect 92 0 3 0;
 #X connect 92 1 90 0;
+#X connect 127 0 39 0;
+#X connect 127 0 54 0;
+#X connect 127 0 74 0;

@@ -3,63 +3,69 @@
 <plist version="1.0">
 <dict>
 	<key>pot_a1</key>
-	<real>0.5</real>
+	<integer>0</integer>
+	<key>onOffSwitch_a</key>
+	<integer>1</integer>
 	<key>pot_a2</key>
-	<real>0.5</real>
+	<real>0.125</real>
 	<key>pot_a3</key>
-	<real>0.5</real>
+	<real>0.133</real>
 	<key>pot_a4</key>
-	<real>0.5</real>
+	<integer>0</integer>
 	<key>pot_a5</key>
-	<real>0.5</real>
+	<real>0.3</real>
 	<key>pot_a6</key>
-	<real>0.5</real>
+	<real>0.094</real>
 	<key>pot_a7</key>
-	<real>0.5</real>
+	<real>0.9399999999999999</real>
 	<key>pot_a8</key>
-	<real>0.5</real>
+	<real>0.6</real>
 	<key>pot_a9</key>
-	<real>0.5</real>
+	<real>0.75</real>
 	<key>slider_a1</key>
 	<real>0.5</real>
 	<key>pot_b1</key>
-	<real>0.5</real>
+	<real>0.204</real>
+	<key>onOffSwitch_b</key>
+	<integer>1</integer>
 	<key>pot_b2</key>
-	<real>0.5</real>
+	<real>0.094</real>
 	<key>pot_b3</key>
-	<real>0.5</real>
+	<real>0.133</real>
 	<key>pot_b4</key>
-	<real>0.5</real>
+	<real>0.275</real>
 	<key>pot_b5</key>
-	<real>0.5</real>
+	<real>0.1</real>
 	<key>pot_b6</key>
-	<real>0.5</real>
+	<real>0.42</real>
 	<key>pot_b7</key>
-	<real>0.5</real>
+	<real>0.08500000000000001</real>
 	<key>pot_b8</key>
-	<real>0.5</real>
+	<real>0.874</real>
 	<key>pot_b9</key>
-	<real>0.5</real>
+	<real>0.75</real>
 	<key>slider_b1</key>
-	<real>0.5</real>
+	<real>0.472</real>
 	<key>pot_c1</key>
-	<real>0.5</real>
+	<integer>0</integer>
+	<key>onOffSwitch_c</key>
+	<integer>1</integer>
 	<key>pot_c2</key>
-	<real>0.5</real>
+	<real>0.1</real>
 	<key>pot_c3</key>
-	<real>0.5</real>
+	<integer>0</integer>
 	<key>pot_c4</key>
-	<real>0.5</real>
+	<real>0.2</real>
 	<key>pot_c5</key>
-	<real>0.5</real>
+	<real>0.1</real>
 	<key>pot_c6</key>
-	<real>0.5</real>
+	<real>0.9</real>
 	<key>pot_c7</key>
-	<real>0.5</real>
+	<real>0.4</real>
 	<key>pot_c8</key>
-	<real>0.5</real>
+	<real>0.4</real>
 	<key>pot_c9</key>
-	<real>0.5</real>
+	<real>0.75</real>
 	<key>slider_c1</key>
 	<real>0.5</real>
 </dict>

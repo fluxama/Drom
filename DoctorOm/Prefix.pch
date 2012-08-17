@@ -20,6 +20,7 @@
 #define TWO_POS_SWITCH (3)
 #define SLIDER (5)
 #define POT_NO_KNOB (6)
+#define VOL_POT (7)
 
 #define MOMENTARY_SWITCH (10)
 #define TOGGLE_BUTTON (11)
@@ -27,6 +28,7 @@
 #define ROUND_TOUCH_AREA (13)
 #define TOGGLE_TOUCH (14)
 #define PLASMA_MULTI_TOUCH (15)
+#define LED_BUTTON (16)
 
 //  Determine device
 #ifdef UI_USER_INTERFACE_IDIOM

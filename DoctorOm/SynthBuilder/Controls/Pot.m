@@ -10,6 +10,7 @@
  *  WARRANTIES, see the file, "Drom-LICENSE.txt," in this distribution.  */
 
 #import "Pot.h"
+#import "InstrumentScene.h"
 
 @implementation Pot
 
@@ -32,7 +33,7 @@
         pinnedLow = NO;
         pinnedHigh = NO;
         
-		if (control_type == POT1) {
+		if ((control_type == POT1) || (control_type == VOL_POT)) {
             sprite = [CCSprite spriteWithFile:@"KnobDot.png"];
         } else {
             sprite = [CCSprite spriteWithFile:@"BrokenKnobPot.png"];
@@ -45,7 +46,7 @@
 		//top.position = ccp(0, 0);
 		//top.visible = YES;
 		//[self addChild:top z:4];
-        if (control_type == POT1) {
+        if ((control_type == POT1) || (control_type == VOL_POT)) {
             sprite_highlight = [CCSprite spriteWithFile:@"RingWhite.png"];
         } else {
             sprite_highlight = [CCSprite spriteWithFile:@"RingWhiteNoDot.png"];
@@ -132,6 +133,9 @@
         }
         self.control_value = (value / 5.283f);
         
+        if (self.control_type == VOL_POT) {
+            [(InstrumentLayer *)self.parent setMasterVolumeValue:self.control_value];
+        }
         //CCLOG(@"CV: %3.3f", self.control_value);
         [sprite setRotation:CC_RADIANS_TO_DEGREES(angle)];
         [sprite_highlight setRotation:CC_RADIANS_TO_DEGREES(angle)];

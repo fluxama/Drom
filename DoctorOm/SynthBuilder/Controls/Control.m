@@ -23,6 +23,7 @@
 @synthesize control_scale;
 @synthesize control_angle;
 @synthesize control_value;
+@synthesize control_value2;
 @synthesize control_state;
 @synthesize control_patch_input;
 @synthesize control_linked_to_output;
@@ -50,6 +51,7 @@
 		self.control_scale = [[params objectForKey:@"scale"] floatValue];
 		self.control_angle = [[params objectForKey:@"angle"] floatValue];
 		self.control_value = [[params objectForKey:@"value"] floatValue];
+        self.control_value2 = [[params objectForKey:@"value2"] floatValue];
 		self.control_state = [[params objectForKey:@"state"] intValue];
 		self.control_patch_input = [params objectForKey:@"patch_input"];
 		self.control_linked_to_output = [[params objectForKey:@"linked_to_output"] intValue ];
