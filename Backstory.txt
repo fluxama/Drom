@@ -1,0 +1,8 @@
+DR-OM is a virtual synthesizer that simulates the hackable yard sale treasure of the same name. Dozens of DR-OM units have been adapted from a rare, limited function generator intended for the science lab but started turning up in fleas markets during the 70s. DIY synth enthusiasts discovered the device was easily hackable, and closely-guarded photocopies have been handed around the community for years. The directions show how to rewire the generator into a nice little synth with two mixable Low Frequency Oscillators and a Voltage-Controlled Filter.
+
+This app is a complete and playable simulation of three different versions of DR-OM boxen that were discovered by Fluxama at a yard sale near Quonset Point along with a folder of photocopied schematics. Each DR-OM unit has its own characteristic sound because of degrading components or bad wiring by the owner. The Speed dial is the most finicky part of the assembly; depending on the box, the dial can cause tuning drifts, random events and gnarly effects. 
+
+In the seventies, the noise generator was nicknamed "Doctor Om" for the meditation-friendly tones it generates. Others believe the name is an acronym for Drone Ready Oscillator Module or Dual Recirculating Oscillator Module, but no one knows for certain where the name comes from originally.
+
+Note: You'll probably want to use more than 2 fingers with DR-OM, so try turning off Multitasking Gestures in your General Settings on your iPad. This is a universal app for iPhone 4+ and the iPad. It is produced by the Fluxama Group, purveyors of fine simulated synths like Noisemusick. Sound and video samples may be found on the support web site.
+

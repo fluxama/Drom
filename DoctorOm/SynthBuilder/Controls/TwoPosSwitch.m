@@ -22,7 +22,6 @@
         [self addChild:sprite];
 		sprite_highlight = [CCSprite spriteWithFile:@"twoPosSwitch1.png"];
 		sprite_highlight.position = ccp(0, 0);
-        CCLOG(@"Switch cv: %3.3f",control_value);
         sprite.visible = NO;
         sprite_highlight.visible = NO;
         [self addChild:sprite_highlight];
@@ -52,7 +51,6 @@
         sprite.visible = YES;
         sprite_highlight.visible = NO;
 	}
-            CCLOG(@"Switch cv: %3.3f",control_value);
     [self sendControlValues];
 }
 
@@ -60,10 +58,8 @@
     
     if (control_value == 0) {
       [(InstrumentLayer *)self.parent setMasterVolumeOff];
-        CCLOG(@"OFF");
     } else {
       [(InstrumentLayer *)self.parent setMasterVolumeOn];
-              CCLOG(@"ON");
     }
 }
 

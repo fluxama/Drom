@@ -12,7 +12,6 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-#import "AboutScene.h"
 
 @class MenuLayer;
 

@@ -43,7 +43,7 @@ return self;
 
 -(void) sendControlValues {
     if (control_state == 1) {
-        CCLOG(@"%@ %3.3f",self.control_patch_input, self.control_value);
+        //CCLOG(@"%@ %3.3f",self.control_patch_input, self.control_value);
         [PdBase sendBangToReceiver:self.control_patch_input];
     } 
 }

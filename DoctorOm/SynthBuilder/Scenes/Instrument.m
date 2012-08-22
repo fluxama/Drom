@@ -70,7 +70,7 @@
 		self.help = [temp objectForKey:@"help"];
         
         [PdBase sendFloat:self.type  toReceiver:@"kit_number"];
-        CCLOG(@"Sent %3i to kit_number", self.type );
+        // CCLOG(@"Sent %3i to kit_number", self.type );
         
 		// Read in inputs
 		NSMutableArray *list = [NSMutableArray arrayWithArray:[temp objectForKey:@"interactive_inputs"]];
@@ -166,6 +166,7 @@
     }
     return self;
 }
+
 
 - (void) dealloc {
     //CCLOG(@"Dealloc Instrument");

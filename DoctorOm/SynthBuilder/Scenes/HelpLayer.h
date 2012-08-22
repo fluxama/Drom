@@ -14,7 +14,7 @@
 #import "Control.h"
 
 @interface HelpLayer : CCNode {
-	CCSprite *img;
+	CCMenu *img;
     float firstTouch;
     float origY;
 }
@@ -23,5 +23,5 @@
 @property float origY;
 
 - (void) updateView:(CGPoint) location;
-
+- (void) nothing:(id)sender;
 @end

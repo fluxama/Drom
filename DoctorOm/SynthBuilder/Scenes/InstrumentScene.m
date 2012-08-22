@@ -19,7 +19,7 @@
 #import "Pot.h"
 
 #define NUM_STEPS 16
-#define BASEBEATS 30.0f
+#define BASEBEATS 10.0f
 
 @implementation InstrumentScene
 @synthesize instrument_name;
@@ -41,7 +41,7 @@
         [nav_menu moveToClosedState];
         
         // Create the Info Menu
-        infoLayer = [CCSprite spriteWithFile:@"menuBackground.png"];
+        infoLayer = [CCSprite spriteWithFile:@"MenuBackground.png"];
         [infoLayer setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
         [infoLayer setVisible:false];
         [self addChild:infoLayer z:100];
@@ -146,7 +146,7 @@
 }
 - (void) gotoDrom: (id)sender {
     [[UIApplication sharedApplication] 
-     openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=513770094"]];
+     openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=555409573"]];
 }
 
 - (void) gotoFB: (id)sender {
@@ -232,12 +232,13 @@ int selectedControl;
         //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:@"pot_a1"] floatValue]);
         
         beats = BASEBEATS;
-		[self schedule: @selector(tick:) interval:0.25f ];
+		[self schedule: @selector(tick:) interval:0.1f ];
 	}
 	return self;
 }
 
 - (void) loadInstrument: (NSString *) name {
+    [self setMasterVolumeOff];
 	instrument_def = [[Instrument alloc] initWithName:name];
     
 	for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
@@ -246,8 +247,8 @@ int selectedControl;
         c.tag = CONTROL_TAG;
         [self addChild:c z:4];
         if (savedState) {
-            CCLOG(@"Key: %@",c.control_id);
-            CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+            //CCLOG(@"Key: %@",c.control_id);
+            //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
             c.control_value = [[savedState valueForKey:c.control_id] floatValue];
             [c updateViewWithValue];
 		}
@@ -264,7 +265,7 @@ int selectedControl;
 	}
     
     if (instrumentOn) {
-        CCLOG(@"Set instrument master volume");
+       //CCLOG(@"Set instrument master volume");
       [self setMasterVolumeOn];
     }
     
@@ -300,10 +301,11 @@ int selectedControl;
         [helpMenu setPosition:ccp(465, 15)];
     }
     [helpMenu setVisible:false];
-    [self addChild:helpMenu z:150];
+    [self addChild:helpMenu z:200];
     
     helpLayer = [HelpLayer node];
-    [helpLayer setPosition:ccp(SCREEN_CENTER_X,SCREEN_CENTER_Y-(HELP_SCREEN_H/2-SCREEN_CENTER_Y))];
+    [helpLayer setAnchorPoint:ccp(0,0)];
+    [helpLayer setPosition:ccp(0, 0)];
     [helpLayer setVisible:false];
 
     [self addChild:helpLayer z:100];
@@ -315,22 +317,22 @@ int selectedControl;
 
 -(void) tick: (ccTime) dt {
     if (instrumentOn) {
-        LEDLayer.visible = !LEDLayer.visible;
+        if (beat_count < 0) {
+            beat_count = beats;
+            LEDLayer.visible = !LEDLayer.visible;
+        }
+        beat_count--;;
     } else {
          LEDLayer.visible = NO;
     }
 }
 
 -(void) setMasterVolumeOn {
-    //Kind of a hack 
-          CCLOG(@"ON2");
     instrumentOn = YES;
     [PdBase sendFloat:masterVolume toReceiver:@"masterVolume"];
 }
 
 -(void) setMasterVolumeOff {
-    //Kind of a hack
-          CCLOG(@"OFF2");
     instrumentOn = NO;
     [PdBase sendFloat:0 toReceiver:@"masterVolume"];
 }
@@ -375,10 +377,6 @@ int selectedControl;
                 }
             }
         }
-        if (helpLayer.visible) {
-            helpLayer.firstTouch = location.y;
-            helpLayer.origY = helpLayer.position.y;
-        }
     }
     
 }
@@ -392,7 +390,7 @@ int selectedControl;
         if (!(helpLayer.visible)) {
             Control *c = (Control*)CFDictionaryGetValue(touchList, touch);
             if (c != NULL) {
-                if ([c.control_id isEqualToString:@"pot1"]) {
+                if ([c.control_id isEqualToString:@"speed"]) {
                     beats = (1.05-c.control_value)*BASEBEATS;
                     //CCLOG(@"beats %@, %4f",c.control_id, beats);
                 }
@@ -419,9 +417,7 @@ int selectedControl;
                     }
                 }
             }
-        } else {
-            [helpLayer updateView:location];
-        }
+        } 
     }
 }
 
@@ -473,15 +469,14 @@ int selectedControl;
     //CCLOG(@"Do nothing");
 }
 
+
 - (void) dealloc {	
     [PdBase sendFloat:0.0f toReceiver:@"kit_number"];
     for (int i=0; i<[instrument_def.interactive_inputs count]; i++) {
         Control *c = [instrument_def.interactive_inputs objectAtIndex:i];
-        //[c sendOffValues];
-		//[c sendZeroValues];
-        CCLOG(@"Retrieved value: %@",c.control_id);
+        //CCLOG(@"Retrieved value: %@",c.control_id);
         [savedState setValue:[NSNumber numberWithFloat:c.control_value] forKey:c.control_id];
-        CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
+        //CCLOG(@"Retrieved value: %3.3f",[[savedState objectForKey:c.control_id] floatValue]);
 	}
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
                       stringByAppendingPathComponent:[NSString stringWithFormat:@"savedState.plist"]];
@@ -490,8 +485,7 @@ int selectedControl;
     } else {
         //CCLOG(@"Failed! %@",path);
     }
-    //[(AppController*)[[UIApplication sharedApplication] delegate] turnOffSound];
-
+    
     [self removeAllChildrenWithCleanup:YES];
     [(id)touchList release];
     [savedState release];

@@ -296,7 +296,7 @@
 			<key>height</key>
 			<integer>75</integer>
 			<key>input_id</key>
-			<string>pot_a5</string>
+			<string>speed</string>
 			<key>input_type</key>
 			<integer>1</integer>
 			<key>linked_to_output</key>

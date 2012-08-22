@@ -18,7 +18,7 @@
 - (id) init {
     self = [super init];
     if (self != nil) {
-        CCSprite * bg = [CCSprite spriteWithFile:@"menuBackground.png"];
+        CCSprite * bg = [CCSprite spriteWithFile:@"MenuBackground.png"];
         [bg setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
         if (IS_IPAD()) {
             bg.scale = 2.5; 
@@ -87,7 +87,7 @@ bool waitForMoveTo;
         menuItems = [[NSMutableArray alloc] initWithCapacity:[instruments count]];
 		selectedMenuItems = [[NSMutableArray alloc] initWithCapacity:[instruments count]];
 		
-        menu =[CCSprite spriteWithFile:@"menuBackground.png"];
+        menu =[CCSprite spriteWithFile:@"MenuBackground.png"];
 		int r =0;
         int c = 0;
         menuWidth = [instruments count] * (THUMBW+PADW)-PADW;
