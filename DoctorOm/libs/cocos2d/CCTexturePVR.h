@@ -59,6 +59,16 @@ struct CCPVRMipmap {
 	unsigned int len;
 };
 
+typedef struct _ccPVRTexturePixelFormatInfo {
+	GLenum internalFormat;
+	GLenum format;
+	GLenum type;
+	uint32_t bpp;
+	BOOL compressed;
+	BOOL alpha;
+	CCTexture2DPixelFormat ccPixelFormat;
+} ccPVRTexturePixelFormatInfo;
+
 enum {
 	CC_PVRMIPMAP_MAX = 16,
 };
@@ -88,9 +98,8 @@ enum {
 @interface CCTexturePVR : NSObject
 {
 	struct CCPVRMipmap	mipmaps_[CC_PVRMIPMAP_MAX];	// pointer to mipmap images
-	int		numberOfMipmaps_;					// number of mipmap used
+	NSUInteger	numberOfMipmaps_;					// number of mipmap used
 
-	unsigned int	tableFormatIndex_;
 	uint32_t width_, height_;
 	GLuint	name_;
 	BOOL hasAlpha_;
@@ -98,6 +107,8 @@ enum {
 	// cocos2d integration
 	BOOL retainName_;
 	CCTexture2DPixelFormat format_;
+	
+	const ccPVRTexturePixelFormatInfo *_pixelFormatInfo;
 }
 
 /** initializes a CCTexturePVR with a path */
@@ -117,6 +128,8 @@ enum {
 @property (nonatomic,readonly) uint32_t height;
 /** whether or not the texture has alpha */
 @property (nonatomic,readonly) BOOL hasAlpha;
+/** how many mipmaps the texture has. 1 means one level (level 0 */
+@property (nonatomic, readonly) NSUInteger numberOfMipmaps;
 
 // cocos2d integration
 @property (nonatomic,readwrite) BOOL retainName;

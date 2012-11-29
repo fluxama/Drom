@@ -50,7 +50,7 @@
 #if CC_NODE_RENDER_SUBPIXEL
 #define RENDER_IN_SUBPIXEL
 #else
-#define RENDER_IN_SUBPIXEL (NSInteger)
+#define RENDER_IN_SUBPIXEL(__ARGS__) (ceil(__ARGS__))
 #endif
 
 
@@ -77,18 +77,18 @@ static NSUInteger globalOrderOfArrival = 1;
 @synthesize tag = tag_;
 @synthesize vertexZ = vertexZ_;
 @synthesize isRunning = isRunning_;
-@synthesize userData = userData_;
+@synthesize userData = userData_, userObject = userObject_;
 @synthesize	shaderProgram = shaderProgram_;
 @synthesize orderOfArrival = orderOfArrival_;
 @synthesize glServerState = glServerState_;
 
 #pragma mark CCNode - Transform related properties
 
-@synthesize rotation = rotation_, scaleX = scaleX_, scaleY = scaleY_;
+@synthesize rotationX = rotationX_, rotationY = rotationY_, scaleX = scaleX_, scaleY = scaleY_;
 @synthesize position = position_;
 @synthesize anchorPoint = anchorPoint_, anchorPointInPoints = anchorPointInPoints_;
 @synthesize contentSize = contentSize_;
-@synthesize isRelativeAnchorPoint = isRelativeAnchorPoint_;
+@synthesize ignoreAnchorPointForPosition = ignoreAnchorPointForPosition_;
 @synthesize skewX = skewX_, skewY = skewY_;
 
 #pragma mark CCNode - Init & cleanup
@@ -105,15 +105,15 @@ static NSUInteger globalOrderOfArrival = 1;
 		isRunning_ = NO;
 
 		skewX_ = skewY_ = 0.0f;
-		rotation_ = 0.0f;
+		rotationX_ = rotationY_ = 0.0f;
 		scaleX_ = scaleY_ = 1.0f;
         position_ = CGPointZero;
         contentSize_ = CGSizeZero;
 		anchorPointInPoints_ = anchorPoint_ = CGPointZero;
 
 
-		// "whole screen" objects. like Scenes and Layers, should set isRelativeAnchorPoint to NO
-		isRelativeAnchorPoint_ = YES;
+		// "whole screen" objects. like Scenes and Layers, should set ignoreAnchorPointForPosition to YES
+		ignoreAnchorPointForPosition_ = NO;
 
 		isTransformDirty_ = isInverseDirty_ = YES;
 
@@ -134,7 +134,8 @@ static NSUInteger globalOrderOfArrival = 1;
 		children_ = nil;
 
 		// userData is always inited as nil
-		userData_ = nil;
+		userData_ = NULL;
+		userObject_ = nil;
 
 		//initialize parent to nil
 		parent_ = nil;
@@ -143,8 +144,8 @@ static NSUInteger globalOrderOfArrival = 1;
 
 		orderOfArrival_ = 0;
 
-		glServerState_ = CC_GL_BLEND;
-
+		glServerState_ = 0;
+		
 		// set default scheduler and actionManager
 		CCDirector *director = [CCDirector sharedDirector];
 		self.actionManager = [director actionManager];
@@ -166,7 +167,7 @@ static NSUInteger globalOrderOfArrival = 1;
 
 - (NSString*) description
 {
-	return [NSString stringWithFormat:@"<%@ = %08X | Tag = %i>", [self class], self, tag_];
+	return [NSString stringWithFormat:@"<%@ = %p | Tag = %ld>", [self class], self, (long)tag_];
 }
 
 - (void) dealloc
@@ -178,6 +179,7 @@ static NSUInteger globalOrderOfArrival = 1;
 	[camera_ release];
 	[grid_ release];
 	[shaderProgram_ release];
+	[userObject_ release];
 
 	// children
 	CCNode *child;
@@ -185,6 +187,7 @@ static NSUInteger globalOrderOfArrival = 1;
 		child.parent = nil;
 
 	[children_ release];
+
 	[super dealloc];
 }
 
@@ -193,7 +196,25 @@ static NSUInteger globalOrderOfArrival = 1;
 // getters synthesized, setters explicit
 -(void) setRotation: (float)newRotation
 {
-	rotation_ = newRotation;
+	rotationX_ = rotationY_ = newRotation;
+	isTransformDirty_ = isInverseDirty_ = YES;
+}
+
+-(float) rotation
+{
+	NSAssert( rotationX_ == rotationY_, @"CCNode#rotation. RotationX != RotationY. Don't know which one to return");
+	return rotationX_;
+}
+
+-(void) setRotationX: (float)newX
+{
+	rotationX_ = newX;
+	isTransformDirty_ = isInverseDirty_ = YES;
+}
+
+-(void) setRotationY: (float)newY
+{
+	rotationY_ = newY;
 	isTransformDirty_ = isInverseDirty_ = YES;
 }
 
@@ -227,10 +248,12 @@ static NSUInteger globalOrderOfArrival = 1;
 	isTransformDirty_ = isInverseDirty_ = YES;
 }
 
--(void) setIsRelativeAnchorPoint: (BOOL)newValue
+-(void) setIgnoreAnchorPointForPosition: (BOOL)newValue
 {
-	isRelativeAnchorPoint_ = newValue;
-	isTransformDirty_ = isInverseDirty_ = YES;
+	if( newValue != ignoreAnchorPointForPosition_ ) {
+		ignoreAnchorPointForPosition_ = newValue;
+		isTransformDirty_ = isInverseDirty_ = YES;
+	}
 }
 
 -(void) setAnchorPoint:(CGPoint)point
@@ -273,6 +296,14 @@ static NSUInteger globalOrderOfArrival = 1;
 {
 	scaleX_ = scaleY_ = s;
 	isTransformDirty_ = isInverseDirty_ = YES;
+}
+
+- (void) setZOrder:(NSInteger)zOrder
+{
+	[self _setZOrder:zOrder];
+
+    if (parent_)
+        [parent_ reorderChild:self z:zOrder];
 }
 
 #pragma mark CCNode Composition
@@ -737,6 +768,11 @@ static NSUInteger globalOrderOfArrival = 1;
 	[actionManager_ pauseTarget:self];
 }
 
+/* override me */
+-(void) update:(ccTime)delta
+{
+}
+
 #pragma mark CCNode Transform
 
 - (CGAffineTransform)nodeToParentTransform
@@ -747,33 +783,39 @@ static NSUInteger globalOrderOfArrival = 1;
 		float x = position_.x;
 		float y = position_.y;
 
-		if ( !isRelativeAnchorPoint_ ) {
+		if ( ignoreAnchorPointForPosition_ ) {
 			x += anchorPointInPoints_.x;
 			y += anchorPointInPoints_.y;
 		}
-
+    
 		// Rotation values
-		float c = 1, s = 0;
-		if( rotation_ ) {
-			float radians = -CC_DEGREES_TO_RADIANS(rotation_);
-			c = cosf(radians);
-			s = sinf(radians);
+		// Change rotation code to handle X and Y
+		// If we skew with the exact same value for both x and y then we're simply just rotating
+		float cx = 1, sx = 0, cy = 1, sy = 0;
+		if( rotationX_ || rotationY_ ) {
+			float radiansX = -CC_DEGREES_TO_RADIANS(rotationX_);
+			float radiansY = -CC_DEGREES_TO_RADIANS(rotationY_);
+			cx = cosf(radiansX);
+			sx = sinf(radiansX);
+			cy = cosf(radiansY);
+			sy = sinf(radiansY);
 		}
 
 		BOOL needsSkewMatrix = ( skewX_ || skewY_ );
 
-
 		// optimization:
 		// inline anchor point calculation if skew is not needed
+		// Adjusted transform calculation for rotational skew
 		if( !needsSkewMatrix && !CGPointEqualToPoint(anchorPointInPoints_, CGPointZero) ) {
-			x += c * -anchorPointInPoints_.x * scaleX_ + -s * -anchorPointInPoints_.y * scaleY_;
-			y += s * -anchorPointInPoints_.x * scaleX_ +  c * -anchorPointInPoints_.y * scaleY_;
+			x += cy * -anchorPointInPoints_.x * scaleX_ + -sx * -anchorPointInPoints_.y * scaleY_;
+			y += sy * -anchorPointInPoints_.x * scaleX_ +  cx * -anchorPointInPoints_.y * scaleY_;
 		}
 
 
 		// Build Transform Matrix
-		transform_ = CGAffineTransformMake( c * scaleX_,  s * scaleX_,
-										   -s * scaleY_, c * scaleY_,
+		// Adjusted transfor m calculation for rotational skew
+		transform_ = CGAffineTransformMake( cy * scaleX_, sy * scaleX_,
+										   -sx * scaleY_, cx * scaleY_,
 										   x, y );
 
 		// XXX: Try to inline skew

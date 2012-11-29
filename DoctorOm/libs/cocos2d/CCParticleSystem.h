@@ -266,6 +266,8 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 	NSUInteger totalParticles;
 	// Count of active particles
 	NSUInteger particleCount;
+    // Number of allocated particles
+    NSUInteger allocatedParticles;
 
 	// How many particles can be emitted per second
 	float emissionRate;
@@ -275,6 +277,8 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 	CCTexture2D *texture_;
 	// blend function
 	ccBlendFunc	blendFunc_;
+	// Texture alpha behavior
+	BOOL opacityModifyRGB_;
 
 	// movment type: free or grouped
 	tCCPositionType	positionType_;
@@ -378,6 +382,8 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
 @property (nonatomic,readwrite, retain) CCTexture2D * texture;
 /** conforms to CocosNodeTexture protocol */
 @property (nonatomic,readwrite) ccBlendFunc blendFunc;
+/** does the alpha value modify color */
+@property (nonatomic, readwrite, getter=doesOpacityModifyRGB, assign) BOOL opacityModifyRGB;
 /** whether or not the particles are using blend additive.
  If enabled, the following blending function will be used.
  @code
@@ -412,6 +418,12 @@ typedef void (*CC_UPDATE_PARTICLE_IMP)(id, SEL, tCCParticle*, CGPoint);
  @since v0.99.3
  */
 +(id) particleWithFile:(NSString*)plistFile;
+
+/* creates an void particle emitter with a maximun number of particles.
+ @since v2.1
+*/
++(id) particleWithTotalParticles:(NSUInteger) numberOfParticles;
+
 
 /** initializes a CCParticleSystem from a plist file.
  This plist files can be creted manually or with Particle Designer:

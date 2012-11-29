@@ -28,6 +28,7 @@
 #import "CCProtocols.h"
 
 @class CCSprite;
+@class CCSpriteFrame;
 
 #define kCCItemSize 32
 
@@ -88,6 +89,17 @@
 /** Returns whether or not the CCMenuItem is enabled */
 -(BOOL) isEnabled;
 
+/** Sets the block that is called when the item is tapped.
+ The block will be "copied".
+ */
+-(void) setBlock:(void(^)(id sender))block;
+
+/** Sets the target and selector that is called when the item is tapped.
+ target/selector will be implemented using blocks.
+ "target" won't be retained.
+ */
+-(void) setTarget:(id)target selector:(SEL)selector;
+
 /** cleanup event. It will release the block and call [super cleanup] */
 -(void) cleanup;
 
@@ -117,7 +129,7 @@
 /** Label that is rendered. It can be any CCNode that implements the CCLabelProtocol */
 @property (nonatomic,readwrite,assign) CCNode<CCLabelProtocol, CCRGBAProtocol>* label;
 
-/** creates a CCMenuItemLabel with a Label. Block will benil */
+/** creates a CCMenuItemLabel with a Label. */
 +(id) itemWithLabel:(CCNode<CCLabelProtocol,CCRGBAProtocol>*)label;
 
 /** creates a CCMenuItemLabel with a Label, target and selector.
@@ -278,7 +290,7 @@
  */
 +(id) itemWithNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite target:(id)target selector:(SEL)selector;
 
-/** creates a menu item with a normal,selected  and disabled image with target/selector.
+/** creates a menu item with a normal, selected and disabled image with target/selector.
  The "target" won't be retained.
  */
 +(id) itemWithNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite disabledSprite:(CCNode<CCRGBAProtocol>*)disabledSprite target:(id)target selector:(SEL)selector;
@@ -288,7 +300,7 @@
  */
 +(id) itemWithNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite block:(void(^)(id sender))block;
 
-/** creates a menu item with a normal,selected  and disabled image with a block.
+/** creates a menu item with a normal, selected and disabled image with a block.
  The block will be "copied".
  */
 +(id) itemWithNormalSprite:(CCNode<CCRGBAProtocol>*)normalSprite selectedSprite:(CCNode<CCRGBAProtocol>*)selectedSprite disabledSprite:(CCNode<CCRGBAProtocol>*)disabledSprite block:(void(^)(id sender))block;
@@ -323,10 +335,13 @@
 /** creates a menu item with a normal and selected image*/
 +(id) itemWithNormalImage: (NSString*)value selectedImage:(NSString*) value2;
 
+/** creates a menu item with a normal, selected and disabled image */
++(id) itemWithNormalImage: (NSString*)value selectedImage:(NSString*) value2 disabledImage: (NSString*) value3;
+
 /** creates a menu item with a normal and selected image with target/selector */
 +(id) itemWithNormalImage: (NSString*)value selectedImage:(NSString*) value2 target:(id) r selector:(SEL) s;
 
-/** creates a menu item with a normal,selected  and disabled image with target/selector.
+/** creates a menu item with a normal, selected and disabled image with target/selector.
  The "target" won't be retained.
  */
 +(id) itemWithNormalImage: (NSString*)value selectedImage:(NSString*) value2 disabledImage:(NSString*) value3 target:(id) r selector:(SEL) s;
@@ -336,7 +351,7 @@
  */
 +(id) itemWithNormalImage: (NSString*)value selectedImage:(NSString*) value2 block:(void(^)(id sender))block;
 
-/** creates a menu item with a normal,selected  and disabled image with a block.
+/** creates a menu item with a normal, selected and disabled image with a block.
  The block will be "copied".
 */
 +(id) itemWithNormalImage: (NSString*)value selectedImage:(NSString*) value2 disabledImage:(NSString*) value3 block:(void(^)(id sender))block;
@@ -350,6 +365,16 @@
  The block will be "copied".
 */
 -(id) initWithNormalImage: (NSString*) value selectedImage:(NSString*)value2 disabledImage:(NSString*) value3 block:(void(^)(id sender))block;
+
+/** sets the sprite frame for the normal image */
+- (void) setNormalSpriteFrame:(CCSpriteFrame*)frame;
+
+/** sets the sprite frame for the selected image */
+- (void) setSelectedSpriteFrame:(CCSpriteFrame*)frame;
+
+/** sets the sprite frame for the disabled image */
+- (void) setDisabledSpriteFrame:(CCSpriteFrame*)frame;
+
 @end
 
 #pragma mark -
@@ -365,6 +390,7 @@
 	NSMutableArray* subItems_;
 	GLubyte		opacity_;
 	ccColor3B	color_;
+    CCMenuItem* currentItem_;
 }
 
 /** conforms with CCRGBAProtocol protocol */
@@ -381,14 +407,15 @@
 
 /** creates a menu item from a list of items with a target/selector */
 +(id) itemWithTarget:(id)target selector:(SEL)selector items:(CCMenuItem*) item, ... NS_REQUIRES_NIL_TERMINATION;
++(id) itemWithTarget:(id)target selector:(SEL)selector items:(CCMenuItem*) item vaList:(va_list)args;
+
+/** creates a menu item from a list of items. */
++(id) itemWithItems:(NSArray*)arrayOfItems;
 
 /** creates a menu item from a list of items and executes the given block when the item is selected.
  The block will be "copied".
  */
 +(id) itemWithItems:(NSArray*)arrayOfItems block:(void(^)(id sender))block;
-
-/** initializes a menu item from a list of items with a target selector */
--(id) initWithTarget:(id)target selector:(SEL)selector items:(CCMenuItem*) item vaList:(va_list) args;
 
 /** initializes a menu item from a list of items with a block.
  The block will be "copied".

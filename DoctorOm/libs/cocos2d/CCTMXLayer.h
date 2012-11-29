@@ -31,11 +31,12 @@
 
 #import "CCAtlasNode.h"
 #import "CCSpriteBatchNode.h"
-
+#import "CCTMXXMLParser.h"
 
 @class CCTMXMapInfo;
 @class CCTMXLayerInfo;
 @class CCTMXTilesetInfo;
+
 
 /** CCTMXLayer represents the TMX layer.
 
@@ -55,6 +56,10 @@
 	http://www.cocos2d-iphone.org/wiki/doku.php/prog_guide:tiled_maps
 
  @since v0.8.1
+ 
+ Tiles can have tile flags for additional properties. At the moment only flip horizontal and flip vertical are used. These bit flags are defined in CCTMXXMLParser.h.
+ 
+ @since 1.1
  */
 @interface CCTMXLayer : CCSpriteBatchNode
 {
@@ -83,11 +88,11 @@
 @property (nonatomic,readwrite,retain) NSString *layerName;
 /** size of the layer in tiles */
 @property (nonatomic,readwrite) CGSize layerSize;
-/** size of the map's tile (could be differnt from the tile's size) */
+/** size of the map's tile (could be different from the tile's size) */
 @property (nonatomic,readwrite) CGSize mapTileSize;
 /** pointer to the map of tiles */
 @property (nonatomic,readwrite) uint32_t *tiles;
-/** Tilset information for the layer */
+/** Tileset information for the layer */
 @property (nonatomic,readwrite,retain) CCTMXTilesetInfo *tileset;
 /** Layer orientation, which is the same as the map orientation */
 @property (nonatomic,readwrite) NSUInteger layerOrientation;
@@ -120,11 +125,25 @@
  */
 -(uint32_t) tileGIDAt:(CGPoint)tileCoordinate;
 
+/** returns the tile gid at a given tile coordinate. It also returns the tile flags.
+ This method requires the the tile map has not been previously released (eg. don't call [layer releaseMap])
+ */
+-(uint32_t) tileGIDAt:(CGPoint)pos withFlags:(ccTMXTileFlags*)flags;
+
 /** sets the tile gid (gid = tile global id) at a given tile coordinate.
  The Tile GID can be obtained by using the method "tileGIDAt" or by using the TMX editor -> Tileset Mgr +1.
  If a tile is already placed at that position, then it will be removed.
  */
 -(void) setTileGID:(uint32_t)gid at:(CGPoint)tileCoordinate;
+
+/** sets the tile gid (gid = tile global id) at a given tile coordinate.
+ The Tile GID can be obtained by using the method "tileGIDAt" or by using the TMX editor -> Tileset Mgr +1.
+ If a tile is already placed at that position, then it will be removed.
+ 
+ Use withFlags if the tile flags need to be changed as well
+ */
+
+-(void) setTileGID:(uint32_t)gid at:(CGPoint)pos withFlags:(ccTMXTileFlags)flags;
 
 /** removes a tile at given tile coordinate */
 -(void) removeTileAt:(CGPoint)tileCoordinate;

@@ -34,11 +34,8 @@ typedef enum  {
 } tCCMenuState;
 
 enum {
-	//* priority used by the menu for the touches
-	kCCMenuTouchPriority = -128,
-
-	//* priority used by the menu for the mouse
-	kCCMenuMousePriority = -128,
+	//* priority used by the menu for the event handler
+	kCCMenuHandlerPriority = -128,
 };
 
 /** A CCMenu
@@ -53,13 +50,27 @@ enum {
 	CCMenuItem	*selectedItem_;
 	GLubyte		opacity_;
 	ccColor3B	color_;
+	BOOL		enabled_;
 }
 
-/** creates a CCMenu with its items */
+/** conforms to CCRGBAProtocol protocol */
+@property (nonatomic,readonly) GLubyte opacity;
+/** conforms to CCRGBAProtocol protocol */
+@property (nonatomic,readonly) ccColor3B color;
+/** whether or not the menu will receive events */
+@property (nonatomic, readwrite) BOOL enabled;
+
+/** creates a CCMenu with CCMenuItem objects */
 + (id) menuWithItems: (CCMenuItem*) item, ... NS_REQUIRES_NIL_TERMINATION;
 
-/** initializes a CCMenu with its items */
-- (id) initWithItems: (CCMenuItem*) item vaList: (va_list) args;
+/** creates a CCMenu with CCMenuItem objects */
++ (id) menuWithItems: (CCMenuItem*) firstItem vaList: (va_list) args;
+
+/** creates a CCMenu with a NSArray of CCMenuItem objects */
++ (id) menuWithArray:(NSArray*)arrayOfItems;
+
+/** initializes a CCMenu with a NSArray of CCMenuItem objects */
+- (id) initWithArray:(NSArray*)arrayOfItems;
 
 /** align items vertically */
 -(void) alignItemsVertically;
@@ -75,19 +86,17 @@ enum {
  */
 -(void) alignItemsHorizontallyWithPadding: (float) padding;
 
-
 /** align items in rows of columns */
 -(void) alignItemsInColumns: (NSNumber *) columns, ... NS_REQUIRES_NIL_TERMINATION;
 -(void) alignItemsInColumns: (NSNumber *) columns vaList: (va_list) args;
+-(void) alignItemsInColumnsWithArray:(NSArray*) arrayOfNumbers;
 
 /** align items in columns of rows */
 -(void) alignItemsInRows: (NSNumber *) rows, ... NS_REQUIRES_NIL_TERMINATION;
 -(void) alignItemsInRows: (NSNumber *) rows vaList: (va_list) args;
+-(void) alignItemsInRowsWithArray: (NSArray*) arrayOfNumbers;
 
-
-/** conforms to CCRGBAProtocol protocol */
-@property (nonatomic,readonly) GLubyte opacity;
-/** conforms to CCRGBAProtocol protocol */
-@property (nonatomic,readonly) ccColor3B color;
+/** set event handler priority. By default it is: kCCMenuTouchPriority */
+-(void) setHandlerPriority:(NSInteger)newPriority;
 
 @end

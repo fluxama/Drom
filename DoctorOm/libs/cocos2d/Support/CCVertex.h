@@ -27,9 +27,9 @@
 /** @file CCVertex.h */
 
 /** converts a line to a polygon */
-void ccVertexLineToPolygon(CGPoint *points, float stroke, ccVertex2F *vertices, ccTex2F *texCoords, NSUInteger offset, NSUInteger nuPoints);
+void ccVertexLineToPolygon(CGPoint *points, float stroke, ccVertex2F *vertices, NSUInteger offset, NSUInteger nuPoints);
 
-/** returns wheter or not the line intersects */
+/** returns whether or not the line intersects */
 BOOL ccVertexLineIntersect(float Ax, float Ay,
                              float Bx, float By,
                              float Cx, float Cy,

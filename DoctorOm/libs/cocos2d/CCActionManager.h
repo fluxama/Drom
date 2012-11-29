@@ -32,8 +32,6 @@
 #import "Support/ccCArray.h"
 #import "Support/uthash.h"
 
-#define kCCActionManagerPriority 0
-
 typedef struct _hashElement
 {
 	struct ccArray	*actions;
@@ -49,7 +47,7 @@ typedef struct _hashElement
 
 /** CCActionManager the object that manages all the actions.
  Normally you won't need to use this API directly. 99% of the cases you will use the CCNode interface, which uses this object.
- But there are some cases where you might need to use this API dirctly:
+ But there are some cases where you might need to use this API directly:
  Examples:
 	- When you want to run an action where the target is different from a CCNode.
 	- When you want to pause / resume the actions
@@ -72,7 +70,7 @@ typedef struct _hashElement
  When the target is paused, the queued actions won't be 'ticked'.
  */
 -(void) addAction: (CCAction*) action target:(id)target paused:(BOOL)paused;
-/** Removes all actions from all the targers.
+/** Removes all actions from all the targets.
  */
 -(void) removeAllActions;
 
@@ -102,6 +100,14 @@ typedef struct _hashElement
 /** Resumes the target. All queued actions will be resumed.
  */
 -(void) resumeTarget:(id)target;
+
+/** Pauses all running actions, returning a list of targets whose actions were paused.
+ */
+-(NSSet *) pauseAllRunningActions;
+
+/** Resume a set of targets (convenience function to reverse a pauseAllRunningActions call)
+ */
+-(void) resumeTargets:(NSSet *)targetsToResume;
 
 @end
 

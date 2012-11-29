@@ -29,7 +29,7 @@
 #import "ccTypes.h"
 #import "CCProtocols.h"
 #import "ccConfig.h"
-#import "ccGLState.h"
+#import "ccGLStateCache.h"
 #import "Support/CCArray.h"
 #import "kazmath/kazmath.h"
 
@@ -90,7 +90,7 @@ enum {
 
  Order in transformations with grid enabled
  -# The node will be translated (position)
- -# The node will be rotated (rotation)
+ -# The node will be rotated (rotation, rotationX, rotationY)
  -# The node will be skewed (skewX, skewY)
  -# The node will be scaled (scale, scaleX, scaleY)
  -# The grid will capture the screen
@@ -103,7 +103,7 @@ enum {
 @interface CCNode : NSObject
 {
 	// rotation angle
-	float rotation_;
+	float rotationX_, rotationY_;
 
 	// scaling factors
 	float scaleX_, scaleY_;
@@ -140,7 +140,7 @@ enum {
 	// array of children
 	CCArray *children_;
 
-	// weakref to parent
+	// weak ref to parent
 	CCNode *parent_;
 
 	// a tag. any number you want to assign to the node
@@ -148,6 +148,7 @@ enum {
 
 	// user data field
 	void *userData_;
+	id userObject_;
 
 	// Shader
 	CCGLProgram	*shaderProgram_;
@@ -165,24 +166,22 @@ enum {
 	CCActionManager	*actionManager_;
 
 	// Is running
-	BOOL isRunning_:1;
+	BOOL isRunning_;
 
-	// To reduce memory, place BOOLs that are not properties here:
-	BOOL isTransformDirty_:1;
-	BOOL isInverseDirty_:1;
+	BOOL isTransformDirty_;
+	BOOL isInverseDirty_;
 
 	// is visible
-	BOOL visible_:1;
-	// If YES the transformtions will be relative to (-transform.x, -transform.y).
-	// Sprites, Labels and any other "small" object uses it.
-	// Scenes, Layers and other "whole screen" object don't use it.
-	BOOL isRelativeAnchorPoint_:1;
+	BOOL visible_;
+	// If YES, the Anchor Point will be (0,0) when you position the CCNode.
+	// Used by CCLayer and CCScene
+	BOOL ignoreAnchorPointForPosition_;
 
-	BOOL isReorderChildDirty_:1;
+	BOOL isReorderChildDirty_;	
 }
 
 /** The z order of the node relative to its "siblings": children of the same parent */
-@property(nonatomic,readonly) NSInteger zOrder;
+@property(nonatomic,assign) NSInteger zOrder;
 /** The real openGL Z vertex.
  Differences between openGL Z vertex and cocos2d Z order:
    - OpenGL Z modifies the Z vertex, and not the Z order in the relation between parent-children
@@ -208,6 +207,11 @@ enum {
 @property(nonatomic,readwrite,assign) float skewY;
 /** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node CW. */
 @property(nonatomic,readwrite,assign) float rotation;
+/** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node CW. It only modifies the X rotation performing a horizontal rotational skew . */
+@property(nonatomic,readwrite,assign) float rotationX;
+/** The rotation (angle) of the node in degrees. 0 is the default rotation angle. Positive values rotate node CW. It only modifies the Y rotation performing a vertical rotational skew . */
+@property(nonatomic,readwrite,assign) float rotationY;
+
 /** The scale factor of the node. 1.0 is the default scale factor. It modifies the X and Y scale at the same time. */
 @property(nonatomic,readwrite,assign) float scale;
 /** The scale factor of the node. 1.0 is the default scale factor. It only modifies the X scale factor. */
@@ -248,15 +252,17 @@ enum {
 @property(nonatomic,readonly) BOOL isRunning;
 /** A weak reference to the parent */
 @property(nonatomic,readwrite,assign) CCNode* parent;
-/** If YES the transformtions will be relative to its anchor point.
- * Sprites, Labels and any other sizeble object use it have it enabled by default.
- * Scenes, Layers and other "whole screen" object don't use it, have it disabled by default.
+/**  If YES, the Anchor Point will be (0,0) when you position the CCNode.
+ Used by CCLayer and CCScene.
  */
-@property(nonatomic,readwrite,assign) BOOL isRelativeAnchorPoint;
+@property(nonatomic,readwrite,assign) BOOL ignoreAnchorPointForPosition;
 /** A tag used to identify the node easily */
 @property(nonatomic,readwrite,assign) NSInteger tag;
 /** A custom user data pointer */
-@property(nonatomic,readwrite,assign) void *userData;
+@property(nonatomic,readwrite,assign) void* userData;
+/** Similar to userData, but instead of holding a void* it holds an id */
+@property(nonatomic,readwrite,retain) id userObject;
+
 /** Shader Program
  @since v2.0
  */
@@ -291,7 +297,7 @@ enum {
 -(id) init;
 
 
-// scene managment
+// scene management
 
 /** Event that is called every time the CCNode enters the 'stage'.
  If the CCNode enters the 'stage' with a transition, this event is called when the transition starts.
@@ -453,7 +459,7 @@ enum {
 
 /** schedules the "update" method. It will use the order number 0. This method will be called every frame.
  Scheduled methods with a lower order value will be called before the ones that have a higher order value.
- Only one "udpate" method could be scheduled per node.
+ Only one "update" method could be scheduled per node.
 
  @since v0.99.3
  */
@@ -461,7 +467,7 @@ enum {
 
 /** schedules the "update" selector with a custom priority. This selector will be called every frame.
  Scheduled selectors with a lower priority will be called before the ones that have a higher value.
- Only one "udpate" selector could be scheduled per node (You can't have 2 'update' selectors).
+ Only one "update" selector could be scheduled per node (You can't have 2 'update' selectors).
 
  @since v0.99.3
  */
@@ -472,7 +478,6 @@ enum {
  @since v0.99.3
  */
 -(void) unscheduleUpdate;
-
 
 /** schedules a selector.
  The scheduled selector will be ticked every frame
@@ -514,6 +519,9 @@ enum {
  */
 -(void) pauseSchedulerAndActions;
 
+/* Update will be called automatically every frame if "scheduleUpdate" is called, and the node is "live"
+ */
+-(void) update:(ccTime)delta;
 
 // transformation methods
 
@@ -527,7 +535,7 @@ enum {
  @since v0.7.1
  */
 - (CGAffineTransform)parentToNodeTransform;
-/** Retrusn the world affine transform matrix. The matrix is in Pixels.
+/** Returns the world affine transform matrix. The matrix is in Pixels.
  @since v0.7.1
  */
 - (CGAffineTransform)nodeToWorldTransform;

@@ -30,8 +30,8 @@
 
 /** A class that implements a Texture Atlas.
  Supported features:
-   * The atlas file can be a PVRTC, PNG or any other fomrat supported by Texture2D
-   * Quads can be udpated in runtime
+   * The atlas file can be a PVRTC, PNG or any other format supported by Texture2D
+   * Quads can be updated in runtime
    * Quads can be added in runtime
    * Quads can be removed in runtime
    * Quads can be re-ordered in runtime
@@ -47,9 +47,13 @@
 	ccV3F_C4B_T2F_Quad	*quads_;	// quads to be rendered
 	GLushort			*indices_;
 	CCTexture2D			*texture_;
-	GLuint				VAOname_;
+	
 	GLuint				buffersVBO_[2]; //0: vertex  1: indices
-	BOOL				dirty_; //indicates whether or not the array buffer of the VBO needs to be updated
+	BOOL				dirty_;			//indicates whether or not the array buffer of the VBO needs to be updated
+
+#if CC_TEXTURE_ATLAS_USE_VAO
+	GLuint				VAOname_;
+#endif
 }
 
 /** quantity of quads that are going to be drawn */

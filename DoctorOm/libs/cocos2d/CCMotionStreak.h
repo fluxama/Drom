@@ -44,6 +44,7 @@
 
     NSUInteger maxPoints_;
     NSUInteger nuPoints_;
+	NSUInteger previousNuPoints_;
 
     /** Pointers */
     CGPoint *pointVertexes_;
@@ -55,11 +56,13 @@
     ccTex2F *texCoords_;
 
     BOOL	fastMode_;
+	
+	BOOL	startingPositionInitialized_;
 }
 /** blending function */
 @property (nonatomic, readwrite, assign) ccBlendFunc blendFunc;
 
-/** When fast mode is enbled, new points are added faster but with lower precision */
+/** When fast mode is enabled, new points are added faster but with lower precision */
 @property (nonatomic, readwrite, assign, getter = isFastMode) BOOL fastMode;
 
 /** texture used for the motion streak */

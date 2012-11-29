@@ -43,15 +43,15 @@ enum {
 	kDefaultPadding =  5,
 };
 
+#pragma mark - CCMenu
+
 @implementation CCMenu
 
-@synthesize opacity = opacity_, color = color_;
+@synthesize opacity = opacity_, color = color_, enabled=enabled_;
 
-- (id) init
++(id) menuWithArray:(NSArray *)arrayOfItems
 {
-	NSAssert(NO, @"CCMenu: Init not supported.");
-	[self release];
-	return nil;
+	return [[[self alloc] initWithArray:arrayOfItems] autorelease];
 }
 
 +(id) menuWithItems: (CCMenuItem*) item, ...
@@ -59,29 +59,51 @@ enum {
 	va_list args;
 	va_start(args,item);
 
-	id s = [[[self alloc] initWithItems: item vaList:args] autorelease];
+	id ret = [self menuWithItems:item vaList:args];
 
 	va_end(args);
-	return s;
+	
+	return ret;
 }
 
--(id) initWithItems: (CCMenuItem*) item vaList: (va_list) args
++(id) menuWithItems: (CCMenuItem*) item vaList: (va_list) args
+{
+	NSMutableArray *array = nil;
+	if( item ) {
+		array = [NSMutableArray arrayWithObject:item];
+		CCMenuItem *i = va_arg(args, CCMenuItem*);
+		while(i) {
+			[array addObject:i];
+			i = va_arg(args, CCMenuItem*);
+		}
+	}
+	
+	return [[[self alloc] initWithArray:array] autorelease];
+}
+
+-(id) init
+{
+	return [self initWithArray:nil];
+}
+
+
+-(id) initWithArray:(NSArray *)arrayOfItems
 {
 	if( (self=[super init]) ) {
-
 #ifdef __CC_PLATFORM_IOS
 		self.isTouchEnabled = YES;
 #elif defined(__CC_PLATFORM_MAC)
 		self.isMouseEnabled = YES;
 #endif
-
-		// menu in the center of the screen
+		enabled_ = YES;
+		
+		// by default, menu in the center of the screen
 		CGSize s = [[CCDirector sharedDirector] winSize];
-
-		self.isRelativeAnchorPoint = NO;
+		
+		self.ignoreAnchorPointForPosition = YES;
 		anchorPoint_ = ccp(0.5f, 0.5f);
 		[self setContentSize:s];
-
+		
 		// XXX: in v0.7, winSize should return the visible size
 		// XXX: so the bar calculation should be done there
 #ifdef __CC_PLATFORM_IOS
@@ -89,24 +111,20 @@ enum {
 		s.height -= r.size.height;
 #endif
 		self.position = ccp(s.width/2, s.height/2);
-
+		
 		int z=0;
-
-		if (item) {
+		
+		for( CCMenuItem *item in arrayOfItems) {
 			[self addChild: item z:z];
-			CCMenuItem *i = va_arg(args, CCMenuItem*);
-			while(i) {
-				z++;
-				[self addChild: i z:z];
-				i = va_arg(args, CCMenuItem*);
-			}
+			z++;
 		}
-	//	[self alignItemsVertically];
 
+//		[self alignItemsVertically];
+		
 		selectedItem_ = nil;
 		state_ = kCCMenuStateWaiting;
 	}
-
+	
 	return self;
 }
 
@@ -135,13 +153,28 @@ enum {
 	[super onExit];
 }
 
-#pragma mark Menu - Touches
+#pragma mark Menu - Events
+
+-(void) setHandlerPriority:(NSInteger)newPriority
+{
+#ifdef __CC_PLATFORM_IOS
+	CCTouchDispatcher *dispatcher = [[CCDirector sharedDirector] touchDispatcher];
+	[dispatcher setPriority:newPriority forDelegate:self];
+
+#elif defined(__CC_PLATFORM_MAC)
+	CCEventDispatcher *dispatcher = [[CCDirector sharedDirector] eventDispatcher];
+	[dispatcher removeMouseDelegate:self];
+	[dispatcher addMouseDelegate:self priority:newPriority];
+#endif
+}
+
+#pragma mark Menu - Events Touches
 
 #ifdef __CC_PLATFORM_IOS
 -(void) registerWithTouchDispatcher
 {
 	CCDirector *director = [CCDirector sharedDirector];
-	[[director touchDispatcher] addTargetedDelegate:self priority:kCCMenuTouchPriority swallowsTouches:YES];
+	[[director touchDispatcher] addTargetedDelegate:self priority:kCCMenuHandlerPriority swallowsTouches:YES];
 }
 
 -(CCMenuItem *) itemForTouch: (UITouch *) touch
@@ -167,7 +200,7 @@ enum {
 
 -(BOOL) ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-	if( state_ != kCCMenuStateWaiting || !visible_ )
+	if( state_ != kCCMenuStateWaiting || !visible_ || ! enabled_)
 		return NO;
 
 	for( CCNode *c = self.parent; c != nil; c = c.parent )
@@ -216,13 +249,13 @@ enum {
 	}
 }
 
-#pragma mark Menu - Mouse
+#pragma mark Menu - Events Mouse
 
 #elif defined(__CC_PLATFORM_MAC)
 
 -(NSInteger) mouseDelegatePriority
 {
-	return kCCMenuMousePriority+1;
+	return kCCMenuHandlerPriority+1;
 }
 
 -(CCMenuItem *) itemForMouseEvent: (NSEvent *) event
@@ -248,7 +281,7 @@ enum {
 
 -(BOOL) ccMouseUp:(NSEvent *)event
 {
-	if( ! visible_ )
+	if( ! visible_ || ! enabled_)
 		return NO;
 
 	if(state_ == kCCMenuStateTrackingTouch) {
@@ -265,7 +298,7 @@ enum {
 
 -(BOOL) ccMouseDown:(NSEvent *)event
 {
-	if( ! visible_ )
+	if( ! visible_ || ! enabled_)
 		return NO;
 
 	selectedItem_ = [self itemForMouseEvent:event];
@@ -281,7 +314,7 @@ enum {
 
 -(BOOL) ccMouseDragged:(NSEvent *)event
 {
-	if( ! visible_ )
+	if( ! visible_ || ! enabled_)
 		return NO;
 
 	if(state_ == kCCMenuStateTrackingTouch) {
@@ -363,30 +396,37 @@ enum {
 		columns = va_arg(args, NSNumber*);
 	}
 
+	[self alignItemsInColumnsWithArray:rows];
+	
+	[rows release];
+}
+
+-(void) alignItemsInColumnsWithArray:(NSArray*) rows
+{	
 	int height = -5;
     NSUInteger row = 0, rowHeight = 0, columnsOccupied = 0, rowColumns;
 	CCMenuItem *item;
 	CCARRAY_FOREACH(children_, item){
 		NSAssert( row < [rows count], @"Too many menu items for the amount of rows/columns.");
-
+		
 		rowColumns = [(NSNumber *) [rows objectAtIndex:row] unsignedIntegerValue];
 		NSAssert( rowColumns, @"Can't have zero columns on a row");
-
+		
 		rowHeight = fmaxf(rowHeight, item.contentSize.height);
 		++columnsOccupied;
-
+		
 		if(columnsOccupied >= rowColumns) {
 			height += rowHeight + 5;
-
+			
 			columnsOccupied = 0;
 			rowHeight = 0;
 			++row;
 		}
 	}
 	NSAssert( !columnsOccupied, @"Too many rows/columns for available menu items." );
-
+	
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
-
+	
 	row = 0; rowHeight = 0; rowColumns = 0;
 	float w, x, y = height / 2;
 	CCARRAY_FOREACH(children_, item) {
@@ -395,26 +435,24 @@ enum {
 			w = winSize.width / (1 + rowColumns);
 			x = w;
 		}
-
+		
 		CGSize itemSize = item.contentSize;
 		rowHeight = fmaxf(rowHeight, itemSize.height);
 		[item setPosition:ccp(x - winSize.width / 2,
 							  y - itemSize.height / 2)];
-
+		
 		x += w;
 		++columnsOccupied;
-
+		
 		if(columnsOccupied >= rowColumns) {
 			y -= rowHeight + 5;
-
+			
 			columnsOccupied = 0;
 			rowColumns = 0;
 			rowHeight = 0;
 			++row;
 		}
 	}
-
-	[rows release];
 }
 
 -(void) alignItemsInRows: (NSNumber *) rows, ...
@@ -436,28 +474,35 @@ enum {
 		rows = va_arg(args, NSNumber*);
 	}
 
+	[self alignItemsInRowsWithArray:columns];
+	
+	[columns release];
+}
+
+-(void) alignItemsInRowsWithArray:(NSArray*) columns
+{
 	NSMutableArray *columnWidths = [[NSMutableArray alloc] init];
 	NSMutableArray *columnHeights = [[NSMutableArray alloc] init];
-
+	
 	int width = -10, columnHeight = -5;
 	NSUInteger column = 0, columnWidth = 0, rowsOccupied = 0, columnRows;
 	CCMenuItem *item;
 	CCARRAY_FOREACH(children_, item){
 		NSAssert( column < [columns count], @"Too many menu items for the amount of rows/columns.");
-
+		
 		columnRows = [(NSNumber *) [columns objectAtIndex:column] unsignedIntegerValue];
 		NSAssert( columnRows, @"Can't have zero rows on a column");
-
+		
 		CGSize itemSize = item.contentSize;
 		columnWidth = fmaxf(columnWidth, itemSize.width);
 		columnHeight += itemSize.height + 5;
 		++rowsOccupied;
-
+		
 		if(rowsOccupied >= columnRows) {
 			[columnWidths addObject:[NSNumber numberWithUnsignedInteger:columnWidth]];
 			[columnHeights addObject:[NSNumber numberWithUnsignedInteger:columnHeight]];
 			width += columnWidth + 10;
-
+			
 			rowsOccupied = 0;
 			columnWidth = 0;
 			columnHeight = -5;
@@ -465,29 +510,29 @@ enum {
 		}
 	}
 	NSAssert( !rowsOccupied, @"Too many rows/columns for available menu items.");
-
+	
 	CGSize winSize = [[CCDirector sharedDirector] winSize];
-
+	
 	column = 0; columnWidth = 0; columnRows = 0;
 	float x = -width / 2, y;
-
+	
 	CCARRAY_FOREACH(children_, item){
 		if(columnRows == 0) {
 			columnRows = [(NSNumber *) [columns objectAtIndex:column] unsignedIntegerValue];
 			y = ([(NSNumber *) [columnHeights objectAtIndex:column] intValue] + winSize.height) / 2;
 		}
-
+		
 		CGSize itemSize = item.contentSize;
 		columnWidth = fmaxf(columnWidth, itemSize.width);
 		[item setPosition:ccp(x + [(NSNumber *) [columnWidths objectAtIndex:column] unsignedIntegerValue] / 2,
 							  y - winSize.height / 2)];
-
+		
 		y -= itemSize.height + 10;
 		++rowsOccupied;
-
+		
 		if(rowsOccupied >= columnRows) {
 			x += columnWidth + 5;
-
+			
 			rowsOccupied = 0;
 			columnRows = 0;
 			columnWidth = 0;
@@ -495,7 +540,6 @@ enum {
 		}
 	}
 
-	[columns release];
 	[columnWidths release];
 	[columnHeights release];
 }
