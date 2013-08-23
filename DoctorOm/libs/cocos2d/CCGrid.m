@@ -280,7 +280,7 @@
 
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
 	[shaderProgram_ use];
-	[shaderProgram_ setUniformsForBuiltins];
+	[shaderProgram_ setUniformForModelViewProjectionMatrix];
 
 	//
 	// Attributes
@@ -431,7 +431,7 @@
 	NSInteger n = gridSize_.x * gridSize_.y;
 
 	[shaderProgram_ use];
-	[shaderProgram_ setUniformsForBuiltins];
+	[shaderProgram_ setUniformForModelViewProjectionMatrix];
 
 
 	//

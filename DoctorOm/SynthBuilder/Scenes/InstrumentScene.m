@@ -17,6 +17,7 @@
 #import "Instrument.h"
 #import "Sequence.h"
 #import "Pot.h"
+#import "PGMidi.h"
 
 #define NUM_STEPS 16
 #define BASEBEATS 10.0f
@@ -28,12 +29,33 @@
 -(id) init {
     self = [super init];
     if (self != nil) {
-	    layer = [InstrumentLayer node];
+        
+        midi=[[PGMidi alloc]init];
+        [midi setNetworkEnabled:YES];
+        [midi setVirtualDestinationEnabled:NO];
+        [midi.virtualDestinationSource addDelegate:self];
+        
+        //midi setup
+        midi.delegate=self;
+        if([midi.sources count]>0){
+            if([midi.sources count] == 2){
+              [self setMidiSourceIndex:1];
+            } else {
+              [self setMidiSourceIndex:0];
+            }
+        }
+       // if([midi.destinations count]>0){
+       //     [self setMidiDestinationIndex:0];//connect to first device in MIDI source list
+       // }
+
+        layer = [InstrumentLayer node];
         [self addChild:layer z:1 ]; 
 		instrument_name = [NSString alloc];
         nav_menu = [NavMenu node];
-        if (IS_IPAD()) {
+        if (IS_IPAD) {
             [nav_menu setPosition:ccp(933, 25)];
+        } else if (IS_IPHONE_5) {
+            [nav_menu setPosition:ccp(498, 15)];
         } else {
             [nav_menu setPosition:ccp(410, 15)];
         }
@@ -104,14 +126,15 @@
                                            selector:@selector(toggleInfo:)];
         [exitButtonMenu addChild:exitInfoButton];
         [exitButtonMenu alignItemsHorizontallyWithPadding:0];
-        if (IS_IPAD()) {
-            [exitButtonMenu setPosition:ccp(1000, 25)]; 
+        if (IS_IPAD) {
+            [exitButtonMenu setPosition:ccp(1000, 25)];
+        } else if (IS_IPHONE_5) {
+            [exitButtonMenu setPosition:ccp(551, 15)];
         } else {
 		    [exitButtonMenu setPosition:ccp(463, 15)];
         }
         [self addChild:exitButtonMenu z:150];
         //[infoLayer addChild:exitButtonMenu z:151];
-        
         
     }
     return self;
@@ -120,7 +143,8 @@
 -(void) loadInstrument {
     [layer loadInstrument:instrument_name];
     CCSprite *background = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@.png",instrument_name]];
-    [background setAnchorPoint:ccp(0.0f, 0.0f)];
+    [background setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
+    
     [layer addChild:background z:-10];
 }
 
@@ -167,6 +191,132 @@
     //layer = nil;
 	[super dealloc];
 }
+
+-(PGMidi*) midi{
+    return midi;
+}
+
+//==== pgmidi delegate methods
+- (void) midi:(PGMidi*)midi sourceAdded:(PGMidiSource *)source
+{
+    printf("\nmidi source added");
+    
+}
+
+- (void) midi:(PGMidi*)midi sourceRemoved:(PGMidiSource *)source{
+}
+
+
+- (void) midi:(PGMidi*)midi destinationAdded:(PGMidiDestination *)destination{
+    NSLog(@"added %@", destination.name);
+}
+
+- (void) midi:(PGMidi*)midi destinationRemoved:(PGMidiDestination *)destination{
+    NSLog(@"removed %@", destination.name);
+}
+
+
+-(NSMutableArray*)midiSourcesArray{//of PGMIDIConnection, get name connection.name
+	return midi.sources;
+}
+
+-(void)setMidiSourceIndex:(int)inIndex{
+	currMidiSourceIndex=inIndex;
+	[currMidiSource removeDelegate:self];
+    currMidiSource = [midi.sources objectAtIndex:inIndex];
+	[currMidiSource addDelegate:self];
+    NSLog(@"set MidiSourceIndex to %d, %@", inIndex, currMidiSource.name);
+}
+
+-(void)setMidiDestinationIndex:(int)inIndex{
+    currMidiDestinationIndex = inIndex;
+    //[currMidiDestination]
+    currMidiDestination=[midi.destinations objectAtIndex:inIndex];
+    NSLog(@"set MidiDestinationIndex to %d, %@", inIndex, currMidiDestination.name);
+}
+
+
+#if TARGET_CPU_ARM
+// MIDIPacket must be 4-byte aligned
+#define MyMIDIPacketNext(pkt)	((MIDIPacket *)(((uintptr_t)(&(pkt)->data[(pkt)->length]) + 3) & ~3))
+#else
+#define MyMIDIPacketNext(pkt)	((MIDIPacket *)&(pkt)->data[(pkt)->length])
+#endif
+
+- (void) midiSource:(PGMidiSource*)midi midiReceived:(const MIDIPacketList *)packetList{
+    
+    const MIDIPacket *packet = &packetList->packet[0];
+	
+    for (int i = 0; i < packetList->numPackets; ++i){
+		//chop packets into messages, there could be more than one!
+		
+		int messageLength;//2 or 3
+		/*Byte**/ const unsigned char* statusByte=nil;
+		for(int i=0;i<packet->length;i++){//step throguh each byte, i
+			if(((packet->data[i] >>7) & 0x01) ==1){//if a newstatus byte
+				//send existing
+				if(statusByte!=nil)[self performSelectorOnMainThread:@selector(parseMessageData:) withObject:[NSData dataWithBytes:statusByte length:messageLength] waitUntilDone:NO];
+				messageLength=0;
+				//now point to new start
+				statusByte=&packet->data[i];
+			}
+			messageLength++;
+		}
+		//send what is left
+		[self performSelectorOnMainThread:@selector(parseMessageData:) withObject:[NSData dataWithBytes:statusByte length:messageLength] waitUntilDone:NO];
+        
+        packet = MyMIDIPacketNext(packet);
+    }
+	
+}
+
+//take messageData, derive the MIDI message type, and send it into PD to be picked up by PD's midi objects
+-(void)parseMessageData:(NSData*)messageData{//2 or 3 bytes
+	
+	
+	Byte* bytePtr = ((Byte*)([messageData bytes]));
+	char type = ( bytePtr[0] >> 4) & 0x07 ;//remove leading 1 bit 0-7
+	char channel = (bytePtr[0] & 0x0F);
+    
+    for(int i=0;i<[messageData length];i++)
+        [PdBase sendMidiByte:currMidiSourceIndex byte:(int)bytePtr[i]];
+	
+	
+    switch (type) {
+        case 0://noteoff
+            [PdBase sendNoteOn:(int)channel pitch:(int)bytePtr[1] velocity:0];
+            break;
+        case 1://noteon
+            [PdBase sendNoteOn:(int)channel pitch:(int)bytePtr[1] velocity:(int)bytePtr[2]];
+            break;
+        case 2://poly aftertouch
+            [PdBase sendPolyAftertouch:(int)channel pitch:(int)bytePtr[1] value:(int)bytePtr[2]];
+            break;
+        case 3://CC
+            [PdBase sendControlChange:(int)channel controller:(int)bytePtr[1] value:(int)bytePtr[2]];
+            break;
+        case 4://prgm change
+            [PdBase sendProgramChange:(int)channel value:(int)bytePtr[1]];
+            break;
+        case 5://aftertouch
+            [PdBase sendAftertouch:(int)channel value:(int)bytePtr[1]];
+            break;
+        case 6://pitch bend - lsb, msb
+        {
+            int bendValue;
+            if([messageData length]==3)
+                bendValue= (bytePtr[1] | bytePtr[2]<<7) -8192;
+            else //2
+                bendValue=(bytePtr[1] | bytePtr[1]<<7)-8192;
+            [PdBase sendPitchBend:(int)channel value:bendValue];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 @end
 
@@ -274,8 +424,10 @@ int selectedControl;
     //[LEDLayer setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
     [LEDLayer setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_COLOR }];
     
-    if (IS_IPAD()) {
-        LEDLayer.position = ccp(512, 548); 
+    if (IS_IPAD) {
+        LEDLayer.position = ccp(512, 548);
+    } else if (IS_IPHONE_5) {
+        LEDLayer.position = ccp(284,236);
     } else {
         LEDLayer.position = ccp(240,236);
     }
@@ -295,10 +447,12 @@ int selectedControl;
                                        selector:@selector(toggleHelp:)];
     
     [helpMenu addChild:exitHelpButton];
-    if (IS_IPAD()) {
+    if (IS_IPAD) {
         [helpMenu setPosition:ccp(1000, 25)]; 
+    } else if (IS_IPHONE_5) {
+        [helpMenu setPosition:ccp(551, 15)];
     } else {
-        [helpMenu setPosition:ccp(465, 15)];
+        [helpMenu setPosition:ccp(463, 15)];
     }
     [helpMenu setVisible:false];
     [self addChild:helpMenu z:200];
@@ -329,11 +483,14 @@ int selectedControl;
 
 -(void) setMasterVolumeOn {
     instrumentOn = YES;
+    [(AppController*)[[UIApplication sharedApplication] delegate] turnOnSound];
+    soundOn = 1;
     [PdBase sendFloat:masterVolume toReceiver:@"masterVolume"];
 }
 
 -(void) setMasterVolumeOff {
     instrumentOn = NO;
+    soundOn = 0;
     [PdBase sendFloat:0 toReceiver:@"masterVolume"];
 }
 
@@ -364,7 +521,6 @@ int selectedControl;
                         [c sendControlValues]; 
                     } else {
                         if (instrumentOn) {
-                            
                             [c sendControlValues]; 
                         }
                     }
@@ -378,7 +534,6 @@ int selectedControl;
             }
         }
     }
-    
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

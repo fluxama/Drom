@@ -20,8 +20,8 @@
     if (self != nil) {
         CCSprite * bg = [CCSprite spriteWithFile:@"MenuBackground.png"];
         [bg setPosition:ccp(SCREEN_CENTER_X, SCREEN_CENTER_Y)];
-        if (IS_IPAD()) {
-            bg.scale = 2.5; 
+        if (IS_IPAD) {
+            bg.scale = 2.5;
         }
         [self addChild:bg z:0];
         
@@ -60,6 +60,8 @@ bool waitForMoveTo;
 - (id) init {
     self = [super init];
     if (self != nil) {
+        
+        soundOn = 0;
         
 		NSString *errorDesc = nil;
         NSPropertyListFormat format;
@@ -100,7 +102,7 @@ bool waitForMoveTo;
             [selectedItem setVisible:NO];
             [selectedMenuItems insertObject:selectedItem atIndex:i];
             
-            if (IS_IPAD()) {
+            if (IS_IPAD) {
                 HALF_DROP_SHADOW_W = 7*IPAD_MULT;
             } else {
                 HALF_DROP_SHADOW_W = 7;

@@ -16,11 +16,12 @@
 #import "PdAudioController.h"
 #import "NavMenu.h"
 #import "HelpLayer.h"
+#import "PGMidi.h"
 
 @class InstrumentLayer;
 
-// Instrument Layer
-@interface InstrumentScene : CCScene
+// Instrument Scene
+@interface InstrumentScene : CCScene<PGMidiDelegate, PGMidiSourceDelegate>
 {
 	NSString *instrument_name;
 	InstrumentLayer *layer;
@@ -29,6 +30,13 @@
     CCMenu *infoMenu2;
     CCMenu *exitButtonMenu;
     NavMenu *nav_menu;
+    
+    //midi
+    PGMidi *midi;
+    PGMidiSource *currMidiSource;
+    int currMidiSourceIndex;
+    PGMidiDestination *currMidiDestination;
+    int currMidiDestinationIndex;
 }
 
 -(void) loadInstrument;
@@ -68,7 +76,8 @@
     float masterVolume;
     bool instrumentOn;
     NSString *masterVolumeInput;
-}   
+    
+}
 
 - (void) loadInstrument: (NSString *) name;
 - (void) setMasterVolumeOn;

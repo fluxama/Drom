@@ -49,7 +49,7 @@
 	/// info about the map file
 	tImageTGA		*tgaInfo;
 
-	/// x,y to altas dictionary
+	/// x,y to altas dicctionary
 	NSMutableDictionary	*posToAtlasIndex;
 
 	/// numbers of tiles to render

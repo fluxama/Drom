@@ -15,12 +15,14 @@
 
 @synthesize window=window_, navController=navController_, director=director_;
 @synthesize audioController = _audioController;
+@synthesize audiobusController = _audiobusController;
+@synthesize audiobusAudioUnitWrapper = _audiobusAudioUnitWrapper;
 
 void moog_tilde_setup();    
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if (IS_IPAD()) {
+    if (IS_IPAD) {
         THUMBW = 768;
         THUMBH = 512;
         PADW = 40;
@@ -30,6 +32,16 @@ void moog_tilde_setup();
         ABOUT_IMAGE_WIDTH = 1000;
         HELP_SCREEN_H = 1394;
         INFO_ICON_H = 181;
+    } else if (IS_IPHONE_5) {
+        THUMBW = 360;
+        THUMBH = 240;
+        PADW = 20;
+        SCREEN_CENTER_X = 284;
+        SCREEN_CENTER_Y = 160;
+        BUTTON_Y = 30;
+        ABOUT_IMAGE_WIDTH = 1000;
+        HELP_SCREEN_H = 654;
+        INFO_ICON_H = 86;
     } else {
         THUMBW = 360;
         THUMBH = 240;
@@ -63,8 +75,11 @@ void moog_tilde_setup();
     
 	director_.wantsFullScreenLayout = YES;
     
+    // enable multi touch
+    [glView setMultipleTouchEnabled:YES];
+    
 	// Display FSP and SPF
-	[director_ setDisplayStats:YES];
+	[director_ setDisplayStats:NO];
     
 	// set FPS at 60
 	[director_ setAnimationInterval:1.0/60];
@@ -116,9 +131,9 @@ void moog_tilde_setup();
     //                                          numberChannels:2
     //                                           mixingEnabled:YES] != PdAudioOK) {
     if ([self.audioController configurePlaybackWithSampleRate:44100
-                                               numberChannels:2
-                                                 inputEnabled:NO
-                                                mixingEnabled:YES] != PdAudioOK) {
+                                            numberChannels:2
+                                                inputEnabled:NO
+                                               mixingEnabled:YES] != PdAudioOK) {
         NSLog(@"failed to initialize audio components");
     }
     
@@ -132,7 +147,25 @@ void moog_tilde_setup();
     
     self.audioController.active = YES;
     
+    // Turn on Audiobus support
+    self.audiobusController = [[[ABAudiobusController alloc]
+                                initWithAppLaunchURL:[NSURL URLWithString:@"drom.audiobus://"]
+                                apiKey:@"MCoqKkRST00qKipkcm9tLmF1ZGlvYnVzOi8v:EQ+t3KKigiYiCJ3SuGAxBHfSc4e0fnskT48GwZFnZGFBTBc/UOQUCuv/OM6Ucpp9tDkNlB58Zc2p9iLzTieYUqPXG4tck6csicnjyYZN+Sy1PTLsrSw5zqHF++gBKRpA"]
+                               autorelease];
+    // May need this if menus collide:
+    //self.audiobusController.connectionPanelPosition = ABAudiobusConnectionPanelPositionLeft;
+    
+    ABOutputPort *output = [self.audiobusController addOutputPortNamed:@"Audio Output"
+                                                                 title:NSLocalizedString(@"Main App Output", @"")];
+     
+    self.audiobusAudioUnitWrapper = [[[ABAudiobusAudioUnitWrapper alloc]
+                                     initWithAudiobusController:self.audiobusController
+                                     audioUnit:_audioController.audioUnit.audioUnit
+                                     output:output
+                                     input:nil] autorelease];
+    
     [PdBase sendFloat:0.0f toReceiver:@"kit_number"];
+    
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	MenuScene *ms = [MenuScene node];
     [director_ pushScene:ms];
@@ -168,7 +201,8 @@ void moog_tilde_setup();
 {
     // Turn on idle timer
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-    self.audioController.active = NO;
+    if (soundOn == 0)
+        self.audioController.active = NO;
 	if( [navController_ visibleViewController] == director_ )
 		[director_ pause];
 }
@@ -176,8 +210,8 @@ void moog_tilde_setup();
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-    self.audioController.active = YES;
-    
+    if (soundOn == 1)
+        self.audioController.active = YES;
 	if( [navController_ visibleViewController] == director_ )
 		[director_ resume];
 }

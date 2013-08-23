@@ -21,7 +21,7 @@
 		
 		self.control_min = [[params objectForKey:@"min"] floatValue];
 		self.control_max = [[params objectForKey:@"max"] floatValue];
-        if (IS_IPAD()) {
+        if (IS_IPAD) {
             self.control_min = self.control_min * IPAD_MULT;
             self.control_max = self.control_max * IPAD_MULT;
         }

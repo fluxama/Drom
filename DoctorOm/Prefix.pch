@@ -31,17 +31,17 @@
 #define LED_BUTTON (16)
 
 //  Determine device
-#ifdef UI_USER_INTERFACE_IDIOM
-#define IS_IPAD() (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-#else
-#define IS_IPAD() (NO)
-#endif
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 568.0f)
 
 // Defines for translating iPhone positioning to iPad
 // 480 point wide -> 1024 points wide
 // = 2.13 multiplier
 #define IPAD_MULT (2.13f)
 #define IPAD_BOT_TRIM (45)
+
+#define IPHONE_5_MARGIN (44)
 
 int THUMBW;
 int THUMBH;
@@ -55,3 +55,6 @@ int HELP_SCREEN_H;
 int INFO_ICON_H;
 
 int current_item;
+
+int soundOn;
+

@@ -121,13 +121,15 @@ typedef enum {
 	BOOL						hasPremultipliedAlpha_;
 	BOOL						hasMipmaps_;
 
+#ifdef __CC_PLATFORM_IOS
 	ccResolutionType			resolutionType_;
+#endif
 
 	// needed for drawAtRect, drawInPoint
 	CCGLProgram					*shaderProgram_;
 
 }
-/** Initializes with a texture2d with data */
+/** Intializes with a texture2d with data */
 - (id) initWithData:(const void*)data pixelFormat:(CCTexture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size;
 
 /** These functions are needed to create mutable textures */
@@ -157,15 +159,17 @@ typedef enum {
 /** shader program used by drawAtPoint and drawInRect */
 @property(nonatomic,readwrite,retain) CCGLProgram *shaderProgram;
 
+#ifdef __CC_PLATFORM_IOS
 /** Returns the resolution type of the texture.
- Is it a RetinaDisplay texture, an iPad texture, a Mac, a Mac RetinaDisplay or an standard texture ?
+ Is it a RetinaDisplay texture, an iPad texture or an standard texture ?
+ Only valid on iOS. Not valid on OS X.
 
  Should be a readonly property. It is readwrite as a hack.
 
  @since v1.1
  */
 @property (nonatomic, readwrite) ccResolutionType resolutionType;
-
+#endif
 
 /** returns the content size of the texture in points */
 -(CGSize) contentSize;
@@ -190,7 +194,11 @@ Note that RGBA type textures will have their alpha premultiplied - use the blend
 */
 @interface CCTexture2D (Image)
 /** Initializes a texture from a CGImage object */
+#ifdef __CC_PLATFORM_IOS
 - (id) initWithCGImage:(CGImageRef)cgImage resolutionType:(ccResolutionType)resolution;
+#elif defined(__CC_PLATFORM_MAC)
+- (id) initWithCGImage:(CGImageRef)cgImage;
+#endif
 @end
 
 /**
@@ -204,9 +212,9 @@ Note that the generated textures are of type A8 - use the blending mode (GL_SRC_
 	- Mac: Only NSLineBreakByWordWrapping is supported.
  @since v1.0
  */
-- (id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)alignment vAlignment:(CCVerticalTextAlignment) vertAlignment lineBreakMode:(CCLineBreakMode)lineBreakMode ;
+- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)alignment vAlignment:(CCVerticalTextAlignment) vertAlignment lineBreakMode:(CCLineBreakMode)lineBreakMode fontName:(NSString*)name fontSize:(CGFloat)size;
 /** Initializes a texture from a string with dimensions, alignment, font name and font size */
-- (id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)alignment vAlignment:(CCVerticalTextAlignment) vertAlignment;
+- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)alignment vAlignment:(CCVerticalTextAlignment) vertAlignment fontName:(NSString*)name fontSize:(CGFloat)size;
 /** Initializes a texture from a string with font name and font size */
 - (id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size;
 @end

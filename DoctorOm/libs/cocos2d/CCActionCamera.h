@@ -44,8 +44,6 @@
 	float upYOrig_;
 	float upZOrig_;
 }
-// XXX Needed for BridgeSupport
--(void) startWithTarget:(id)aTarget;
 @end
 
 /** CCOrbitCamera action

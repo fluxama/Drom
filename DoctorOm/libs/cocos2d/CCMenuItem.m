@@ -731,15 +731,8 @@ const NSInteger	kCCZoomActionTag = 0xc0c05002;
 //
 // MenuItemToggle
 //
-@interface CCMenuItemToggle ()
-/**
- Reference to the current display item.
- */
-@property (nonatomic, assign) CCMenuItem *currentItem;
-@end
-
 @implementation CCMenuItemToggle
-@synthesize currentItem = currentItem_;
+
 @synthesize subItems = subItems_;
 @synthesize opacity = opacity_, color = color_;
 
@@ -747,17 +740,22 @@ const NSInteger	kCCZoomActionTag = 0xc0c05002;
 {
 	va_list args;
 	va_start(args, item);
-	
-	id s = [self itemWithTarget: t selector:sel items: item vaList:args];
-	
+
+	id s = [[[self alloc] initWithTarget: t selector:sel items: item vaList:args] autorelease];
+
 	va_end(args);
 	return s;
 }
 
-+(id) itemWithTarget:(id)target selector:(SEL)selector items:(CCMenuItem*) item vaList: (va_list) args
++(id) itemWithItems:(NSArray*)arrayOfItems block:(void(^)(id))block
+{
+	return [[[self alloc] initWithItems:arrayOfItems block:block] autorelease];
+}
+
+-(id) initWithTarget:(id)target selector:(SEL)selector items:(CCMenuItem*) item vaList: (va_list) args
 {
 	NSMutableArray *array = [NSMutableArray arrayWithCapacity:2];
-	
+
 	int z = 0;
 	CCMenuItem *i = item;
 	while(i) {
@@ -765,25 +763,14 @@ const NSInteger	kCCZoomActionTag = 0xc0c05002;
 		[array addObject:i];
 		i = va_arg(args, CCMenuItem*);
 	}
-	
+
 	// avoid retain cycle
 	__block id t = target;
-	
-	return [[[self alloc] initWithItems:array block:^(id sender) {
+
+	return [self initWithItems:array block:^(id sender) {
 		[t performSelector:selector withObject:sender];
 	}
-			 ] autorelease];
-}
-
-
-+(id) itemWithItems:(NSArray*)arrayOfItems
-{
-	return [[[self alloc] initWithItems:arrayOfItems block:NULL] autorelease];
-}
-
-+(id) itemWithItems:(NSArray*)arrayOfItems block:(void(^)(id))block
-{
-	return [[[self alloc] initWithItems:arrayOfItems block:block] autorelease];
+			];
 }
 
 -(id) initWithItems:(NSArray*)arrayOfItems block:(void(^)(id sender))block
@@ -792,7 +779,6 @@ const NSInteger	kCCZoomActionTag = 0xc0c05002;
 
 		self.subItems = [NSMutableArray arrayWithArray:arrayOfItems];
 
-        currentItem_ = nil;
 		selectedIndex_ = NSUIntegerMax;
 		[self setSelectedIndex:0];
 	}
@@ -810,13 +796,12 @@ const NSInteger	kCCZoomActionTag = 0xc0c05002;
 {
 	if( index != selectedIndex_ ) {
 		selectedIndex_=index;
-        
-		if( currentItem_ )
-			[currentItem_ removeFromParentAndCleanup:NO];
+		CCMenuItem *currentItem = (CCMenuItem*)[self getChildByTag:kCCCurrentItemTag];
+		if( currentItem )
+			[currentItem removeFromParentAndCleanup:NO];
 		
 		CCMenuItem *item = [subItems_ objectAtIndex:selectedIndex_];
-		[self addChild:item z:0];
-        self.currentItem = item;
+		[self addChild:item z:0 tag:kCCCurrentItemTag];
 
 		CGSize s = [item contentSize];
 		[self setContentSize: s];

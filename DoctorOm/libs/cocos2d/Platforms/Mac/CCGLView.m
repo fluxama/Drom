@@ -133,10 +133,7 @@
 	[director reshapeProjection: NSSizeToCGSize(rect.size) ];
 
 	// avoid flicker
-  // Only draw if there is something to draw, otherwise it actually creates a flicker of the current glClearColor
-	if(director.runningScene){
-    [director drawScene];
-  }
+	[director drawScene];
 //	[self setNeedsDisplay:YES];
 	
 	[self unlockOpenGLContext];

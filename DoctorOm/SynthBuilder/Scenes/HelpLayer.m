@@ -31,8 +31,10 @@
                                            selector:@selector(nothing:)];
 
         [img addChild:helpImage];
-        if (IS_IPAD()) {
+        if (IS_IPAD) {
             [img setPosition:ccp(475,SCREEN_CENTER_Y)];
+        } else if (IS_IPHONE_5) {
+            [img setPosition:ccp(269,SCREEN_CENTER_Y)];
         } else {
             [img setPosition:ccp(225,SCREEN_CENTER_Y)];
         }

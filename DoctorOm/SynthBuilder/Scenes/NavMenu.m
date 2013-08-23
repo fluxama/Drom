@@ -97,7 +97,7 @@
 
 -(void)moveToOpenState {
     //CCLOG(@"Move to Open");
-    if (IS_IPAD()) {
+    if (IS_IPAD) {
         [self runAction: [CCMoveBy actionWithDuration:.25 position:ccp(-134,0)]];
     } else {
         [self runAction: [CCMoveBy actionWithDuration:.25 position:ccp(-105,0)]];
@@ -108,7 +108,7 @@
 
 -(void)moveToClosedState {
     //CCLOG(@"Move to Closed");
-    if (IS_IPAD()) {
+    if (IS_IPAD) {
         [self runAction: [CCMoveBy actionWithDuration:.25 position:ccp(134,0)]];
     } else {
         [self runAction: [CCMoveBy actionWithDuration:.25 position:ccp(105,0)]];

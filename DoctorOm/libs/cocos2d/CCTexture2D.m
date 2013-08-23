@@ -110,7 +110,10 @@ static CCTexture2DPixelFormat defaultAlphaPixelFormat_ = kCCTexture2DPixelFormat
 @synthesize contentSizeInPixels = size_, pixelFormat = format_, pixelsWide = width_, pixelsHigh = height_, name = name_, maxS = maxS_, maxT = maxT_;
 @synthesize hasPremultipliedAlpha = hasPremultipliedAlpha_;
 @synthesize shaderProgram = shaderProgram_;
+
+#ifdef __CC_PLATFORM_IOS
 @synthesize resolutionType = resolutionType_;
+#endif
 
 
 - (id) initWithData:(const void*)data pixelFormat:(CCTexture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size
@@ -173,7 +176,9 @@ static CCTexture2DPixelFormat defaultAlphaPixelFormat_ = kCCTexture2DPixelFormat
 
 		hasMipmaps_ = NO;
 
+#ifdef __CC_PLATFORM_IOS
 		resolutionType_ = kCCResolutionUnknown;
+#endif
 		self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
 	}
 	return self;
@@ -224,7 +229,11 @@ static CCTexture2DPixelFormat defaultAlphaPixelFormat_ = kCCTexture2DPixelFormat
 
 @implementation CCTexture2D (Image)
 
+#ifdef __CC_PLATFORM_IOS
 - (id) initWithCGImage:(CGImageRef)cgImage resolutionType:(ccResolutionType)resolution
+#elif defined(__CC_PLATFORM_MAC)
+- (id) initWithCGImage:(CGImageRef)cgImage
+#endif
 {
 	NSUInteger				textureWidth, textureHeight;
 	CGContextRef			context = nil;
@@ -445,7 +454,9 @@ static CCTexture2DPixelFormat defaultAlphaPixelFormat_ = kCCTexture2DPixelFormat
 	CGContextRelease(context);
 	[self releaseData:data];
 
+#ifdef __CC_PLATFORM_IOS
 	resolutionType_ = resolution;
+#endif
 
 	return self;
 }
@@ -574,8 +585,7 @@ static CCTexture2DPixelFormat defaultAlphaPixelFormat_ = kCCTexture2DPixelFormat
 		[[NSGraphicsContext currentContext] setShouldAntialias:NO];	
 		
 		NSImage *image = [[NSImage alloc] initWithSize:POTSize];
-		[image lockFocus];
-		[[NSAffineTransform transform] set];
+		[image lockFocus];	
 		
         [stringWithAttributes drawWithRect:NSRectFromCGRect(drawArea) options:NSStringDrawingUsesLineFragmentOrigin];
 		
@@ -653,12 +663,12 @@ static CCTexture2DPixelFormat defaultAlphaPixelFormat_ = kCCTexture2DPixelFormat
 
 }
 
-- (id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)alignment vAlignment:(CCVerticalTextAlignment)vAlignment
+- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)alignment vAlignment:(CCVerticalTextAlignment)vAlignment fontName:(NSString*)name fontSize:(CGFloat)size
 {
-	return [self initWithString:string fontName:name fontSize:size dimensions:dimensions hAlignment:alignment vAlignment:vAlignment lineBreakMode:kCCLineBreakModeWordWrap];
+	return [self initWithString:string dimensions:dimensions hAlignment:alignment vAlignment:vAlignment lineBreakMode:kCCLineBreakModeWordWrap fontName:name fontSize:size];
 }
 
-- (id) initWithString:(NSString*)string fontName:(NSString*)name fontSize:(CGFloat)size dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)hAlignment vAlignment:(CCVerticalTextAlignment)vAlignment lineBreakMode:(CCLineBreakMode)lineBreakMode 
+- (id) initWithString:(NSString*)string dimensions:(CGSize)dimensions hAlignment:(CCTextAlignment)hAlignment vAlignment:(CCVerticalTextAlignment)vAlignment lineBreakMode:(CCLineBreakMode)lineBreakMode fontName:(NSString*)name fontSize:(CGFloat)size
 {
 #ifdef __CC_PLATFORM_IOS
 	UIFont *uifont = [UIFont fontWithName:name size:size];
@@ -712,8 +722,13 @@ static BOOL PVRHaveAlphaPremultiplied_ = NO;
 
 -(id) initWithPVRFile: (NSString*) relPath
 {
+#ifdef __CC_PLATFORM_IOS
 	ccResolutionType resolution;
 	NSString *fullpath = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath:relPath resolutionType:&resolution];
+
+#elif defined(__CC_PLATFORM_MAC)
+	NSString *fullpath = [[CCFileUtils sharedFileUtils] fullPathFromRelativePath:relPath];
+#endif
 
 	if( (self = [super init]) ) {
 		CCTexturePVR *pvr = [[CCTexturePVR alloc] initWithContentsOfFile:fullpath];
@@ -738,7 +753,9 @@ static BOOL PVRHaveAlphaPremultiplied_ = NO;
 			[self release];
 			return nil;
 		}
+#ifdef __CC_PLATFORM_IOS
 		resolutionType_ = resolution;
+#endif
 	}
 	return self;
 }
@@ -770,7 +787,7 @@ static BOOL PVRHaveAlphaPremultiplied_ = NO;
 
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
 	[shaderProgram_ use];
-	[shaderProgram_ setUniformsForBuiltins];
+	[shaderProgram_ setUniformForModelViewProjectionMatrix];
 
 	ccGLBindTexture2D( name_ );
 
@@ -798,7 +815,7 @@ static BOOL PVRHaveAlphaPremultiplied_ = NO;
 
 
 	[shaderProgram_ use];
-	[shaderProgram_ setUniformsForBuiltins];    
+	[shaderProgram_ setUniformForModelViewProjectionMatrix];    
 
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
 

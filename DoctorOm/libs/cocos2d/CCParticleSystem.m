@@ -88,11 +88,6 @@
 	return [[[self alloc] initWithFile:plistFile] autorelease];
 }
 
-+(id) particleWithTotalParticles:(NSUInteger) numberOfParticles
-{
-	return [[[self alloc] initWithTotalParticles:numberOfParticles] autorelease];
-}
-
 -(id) init {
 	return [self initWithTotalParticles:150];
 }
@@ -311,14 +306,14 @@
 
 		autoRemoveOnFinish_ = NO;
 
-		// Optimization: compile updateParticle method
+		// Optimization: compile udpateParticle method
 		updateParticleSel = @selector(updateQuadWithParticle:newPosition:);
 		updateParticleImp = (CC_UPDATE_PARTICLE_IMP) [self methodForSelector:updateParticleSel];
 
 		//for batchNode
 		transformSystemDirty_ = NO;
 
-		// update after action in run!
+		// udpate after action in run!
 		[self scheduleUpdateWithPriority:1];
 	}
 	return self;

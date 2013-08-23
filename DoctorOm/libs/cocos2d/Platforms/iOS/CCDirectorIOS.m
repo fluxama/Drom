@@ -236,18 +236,6 @@ CGFloat	__ccContentScaleFactor = 1;
 	ccSetProjectionMatrixDirty();
 }
 
-// override default logic
-- (void)runWithScene:(CCScene*) scene
-{
-	NSAssert( scene != nil, @"Argument must be non-nil");
-	NSAssert(runningScene_ == nil, @"This command can only be used to start the CCDirector. There is already a scene present.");
-	
-	[self pushScene:scene];
-
-	NSThread *thread = [self runningThread];
-	[self performSelector:@selector(drawScene) onThread:thread withObject:nil waitUntilDone:YES];
-}
-
 #pragma mark Director - TouchDispatcher
 
 -(CCTouchDispatcher*) touchDispatcher
@@ -327,9 +315,6 @@ CGFloat	__ccContentScaleFactor = 1;
 	winSizeInPixels_ = CGSizeMake(winSizeInPoints_.width * __ccContentScaleFactor, winSizeInPoints_.height *__ccContentScaleFactor);
 
 	[self setProjection:projection_];
-  
-	if( [delegate_ respondsToSelector:@selector(directorDidReshapeProjection:)] )
-		[delegate_ directorDidReshapeProjection:self];
 }
 
 #pragma mark Director Point Convertion
@@ -341,16 +326,6 @@ CGFloat	__ccContentScaleFactor = 1;
 
 	return ccp( uiPoint.x, newY );
 }
-
--(CGPoint)convertTouchToGL:(UITouch*)touch
-{
-	CGPoint uiPoint = [touch locationInView: [touch view]];
-	CGSize s = winSizeInPoints_;
-	float newY = s.height - uiPoint.y;
-	
-	return ccp( uiPoint.x, newY );
-}
-
 
 -(CGPoint)convertToUI:(CGPoint)glPoint
 {
